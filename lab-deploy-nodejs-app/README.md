@@ -1,6 +1,19 @@
 ## Workshop Deploy Node.js App dengan Amazon Lightsail Containers
+<a name="top"></a>
+Short intro - the why - TBD.
 
-### Step 0 - Kebutuhan
+- [Step 0 - Kebutuhan](#step-0)
+- [Step 1 - Menginstal Lightsail Control Plugin](#step-1)
+- [Step 2 - Membuat Direktori untuk Project](#step-2)
+- [Step 3 - Membuat Node.js API](#step-3)
+- [Step 4 - Membuat Container Image](#step-4)
+- [Step 5 - Membuat Container Service di Amazon Lightsail](#step-5)
+- [Step 6 - Push Container Image ke Amazon Lightsail](#step-6)
+- [Step 7 - Deploy Container](#step-7)
+- [Step 8 - Membuat Versi Baru dari API](#step-8)
+- [Step 9 - Update Container Image](#step-9)
+
+### <a name="step-0"></a>Step 0 - Kebutuhan
 
 Sebelum memulai workshop pastikan sudah memenuhi kebutuhan yang tercantum di bawah ini.
 
@@ -8,7 +21,9 @@ Sebelum memulai workshop pastikan sudah memenuhi kebutuhan yang tercantum di baw
 - Sudah menginstal Docker
 - Sudah menginstal AWS CLI v2 dan konfigurasinya
 
-### Step 1 - Menginstal Lightsail Control Plugin
+[^back to top](#top)
+
+### <a name="step-1"></a>Step 1 - Menginstal Lightsail Control Plugin
 
 Plugin CLI ini digunakan untuk mengupload container image dari komputer lokal ke Amazon Lightsail container service. Jalankan perintah berikut untuk menginstal Lightsail Control Plugin. Diasumsikan bahwa terdapat perintah `sudo` pada distribusi Linux yang anda gunakan.
 
@@ -22,7 +37,9 @@ Tambahkan atribut _execute_ pada file `lightsailctl` yang baru saja didownload.
 $ sudo chmod +x /usr/local/bin/lightsailctl
 ```
 
-### Step 2 - Membuat Direktori untuk Project
+[^back to top](#top)
+
+### <a name="step-2"></a>Step 2 - Membuat Direktori untuk Project
 
 Pastikan anda sedang berada pada `$HOME` direktori yaitu `/home/ec2-user`.
 
@@ -46,7 +63,9 @@ $ pwd
 /home/ec2-user/nodejs-app
 ```
 
-### Step 3 - Membuat Node.js API
+[^back to top](#top)
+
+### <a name="step-3"></a>Step 3 - Membuat Node.js API
 
 Pada langkah ini kita akan membuat sebuah API sederhana yang dibangun menggunakan framework Node.js yang populer yaitu Express.
 
@@ -128,7 +147,9 @@ Keep-Alive: timeout=5
 
 Keren. API kita sudah bisa berjalan sesuai harapan. Saatnya memaket menjadi container image.
 
-### Step 4 - Membuat Container Image
+[^back to top](#top)
+
+### <a name="step-4"></a>Step 4 - Membuat Container Image
 
 Untuk membuat container image dari layanan API yang baru dibuat kita akan menggunakan Docker.
 
@@ -174,18 +195,60 @@ Successfully tagged idn-belajar-node:1.0
 Pastikan image tersebut ada dalam daftar image di lokal mesin.
 
 ```sh
-$ docker images
+$ docker images idn-belajar-node
 ```
 
 ```
-REPOSITORY                                                                  TAG       IMAGE ID       CREATED         SIZE
-idn-belajar-node                                                            1.0       6c88b5d7ef4a   3 minutes ago   179MB
-public.ecr.aws/docker/library/node                                          16-slim   d42cb3d451c4   6 days ago      175MB
+REPOSITORY         TAG       IMAGE ID       CREATED             SIZE
+idn-belajar-node   1.0       6c88b5d7ef4a   3 minutes ago       179MB
 ```
 
 Dapat terlihat jika container image yang dibuat yaitu `idn-belajar-node` dengan versi `1.0` berhasil dibuat.
 
-### Step 5 - Membuat Container Service di Amazon Lightsail
+Sekarang coba jalankan container `idn-belajar-node:1.0` pada port `8080` untuk memastikan API yang dibuat dapat berjalan pada container.
+
+```sh
+$ docker run --rm --name idn_belajar_1_0 -p 8080:8080 -d idn-belajar-node:1.0
+```
+
+```
+ec43c5f4ab04b920df9907bf981d3b7b0dd2c287d8599e1b7768e290694b8f16
+```
+
+Kemudian cek untuk memastikan container `idn-belajar-node:1.0` sedang berjalan.
+
+```sh
+$ docker ps
+```
+
+```
+CONTAINER ID   IMAGE                  COMMAND               CREATED          STATUS          PORTS                                       NAMES
+ec43c5f4ab04   idn-belajar-node:1.0   "node src/index.js"   24 seconds ago   Up 22 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   idn_belajar_1_0
+```
+
+Jalankan `curl` untuk melakukan HTTP request ke localhost port `8080` dan path `/`.
+
+```sh
+$ curl -s http://localhost:8080/
+```
+
+```json
+{
+  "hello": "Indonesia Belajar!"
+}
+```
+
+Mantab! API dapat berjalan dengan sempurna di container. Sekarang stop container tersebut.
+
+```sh
+$ docker stop idn_belajar_1_0
+```
+
+[^back to top](#top)
+
+### <a name="step-5"></a>Step 5 - Membuat Container Service di Amazon Lightsail
+
+Container service adalah sumber daya komputasi tempat dimana container dijalankan. Container service memiliki banyak pilihan kapasitas RAM dan vCPU yang bisa dipilih sesuai dengan kebutuhan aplikasi. Selain itu anda juga bisa menentukan jumlah Container service yang berjalan.
 
 1. Sekarang masuk ke AWS Management Console kemudian masuk ke halaman Amazon Lightsail. Pada dashboard Amazon Lightsail klik menu **Containers**.
 
@@ -211,7 +274,7 @@ Dapat terlihat jika container image yang dibuat yaitu `idn-belajar-node` dengan 
 
 > Gambar 4. Memasukkan nama container service
 
-5. Setelah itu Lightsail akan mulai memproses pembuatan container service **hello-api**. Ini akan memakan waktu beberapa menit, jadi mohon ditunggu. Setelah selesai anda akan dibawa ke dashboard dari halaman container service **hello-api**. ANda akan mendapat domain yang digunakan untuk mengakses container. Domain tersebut terlihat di bagian _Public domain_. Klik domain tersebut untuk membuka aplikasi **hello-api**. Ketika domain tersebut dikunjungi harusnya terdapat error 404 karena belum ada container image yang dideploy pada **hello-api**.
+5. Setelah itu Lightsail akan mulai memproses pembuatan container service **hello-api**. Ini akan memakan waktu beberapa menit, jadi mohon ditunggu. Setelah selesai anda akan dibawa ke dashboard dari halaman container service **hello-api**. ANda akan mendapat domain yang digunakan untuk mengakses container. Domain tersebut terlihat di bagian _Public domain_. Tunggu hingga status menjadi **Ready** kemudian klik domain tersebut untuk membuka aplikasi **hello-api**. Ketika domain tersebut dikunjungi harusnya terdapat error 404 karena belum ada container image yang dideploy pada **hello-api**.
 
 [![Lightsail hello-api Dashboard](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-dashboard.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-dashboard.png)
 
@@ -220,3 +283,224 @@ Dapat terlihat jika container image yang dibuat yaitu `idn-belajar-node` dengan 
 [![https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-404-hello-api.png](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-404-hello-api.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-404-hello-api.png)
 
 > Gambar 6. Layanan hello-api masih 404 karena belum ada container image yang dideploy
+
+[^back to top](#top)
+
+### <a name="step-6"></a>Step 6 - Push Container Image ke Amazon Lightsail
+
+Setiap container image yang di-push ke Amazon Lightsail terikat pada sebuah Container service. Karena itulah kita membuat **hello-api** Container service terlebih dahulu sebelum melakukan push container image.
+
+Pada langkah ini kita akan melakukan push container image `idn-belajar-node:1.0` yang telah dibuat sebelumnya ke Container service **hello-api**. Jalankan perintah dibawah ini.
+
+```sh
+$ aws lightsail push-container-image \
+--region "ap-southeast-1" \
+--service-name "hello-api" \
+--label "idn-belajar-node" \
+--image "idn-belajar-node:1.0"
+```
+
+```
+...[CUT]...
+c1065d45b872: Pushed 
+Digest: sha256:236b7239c44e16ac44a94b92350b3e409ca7631c9663b5242f8a2d2175603417
+Image "idn-belajar-node:1.0" registered.
+Refer to this image as ":hello-api.idn-belajar-node.2" in deployments.
+```
+
+Jika berhasil maka anda akan mendapatkan pesan mirip seperti diatas. Container image akan disimpan dengan penamaan `:<container-service>:<label>.<versi-upload>` pada contoh diatas penamaannya adalah `:hello-api.idn-belajar.2`.
+
+Sekarang pastikan container image tersebut ada dalam daftar container yang telah diupload. Masuk ke halaman dashboard dari container service **hello api** kemudian masuk ke halaman **Images**.
+
+[![Lightsail hello-api Image](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-image.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-image.png)
+
+> Gambar 7. Daftar container image yang telah diupload
+
+Pada halaman _Images_ dapat terlihat jika terdapat sebuah image `:hello-api.idn-belajar.2` seperti yang telah diupload pada proses sebelumnya. Kita akan menggunakan image ini untuk melakukan deployment.
+
+[^back to top](#top)
+
+### <a name="step-7"></a>Step 7 - Deploy Container
+
+Proses ini digunakan untuk menempatkan container yang akan dijalankan ke Container service yang telah tersedia. Pada contoh ini kita telah membuat sebuah Container service dengan nama **hello-api** dengan kapasitas 512MB RAM dan 0.25 vCPU dan hanya berjumlah 1.
+
+1. Pada halaman dashboard **hello-api** klik menu **Deployments** kemudian klik link **Create your first deployment**.
+
+[![https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployments-menu.png](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployments-menu.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployments-menu.png)
+
+> Gambar 8. Membuka halaman deployment
+
+2. Terdapat beberapa isian yang harus dilengkapi. Pertama isikan **hello-idn-belajar** untuk _Container name_. 
+3. Pada pilihan _Image_ klik **Choose stored image** untuk memilih container image yang sudah diupload sebelumnya. Pilih versi container image yang telah diupload.
+4. Aplikasi yang dibuat hanya menggunakan satu environment variable yaitu `APP_PORT`. Environment variable ini menentukan nomor port dimana aplikasi berjalan. Dengan default port `8080`. Kendati opsional pada contoh ini kita tetap mengisikan `APP_PORT` dengan nilai `8080`.
+5. Pada konfigurasi **Open ports** gunakan nomor port dimana aplikasi berjalan. Dalam hal ini sama dengan nilai dari `APP_PORT` yaitu `8080`. 
+6. Untuk **PUBLIC ENDPOINT** gunakan container **idn-hello-belajar** yang telah diinput pada bagian sebelumnya. Container service yang berjalan pada public domain akan melakukan koneksi pada `8080` yang dikonfigurasi pada **Open ports**.
+7. Jika semua sudah sesuai, klik **Save and deploy** untuk melakukan deployment. Proses ini akan memakan waktu beberapa menit. Tunggu hingga status dari Container service menjadi **Running**.
+
+[![Lightsail Create Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-create-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-create-deployment.png)
+
+> Gambar 9. Konfigurasi deployment untuk container
+
+Jika status sudah **Running** maka kita dapat mencoba untuk mengakses aplikasi dengan membuka URL yang ada di public domain. Perlu dicatat jika protocol yang digunakan adalah HTTPS. Dalam contoh ini saya menggunakan `curl` untuk melakukan tes. Sesuaikan dengan public domain anda sendiri.
+
+```sh
+$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+```
+
+```json
+{
+  "hello": "Indonesia Belajar!"
+}
+```
+
+Selamat! anda telah sukses melakukan deployment sebuah aplikasi Node.js menggunakan Amazon Lightsail Container service.
+
+[^back to top](#top)
+
+### <a name="step-8"></a>Step 8 - Membuat Versi Baru dari API
+
+Setiap aplikasi hampir pasti akan selalu mengalami proses update entah itu untuk perbaikan atau penambahan fitur. Pada workshop ini kita akan coba mendemonstrasikan bagaimana melakukan update dari aplikasi menggunakan Amazon Lightsail Container service.
+
+Namun sebelumnya kita akan mengubah kode dari API yang dibuat dengan menambahkan fitur untuk menampilkan informasi jaringan dari container.
+
+Pastikan anda berada pada direktori `nodejs-app`. Kemudian ubah isi dari file `src/index.js` menjadi seperti di bawah.
+
+```js
+const express = require('express');
+const app = express();
+const port = process.env.APP_PORT || 8080;
+const { networkInterfaces } = require('os');
+
+app.set('json spaces', 2);
+app.get('/', function mainRoute(req, res) {
+  const network = networkInterfaces();
+  delete network['lo']; // remove loopback interface
+  
+  const mainResponse = {
+    "hello": "Indonesia Belajar!",
+    "network": network
+  };
+  
+  res.json(mainResponse);
+});
+
+app.listen(port, function() {
+  console.log(`API server running on port ${port}`);
+});
+```
+
+Terlihat kita menambahkan respon atribut baru yaitu `network`. Untuk mencobanya jalankan API server tersebut.
+
+```sh
+$ node src/index.js
+```
+
+```
+API server running on port 8080
+```
+
+Kemudian lakukan HTTP request ke path `/` untuk melihat respon terbaru.
+
+```sh
+$ curl -s http://localhost:8080/
+```
+
+```json
+{
+  "hello": "Indonesia Belajar!",
+  "network": {
+    "eth0": [
+      {
+        "address": "172.31.29.226",
+        "netmask": "255.255.240.0",
+        "family": "IPv4",
+        "mac": "02:08:fa:7e:c3:c6",
+        "internal": false,
+        "cidr": "172.31.29.226/20"
+      },
+      {
+        "address": "fe80::8:faff:fe7e:c3c6",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+      
+        "mac": "02:08:fa:7e:c3:c6",
+        "internal": false,
+        "cidr": "fe80::8:faff:fe7e:c3c6/64",
+        "scopeid": 2
+      }
+    ]
+  }
+}
+```
+
+Dapat terlihat informasi jaringan dari container ditampilkan pada atribut `network`.
+
+[^back to top](#top)
+
+### <a name="step-9"></a>Step 9 - Update Container Image
+
+API versi terbaru sudah siap, saatnya melakukan update untuk container image `idn-belajar-node`. Kita akan merilis API versi terbaru ini dengan tag `2.0`. Untuk melakukannya ikuti langkah berikut.
+
+```sh
+$ docker build --rm -t idn-belajar-node:2.0 .
+```
+
+```
+...[CUT]...
+Step 7/7 : ENTRYPOINT ["node", "src/index.js"]
+ ---> Running in f1245cc03183
+Removing intermediate container f1245cc03183
+ ---> c83f20a98c54
+Successfully built c83f20a98c54
+Successfully tagged idn-belajar-node:2.0
+```
+
+Kita lihat apakah container image baru tersebut sudah ada dalam daftar container image pada mesin kita.
+
+```sh
+$ docker images idn-belajar-node
+```
+
+```
+REPOSITORY         TAG       IMAGE ID       CREATED          SIZE
+idn-belajar-node   2.0       c83f20a98c54   22 minutes ago   179MB
+idn-belajar-node   1.0       6c88b5d7ef4a   2 days ago       179MB
+```
+
+Jalankan container versi baru tersebut untuk memastikan API berjalan sesuai harapan. 
+
+```sh
+$ docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d idn-belajar-node:2.0
+```
+
+```
+d8df1a6d0dbd70de4cd36ff21e5b6a766a7bb0c21d28819d37fdff612aefe23c
+```
+
+Lakukan HTTP request ke `localhost:8080` untuk melakukan tes respon dari API.
+
+```sh
+$ curl -s http://localhost:8080/
+```
+
+```json
+{
+  "hello": "Indonesia Belajar!",
+  "network": {
+    "eth0": [
+      {
+        "address": "172.17.0.2",
+        "netmask": "255.255.0.0",
+        "family": "IPv4",
+        "mac": "02:42:ac:11:00:02",
+        "internal": false,
+        "cidr": "172.17.0.2/16"
+      }
+    ]
+  }
+}
+```
+
+Dapat terlihat jika respon dari API telah memiliki atribut `network`. Hasilnya berbeda dengan yang non-container karena memang perangkat network yang ada dalam container berbeda dengan host.
+
+[^back to top](#top)
