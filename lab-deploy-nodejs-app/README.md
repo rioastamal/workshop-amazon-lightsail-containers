@@ -504,3 +504,34 @@ $ curl -s http://localhost:8080/
 Dapat terlihat jika respon dari API telah memiliki atribut `network`. Hasilnya berbeda dengan yang non-container karena memang perangkat network yang ada dalam container berbeda dengan host.
 
 [^back to top](#top)
+
+### <a name="step-10"></a>Step 10 - Push Container Image Versi Terbaru ke Amazon Lightsail
+
+Kita sudah pernah melakukan upload container image `idn-belajar-node:1.0` ke Container service **hello-api**. Karena sudah ada versi terbaru yaitu `idn-belajar-node:2.0` maka kita juga harus melakukan push container image ini ke **hello-api**. Jalankan perintah di bawah ini.
+
+```sh
+$ aws lightsail push-container-image \
+--region "ap-southeast-1" \
+--service-name "hello-api" \
+--label "idn-belajar-node" \
+--image "idn-belajar-node:2.0"
+```
+
+```
+...[CUT]...
+5dd85641fdcb: Layer already exists 
+c1065d45b872: Layer already exists 
+Digest: sha256:84be0f3b648170b62551abbadbafda1234c1e6362470ecf0b94b3f767d067976
+Image "idn-belajar-node:2.0" registered.
+Refer to this image as ":hello-api.idn-belajar-node.4" in deployments.
+```
+
+Pada kasus milik saya image yang tersimpan di Container service adalah `:hello-api.idn-belajar-node.4`. Nomor versi upload `.4` bisa berbeda dengan milik anda.
+
+Untuk memastikan container telah terupload dengan sukses masuk pada dashboard Container service **hello-api** dan klik menu **Images**. Harusnya image sudah muncul di halaman tersebut.
+
+[![Lightsail Container New Image](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-new-image.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-new-image.png)
+
+> Gambar 10. Container image versi terbaru 2.0
+
+TBD
