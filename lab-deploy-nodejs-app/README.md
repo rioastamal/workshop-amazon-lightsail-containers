@@ -700,6 +700,8 @@ Dapat terlihat jika alamat IP yang dikembalikan berbeda-beda mengindikasikan bah
 
 Okey, sebelum lanjut ke langkah berikutnya kembalikan terlebih dahulu jumlah node dari **3** menjadi **1**. Tentu masih ingat caranya bukan?
 
+[^back to top](#top)
+
 ### <a name="step-13"></a>Step 13 - Rollback API ke Versi Sebelumnya
 
 Kehidupan di dunia tidak selalu indah, benar? Begitu juga proses deployment kadang versi baru yang kita deploy malah tidak berfungsi dan menyebabkan error. Salah satu keuntungan menggunakan deployment berbasis container adalah kita dapat melakukan rollback dengan mudah.
@@ -780,6 +782,8 @@ $ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 Dapat terlihat bahwa public URL yang sebelumnya digunakan sekarang mengembalikan HTTP error 404. Artinya tidak ada container service yang berjalan.
+
+[^back to top](#top)
 
 ---
 
