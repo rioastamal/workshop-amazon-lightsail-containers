@@ -12,6 +12,9 @@ Short intro - the why - TBD.
 - [Step 7 - Deploy Container](#step-7)
 - [Step 8 - Membuat Versi Baru dari API](#step-8)
 - [Step 9 - Update Container Image](#step-9)
+- [Step 10 - Push Container Image Versi Terbaru](#step-10)
+- [Step 11 - Deploy Versi Terbaru dari API](#step-11)
+- [Step 12 - Rollback API ke Versi Sebelumnya](#step-12)
 
 ### <a name="step-0"></a>Step 0 - Kebutuhan
 
@@ -353,7 +356,7 @@ $ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 }
 ```
 
-Selamat! anda telah sukses melakukan deployment sebuah aplikasi Node.js menggunakan Amazon Lightsail Container service.
+Selamat! anda telah sukses melakukan deployment sebuah aplikasi Node.js menggunakan Amazon Lightsail Container service. Cukup mudah bukan?
 
 [^back to top](#top)
 
@@ -505,7 +508,7 @@ Dapat terlihat jika respon dari API telah memiliki atribut `network`. Hasilnya b
 
 [^back to top](#top)
 
-### <a name="step-10"></a>Step 10 - Push Container Image Versi Terbaru ke Amazon Lightsail
+### <a name="step-10"></a>Step 10 - Push Container Image Versi Terbaru
 
 Kita sudah pernah melakukan upload container image `idn-belajar-node:1.0` ke Container service **hello-api**. Karena sudah ada versi terbaru yaitu `idn-belajar-node:2.0` maka kita juga harus melakukan push container image ini ke **hello-api**. Jalankan perintah di bawah ini.
 
@@ -533,5 +536,129 @@ Untuk memastikan container telah terupload dengan sukses masuk pada dashboard Co
 [![Lightsail Container New Image](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-new-image.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-new-image.png)
 
 > Gambar 10. Container image versi terbaru 2.0
+
+[^back to top](#top)
+
+## <a name="step-11"></a>Step 11 - Deploy Versi Terbaru dari API
+
+Setelah container image versi terbaru `idn-belajar-node:2.0` diupload ke Amazon Lightsail Containers maka kita dapat melakukan deployment versi terbaru dari API menggunakan image tersebut.
+
+1. Masuk pada halaman dashboard Contianer service **hello-api** dan pastikan berada pada halaman _Deployments_.
+2. Klik tombol **Modify your deployment**, maka akan terbuka halaman konfigurasi yang sama ketika membuat deployment baru.
+3. Konfigurasi yang perlu diubah adalah container image yang digunakan. Klik tombol **Choose stored image** kemudian pilih versi terbaru dari container image yang diupload.
+4. Sisanya tidak perlu diubah, untuk memulai deployment klik tombol **Save and deploy**.
+5. Tunggu beberapa menit hidda status berubah menjadi **Running** kembali.
+
+[![Lightsail Update Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-modify-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-modify-deployment.png)
+
+> Gambar 11. Deployment versi terbaru dari container
+
+Setelah status kembali menjadi **Running** saatnya mengakses API versi terbaru apakah sudah menampilkan respon yang diinginkan. Gunakan web browser atau `curl` seperti di bawah untuk mengakses. Sesuaikan dengan URL dari container service anda sendiri.
+
+```sh
+$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+```
+
+```json
+{
+  "hello": "Indonesia Belajar!",
+  "network": {
+    "eth0": [
+      {
+        "address": "169.254.172.2",
+        "netmask": "255.255.252.0",
+        "family": "IPv4",
+        "mac": "0a:58:a9:fe:ac:02",
+        "internal": false,
+        "cidr": "169.254.172.2/22"
+      },
+      {
+        "address": "fe80::c016:75ff:fe78:8827",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "0a:58:a9:fe:ac:02",
+        "internal": false,
+        "cidr": "fe80::c016:75ff:fe78:8827/64",
+        "scopeid": 3
+      }
+    ],
+    "eth1": [
+      {
+        "address": "172.26.0.67",
+        "netmask": "255.255.240.0",
+        "family": "IPv4",
+        "mac": "02:f4:1a:f9:96:ac",
+        "internal": false,
+        "cidr": "172.26.0.67/20"
+      },
+      {
+        "address": "2406:da18:f4f:e00:971b:f340:5454:794c",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "02:f4:1a:f9:96:ac",
+        "internal": false,
+        "cidr": "2406:da18:f4f:e00:971b:f340:5454:794c/64",
+        "scopeid": 0
+      },
+      {
+        "address": "fe80::f4:1aff:fef9:96ac",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "02:f4:1a:f9:96:ac",
+        "internal": false,
+        "cidr": "fe80::f4:1aff:fef9:96ac/64",
+        "scopeid": 4
+      }
+    ]
+  }
+}
+```
+
+Keren! API terbaru sudah berhasil dideploy. Output dari API sekarang menyertakan atribut `network` yang pada versi sebelumnya tidak ada.
+
+[^back to top](#top)
+
+### <a name="step-12"></a>Step 12 - Rollback API ke Versi Sebelumnya
+
+Kehidupan di dunia tidak selalu indah, benar? Begitu juga proses deployment kadang versi baru yang kita deploy malah tidak berfungsi dan menyebabkan error. Salah satu keuntungan menggunakan deployment berbasis container adalah kita dapat melakukan rollback dengan mudah.
+
+Sebagai contoh kita akan melakukan rollback API kita ke versi sebelumnya. Caranya sangat mudah.
+
+1. Pertama pastikan anda berada pada halaman dashboard dari container service **hello-api**.
+2. Pastikan anda berada pada halaman _Deployments_.
+3. Scroll bagian bawah yaitu **Deployment versions**. Disana terlihat kita telah melakukan dua kali deployment. Deployment yang terakhir adalah untuk image `idn-belajar-node:2.0`.
+4. Klik titik tiga **Version 1** kemudian klik **Modify and redeploy**.
+5. Akan muncul dialog konfirmasi untuk melakukan deployment, klik tombol **Yes, continue**.
+6. Proses deployment belum dilakukan, ini hanya otomatis nilai konfigurasi _Image_ akan berubah menjadi versi sebelumnya yaitu `:hello-api.idn-belajar-node.3`. Nomor versi upload `.3` bisa berbeda ditempat anda.
+7. Klik tombol **Save and deploy** untuk memulai proses rollback deployment dari image sebelumnya.
+8. Tunggu hingga status dari container service kembali menjadi **Running**.
+
+[![Lightsail Rollback Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)
+
+> Gambar 12. Rollback Deployment ke Versi Sebelumnya
+
+Ketika rollback sudah selesai dan status kembali menjadi **Running** maka coba lakukan request ke API untuk melihat apakah respon sesuai dengan versi sebelumnya.
+
+```sh
+$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+```
+
+```json
+{ 
+  "hello": "Indonesia Belajar!"
+}
+```
+
+Dapat terlihat bahwa API kita telah kembali ke versi sebelumnya yaitu `idn-belajar-node:1.0`. Respon tidak mengembalikan atribut `network` yang seharusnya ada di versi `idn-belajar-node:2.0`.
+
+Jadi sebenarnya untuk melakukan rollback sesimple anda mengganti versi container image yang akan dijalankan.
+
+Perlu diingat bahwa rollback juga adalah sebuah proses deployment jadi otomatis itu akan menambah daftar pada **Deployment versions**. Seperti yang terlihat pada gambar di bawah, rollback yang kita lakukan menghasilkan deployment versi 3.
+
+[![Lightsail Deployment Versions](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)
+
+> Gambar 13. Rollback juga menghasilkan versi deployment baru
+
+[^back to top](#top)
 
 TBD
