@@ -14,7 +14,9 @@ Short intro - the why - TBD.
 - [Step 9 - Update Container Image](#step-9)
 - [Step 10 - Push Container Image Versi Terbaru](#step-10)
 - [Step 11 - Deploy Versi Terbaru dari API](#step-11)
-- [Step 12 - Rollback API ke Versi Sebelumnya](#step-12)
+- [Step 12 - Menambah Jumlah Node](#step-12)
+- [Step 13 - Rollback API ke Versi Sebelumnya](#step-13)
+- [Step 14 - Menghapus Amazon Lightsail Container Service](#step-14)
 
 ### <a name="step-0"></a>Step 0 - Kebutuhan
 
@@ -251,7 +253,7 @@ $ docker stop idn_belajar_1_0
 
 ### <a name="step-5"></a>Step 5 - Membuat Container Service di Amazon Lightsail
 
-Container service adalah sumber daya komputasi tempat dimana container dijalankan. Container service memiliki banyak pilihan kapasitas RAM dan vCPU yang bisa dipilih sesuai dengan kebutuhan aplikasi. Selain itu anda juga bisa menentukan jumlah Container service yang berjalan.
+Container service adalah sumber daya komputasi tempat dimana container dijalankan. Container service memiliki banyak pilihan kapasitas RAM dan vCPU yang bisa dipilih sesuai dengan kebutuhan aplikasi. Selain itu anda juga bisa menentukan jumlah node yang berjalan.
 
 1. Sekarang masuk ke AWS Management Console kemudian masuk ke halaman Amazon Lightsail. Pada dashboard Amazon Lightsail klik menu **Containers**.
 
@@ -618,7 +620,87 @@ Keren! API terbaru sudah berhasil dideploy. Output dari API sekarang menyertakan
 
 [^back to top](#top)
 
-### <a name="step-12"></a>Step 12 - Rollback API ke Versi Sebelumnya
+### <a name="step-12"></a>Step 12 - Menambah Jumlah Node
+
+Ketika anda ingin meningkatkan kemampuan aplikasi dalam merespon _traffic_ salah satu cara yang bisa dilakukan adalah dengan melakukan _vertical scaling_ yaitu menambah kombinasi CPU dan RAM atau _horizontal scaling_ menambah jumlah node. 
+
+Kali ini kita akan melakukan _horizontal scaling_ dengan menambah jumlah node dari 1 menjadi 3.
+
+1. Masuk pada dashboard dari **hello-api** container service.
+2. Klik menu **Capacity**
+3. Klik tombol **Change capacity** akan muncul dialog konfirmasi. Klik tombol **Yes, continue** untuk melanjutkan.
+
+[![Lightsail Capacity](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-menu.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-menu.png)
+
+> Gambar 12. Halaman capacity pada container service
+
+4. Kita akan tetap menggunakan tipe Nano jadi yang akan kita ubah adalah jumlah node. Pada **Choose the scale** geser slider ke angka **3**. 
+
+[![Lightsail Add Node](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-add-node.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-add-node.png)
+
+> Gambar 13. Menambah jumlah node untuk container service
+
+5. Proses akan memakan waktu beberapa menit, klik **I understand** untuk menutup dialog.
+6. Tunggu hingga status dari container service kembali **Running**.
+
+[![Lightsail New Capacity](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-new-capacity-applied.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-new-capacity-applied.png)
+
+> Gambar 14. Kapasitas jumlah node telah bertambah
+
+Amazon Lightsail akan secara otomatis mendistribusikan _traffic_ ke 3 node yang telah berjalan pada **hello-api** container service. Anda tidak perlu melakukan konfigurasi apapun, sangat memudahkan.
+
+Sekarang kita tes respon dari API terutama pada atribut `network.eth1`, harusnya alamat IP dari setiap request bisa berbeda hasilnya tergantung node mana yang melayani. Lakukan request ke public endpoint dari container beberapa kali dan lihat hasilnya.
+
+```sh
+$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+```
+
+```json
+{
+  "address": "172.26.16.104",
+  "netmask": "255.255.240.0",
+  "family": "IPv4",
+  "mac": "06:3d:94:bd:f3:82",
+  "internal": false,
+  "cidr": "172.26.16.104/20"
+}
+```
+
+```sh
+$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+```
+
+```json
+{
+  "address": "172.26.40.212",
+  "netmask": "255.255.240.0",
+  "family": "IPv4",
+  "mac": "0a:2f:30:f6:15:ca",
+  "internal": false,
+  "cidr": "172.26.40.212/20"
+}
+```
+
+```sh
+$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+```
+
+```json
+{
+  "address": "172.26.13.18",
+  "netmask": "255.255.240.0",
+  "family": "IPv4",
+  "mac": "02:5d:98:ca:df:e6",
+  "internal": false,
+  "cidr": "172.26.13.18/20"
+}
+```
+
+Dapat terlihat jika alamat IP yang dikembalikan berbeda-beda mengindikasikan bahwa node yang menangani _request_ adalah node yang berbeda. Lakukan beberapa kali jika mendapatkan hasil yang sama.
+
+Okey, sebelum lanjut ke langkah berikutnya kembalikan terlebih dahulu jumlah node dari **3** menjadi **1**. Tentu masih ingat caranya bukan?
+
+### <a name="step-13"></a>Step 13 - Rollback API ke Versi Sebelumnya
 
 Kehidupan di dunia tidak selalu indah, benar? Begitu juga proses deployment kadang versi baru yang kita deploy malah tidak berfungsi dan menyebabkan error. Salah satu keuntungan menggunakan deployment berbasis container adalah kita dapat melakukan rollback dengan mudah.
 
@@ -628,14 +710,15 @@ Sebagai contoh kita akan melakukan rollback API kita ke versi sebelumnya. Carany
 2. Pastikan anda berada pada halaman _Deployments_.
 3. Scroll bagian bawah yaitu **Deployment versions**. Disana terlihat kita telah melakukan dua kali deployment. Deployment yang terakhir adalah untuk image `idn-belajar-node:2.0`.
 4. Klik titik tiga **Version 1** kemudian klik **Modify and redeploy**.
+
+[![Lightsail Rollback Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)
+
+> Gambar 15. Rollback Deployment ke Versi Sebelumnya
+
 5. Akan muncul dialog konfirmasi untuk melakukan deployment, klik tombol **Yes, continue**.
 6. Proses deployment belum dilakukan, ini hanya otomatis nilai konfigurasi _Image_ akan berubah menjadi versi sebelumnya yaitu `:hello-api.idn-belajar-node.3`. Nomor versi upload `.3` bisa berbeda ditempat anda.
 7. Klik tombol **Save and deploy** untuk memulai proses rollback deployment dari image sebelumnya.
 8. Tunggu hingga status dari container service kembali menjadi **Running**.
-
-[![Lightsail Rollback Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)
-
-> Gambar 12. Rollback Deployment ke Versi Sebelumnya
 
 Ketika rollback sudah selesai dan status kembali menjadi **Running** maka coba lakukan request ke API untuk melihat apakah respon sesuai dengan versi sebelumnya.
 
@@ -657,8 +740,49 @@ Perlu diingat bahwa rollback juga adalah sebuah proses deployment jadi otomatis 
 
 [![Lightsail Deployment Versions](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)
 
-> Gambar 13. Rollback juga menghasilkan versi deployment baru
+> Gambar 16. Rollback juga menghasilkan versi deployment baru
 
 [^back to top](#top)
 
-TBD
+### <a name="step-14"></a>Step 14 - Menghapus Amazon Lightsail Container Service
+
+Jika aplikasi sudah tidak dibutuhkan maka tidak ada alasan untuk menjalankannya. Jika Container Service hanya kita _disabled_ maka kita tetap terkena charge meskipun container dan endpoint tidak dapat diakses. 
+
+Jika sudah tidak diperlukan maka menghapus container adalah cara yang tepat. Ikuti langkah berikut.
+
+1. Kembali ke dashboard Amazon Lightsail
+2. Kemudian klik menu **Containers** untuk masuk ke halaman container service.
+3. Disana harusnya terdapat container service **hello-api**, klik tombol titik tiga untuk membuka menu kemudian klik pilihan **Delete**.
+
+[![Lightsail Delete Container Service](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-delete.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-delete.png)
+
+> Gambar 17. Menghapus container service
+
+4. Pada dialog konfirmasi klik tombol **Yes, delete** untuk menghapus container service.
+5. Harusnya container service **hello-api** sudah tidak ada dalam daftar.
+
+Perlu dicatat bahwa container image pada Amazon Lightsail terikat pada container service. Jadi menghapus container service juga akan menghapus semua container image yang telah diupload pada container service tersebut. Dalam hal ini, dua container image yang kita upload sebelumnya yaitu `idn-belajar-node:1.0` dan `idn-belajar-node:2.0` juga ikut dihapus.
+
+Sekarang mari kita coba akses kembali URL endpoint container apakah masih bisa merespon atau mengembalikan error.
+
+```sh
+$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head><title>404 No Such Service</title></head>
+<body bgcolor="white">
+<center><h1>404 No Such Service</h1></center>
+</body>
+</html>
+```
+
+Dapat terlihat bahwa public URL yang sebelumnya digunakan sekarang mengembalikan HTTP error 404. Artinya tidak ada container service yang berjalan.
+
+---
+
+SELAMAT! Anda telah menyelesaikan workshop deploy Node.js dengan menggunakan Amazon Lightsail Containers.
+
+Jangan lupa berikan tanda ⭐ untuk repo ini. Sampai bertemu diworkshop selanjutnya.
