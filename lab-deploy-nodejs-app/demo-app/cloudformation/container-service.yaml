@@ -1,0 +1,51 @@
+Resources:
+  HelloApi:
+    Type: 'AWS::Lightsail::Container'
+    Properties:
+      Power: 'nano'
+      Scale: 1
+      ServiceName: 'hello-api'
+      ContainerServiceDeployment:
+        !If 
+          - DeployContainerService
+          - 
+            Containers:
+              - ContainerName: !Ref ContainerNameParam
+                Image: !Ref ImageNameParam
+                Environment:
+                  - Value: !Ref AppPortNumberParam
+                    Variable: 'APP_PORT'
+                Ports:
+                  - Port: !Ref AppPortNumberParam
+                    Protocol: 'HTTP'
+            PublicEndpoint:
+              ContainerName: !Ref ContainerNameParam
+              ContainerPort: !Ref AppPortNumberParam
+          - !Ref "AWS::NoValue"
+
+Parameters:
+  ImageNameParam:
+    Type: String
+    Default: ':hello-api.idn-belajar-node.latest'
+  StepParam:
+    Type: String
+    Default: 'container_service'
+    AllowedValues:
+      - 'container_service'
+      - 'deployment'
+    ConstraintDescription: 'Must specify StepParam.'
+  ContainerNameParam:
+    Type: String
+    Default: 'hello-idn-belajar'
+  AppPortNumberParam:
+    Type: Number
+    Default: 8080
+
+Conditions:
+  DeployContainerService: !Equals
+    - !Ref StepParam
+    - 'deployment'
+
+Outputs:
+  ContainerServiceName:
+    Value: !Ref HelloApi
