@@ -17,7 +17,6 @@ $ docker images idn-belajar-node:2.0
 ```
 
 ```
-docker images idn-belajar-node:2.0
 REPOSITORY         TAG       IMAGE ID       CREATED        SIZE
 idn-belajar-node   2.0       c83f20a98c54   40 hours ago   179MB
 ```
@@ -56,7 +55,7 @@ $ aws lightsail push-container-image \
 ```
 
 ```
-...[CUR]...
+...[CUT]...
 Digest: sha256:84be0f3b648170b62551abbadbafda1234c1e6362470ecf0b94b3f767d067976
 Image "idn-belajar-node:2.0" registered.
 Refer to this image as ":hello-api.idn-belajar-node.11" in deployments.
@@ -83,3 +82,14 @@ ParameterKey=ImageNameParam,ParameterValue=:hello-api.idn-belajar-node.11
 Jika semua berjalan sukses maka pada halaman Amazon Lightsail Containers terdapat container service baru **hello-api**. Anda dapat mengakses API dari public domain yang berfungsi sebagai endpoint.
 
 [![Lightsail Deploy from CloudFormation](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-cloudformation-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-cloudformation-deployment.png)
+
+## Menghapus Deployment dan Container Service
+
+Karena kita menggunakan CloudFormation dalam membuat Amazon Lightsail Container dan deploymentnya, maka untuk menghapus keseluruhan cukup mudah.
+
+```sh
+$ aws cloudformation delete-stack \
+--stack-name "lab-lightsail-nodejs-app"
+```
+
+Hanya dengan perintah diatas maka seluruh _resources_ yang dibuat saat deployment akan dihapus.
