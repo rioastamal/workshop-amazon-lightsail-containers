@@ -48,6 +48,11 @@ echo "$@" | grep '\-\-split-pages' > /dev/null && {
         CURRENT_FILE=$ABS_DIR/$TOC_FILE
       }
       
+      [ $i -eq 1 ] && {
+        # No Step-0
+        PREV_LINK=$INDEX_LINK
+      }
+      
       [ $i -eq $MAX_PAGE ] && {
         NEXT_LINK=$INDEX_LINK
       }
