@@ -69,4 +69,7 @@ Version: ${WORKSHOP_VERSION}
 Author: [@rioastamal](https://github.com/rioastamal)</sup>
 EOF
     done
+    
+    # Change #step-1 to STEP-1.md
+    sed -i 's/#step-\([0-9]\+\)/STEP-\1\.md/g' $ABS_DIR/$TOC_FILE
 }
