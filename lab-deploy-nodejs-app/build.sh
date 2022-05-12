@@ -58,11 +58,10 @@ echo "$@" | grep '\-\-split-pages' > /dev/null && {
       
       cat <<EOF >> $CURRENT_FILE
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="${PREV_LINK}">&laquo; Sebelumnya</td><td align="center"><a href="$INDEX_LINK">Daftar Isi</a></td><td align="right"><a href="$NEXT_LINK">Berikutnya &raquo;</a></td></tr></table>
-<p class="line" style="font-size: small;">
-  <span style="display:block">Workshop: Deploy Node.js App dengan Amazon Lightsail Containers</span>
-  <span style="display:block">Version: ${WORKSHOP_VERSION}</span>
-  <span style="display:block">Author: <a href="https://github.com/rioastamal">@rioastamal</a></span>
-</p>
+
+<sup>Workshop: Deploy Node.js App dengan Amazon Lightsail Containers  
+Version: ${WORKSHOP_VERSION}  
+Author: [@rioastamal](https://github.com/rioastamal)</sup>
 EOF
     done
 }
