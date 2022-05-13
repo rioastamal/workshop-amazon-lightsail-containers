@@ -39,7 +39,7 @@ Dapat terlihat bahwa public URL yang sebelumnya digunakan sekarang mengembalikan
 
 ---
 
-SELAMAT! Anda telah menyelesaikan workshop deploy Node.js dengan menggunakan Amazon Lightsail Containers.
+SELAMAT! Anda telah menyelesaikan workshop deployment Node.js dengan menggunakan Amazon Lightsail Containers.
 
 Jangan lupa berikan tanda ⭐ untuk repo ini. Sampai bertemu diworkshop selanjutnya.
 

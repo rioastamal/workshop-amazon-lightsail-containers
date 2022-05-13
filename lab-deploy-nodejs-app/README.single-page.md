@@ -69,6 +69,9 @@ Pastikan anda sedang berada pada `$HOME` direktori yaitu `/home/ec2-user`.
 ```sh
 cd ~
 pwd 
+```
+
+```
 /home/ec2-user/
 ```
 
@@ -83,6 +86,9 @@ Masuk pada direktori tersebut. Kita akan menempatkan file-file yang diperlukan d
 ```sh
 cd nodejs-app
 pwd
+```
+
+```
 /home/ec2-user/nodejs-app
 ```
 
@@ -857,7 +863,7 @@ Dapat terlihat bahwa public URL yang sebelumnya digunakan sekarang mengembalikan
 
 ---
 
-SELAMAT! Anda telah menyelesaikan workshop deploy Node.js dengan menggunakan Amazon Lightsail Containers.
+SELAMAT! Anda telah menyelesaikan workshop deployment Node.js dengan menggunakan Amazon Lightsail Containers.
 
 Jangan lupa berikan tanda ⭐ untuk repo ini. Sampai bertemu diworkshop selanjutnya.
 
