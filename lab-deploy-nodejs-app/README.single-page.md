@@ -4,7 +4,9 @@
 
 ## Workshop Deploy Node.js App dengan Amazon Lightsail Containers
 
-Short intro - the why - TBD.
+Pada workshop ini peserta akan mempraktikkan bagaimana melakukan deployment sebuah API menggunakan Amazon Lightsail Containers. Sebuah API sederhana dibangun dengan Node.js dan framework Express.js sebagai contoh pada praktik ini.
+
+Peserta dapat mengikuti panduan workshop melalui step-step atau langkah-langkah yang telah disediakan secara berurutan mulai dari step 1 hingga step 15.
 
 - [Step 1 - Kebutuhan](#step-1)
 - [Step 2 - Menginstal Lightsail Control Plugin](#step-2)
