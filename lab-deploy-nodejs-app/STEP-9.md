@@ -34,7 +34,7 @@ app.listen(port, function() {
 Terlihat kita menambahkan respon atribut baru yaitu `network`. Untuk mencobanya jalankan API server tersebut.
 
 ```sh
-$ node src/index.js
+node src/index.js
 ```
 
 ```
@@ -44,7 +44,7 @@ API server running on port 8080
 Kemudian lakukan HTTP request ke path `/` untuk melihat respon terbaru.
 
 ```sh
-$ curl -s http://localhost:8080/
+curl -s http://localhost:8080/
 ```
 
 ```json

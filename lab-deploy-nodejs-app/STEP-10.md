@@ -4,7 +4,7 @@
 API versi terbaru sudah siap, saatnya melakukan update untuk container image `idn-belajar-node`. Kita akan merilis API versi terbaru ini dengan tag `2.0`. Untuk melakukannya ikuti langkah berikut.
 
 ```sh
-$ docker build --rm -t idn-belajar-node:2.0 .
+docker build --rm -t idn-belajar-node:2.0 .
 ```
 
 ```
@@ -20,7 +20,7 @@ Successfully tagged idn-belajar-node:2.0
 Kita lihat apakah container image baru tersebut sudah ada dalam daftar container image pada mesin kita.
 
 ```sh
-$ docker images idn-belajar-node
+docker images idn-belajar-node
 ```
 
 ```
@@ -32,7 +32,7 @@ idn-belajar-node   1.0       6c88b5d7ef4a   2 days ago       179MB
 Jalankan container versi baru tersebut untuk memastikan API berjalan sesuai harapan. 
 
 ```sh
-$ docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d idn-belajar-node:2.0
+docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d idn-belajar-node:2.0
 ```
 
 ```
@@ -42,7 +42,7 @@ d8df1a6d0dbd70de4cd36ff21e5b6a766a7bb0c21d28819d37fdff612aefe23c
 Lakukan HTTP request ke `localhost:8080` untuk melakukan tes respon dari API.
 
 ```sh
-$ curl -s http://localhost:8080/
+curl -s http://localhost:8080/
 ```
 
 ```json

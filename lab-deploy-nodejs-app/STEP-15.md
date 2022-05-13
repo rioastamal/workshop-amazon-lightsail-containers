@@ -21,7 +21,7 @@ Perlu dicatat bahwa container image pada Amazon Lightsail terikat pada container
 Sekarang mari kita coba akses kembali URL endpoint container apakah masih bisa merespon atau mengembalikan error.
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 ```html

@@ -4,22 +4,22 @@
 Pastikan anda sedang berada pada `$HOME` direktori yaitu `/home/ec2-user`.
 
 ```sh
-$ cd ~
-$ pwd 
+cd ~
+pwd 
 /home/ec2-user/
 ```
 
 Kemudian buat sebuah direktori baru bernama `nodejs-app`.
 
 ```sh
-$ mkdir nodejs-app
+mkdir nodejs-app
 ```
 
 Masuk pada direktori tersebut. Kita akan menempatkan file-file yang diperlukan disana.
 
 ```sh
-$ cd nodejs-app
-$ pwd
+cd nodejs-app
+pwd
 /home/ec2-user/nodejs-app
 ```
 

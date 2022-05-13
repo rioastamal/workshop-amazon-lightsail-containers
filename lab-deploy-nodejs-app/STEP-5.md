@@ -6,7 +6,7 @@ Untuk membuat container image dari layanan API yang baru dibuat kita akan menggu
 Buat sebuah file baru dengan nama `Dockerfile`. File ini akan berisi perintah-perintah dalam membangun container image. Letakkan file ini di dalam root direktori project yaitu `nodejs-app/`.
 
 ```sh
-$ touch Dockerfile
+touch Dockerfile
 ```
 
 Salin kode dibawah ini dan masukkan ke dalam file `Dockerfile`.
@@ -29,7 +29,7 @@ Pada kode di atas, kita menggunakan Node.js versi 16 yang diambil dari Amazon EC
 Kita akan menamakan container image ini dengan nama `idn-belajar-node` dengan versi `1.0`. Untuk mulai membangun container image jalankan perintah berikut. Perhatikan ada `.` titik diakhir perintah.
 
 ```sh
-$ docker build --rm -t idn-belajar-node:1.0 .
+docker build --rm -t idn-belajar-node:1.0 .
 ```
 
 ```
@@ -45,7 +45,7 @@ Successfully tagged idn-belajar-node:1.0
 Pastikan image tersebut ada dalam daftar image di lokal mesin.
 
 ```sh
-$ docker images idn-belajar-node
+docker images idn-belajar-node
 ```
 
 ```
@@ -58,7 +58,7 @@ Dapat terlihat jika container image yang dibuat yaitu `idn-belajar-node` dengan 
 Sekarang coba jalankan container `idn-belajar-node:1.0` pada port `8080` untuk memastikan API yang dibuat dapat berjalan pada container.
 
 ```sh
-$ docker run --rm --name idn_belajar_1_0 -p 8080:8080 -d idn-belajar-node:1.0
+docker run --rm --name idn_belajar_1_0 -p 8080:8080 -d idn-belajar-node:1.0
 ```
 
 ```
@@ -68,7 +68,7 @@ ec43c5f4ab04b920df9907bf981d3b7b0dd2c287d8599e1b7768e290694b8f16
 Kemudian cek untuk memastikan container `idn-belajar-node:1.0` sedang berjalan.
 
 ```sh
-$ docker ps
+docker ps
 ```
 
 ```
@@ -79,7 +79,7 @@ ec43c5f4ab04   idn-belajar-node:1.0   "node src/index.js"   24 seconds ago   Up 
 Jalankan `curl` untuk melakukan HTTP request ke localhost port `8080` dan path `/`.
 
 ```sh
-$ curl -s http://localhost:8080/
+curl -s http://localhost:8080/
 ```
 
 ```json
@@ -91,7 +91,7 @@ $ curl -s http://localhost:8080/
 Mantab! API dapat berjalan dengan sempurna di container. Sekarang stop container tersebut.
 
 ```sh
-$ docker stop idn_belajar_1_0
+docker stop idn_belajar_1_0
 ```
 
 

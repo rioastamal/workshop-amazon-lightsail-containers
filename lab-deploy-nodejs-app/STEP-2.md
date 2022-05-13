@@ -4,13 +4,13 @@
 Plugin CLI ini digunakan untuk mengupload container image dari komputer lokal ke Amazon Lightsail container service. Jalankan perintah berikut untuk menginstal Lightsail Control Plugin. Diasumsikan bahwa terdapat perintah `sudo` pada distribusi Linux yang anda gunakan.
 
 ```sh
-$ sudo curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
+sudo curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
 ```
 
 Tambahkan atribut _execute_ pada file `lightsailctl` yang baru saja didownload.
 
 ```sh
-$ sudo chmod +x /usr/local/bin/lightsailctl
+sudo chmod +x /usr/local/bin/lightsailctl
 ```
 
 

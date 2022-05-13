@@ -4,7 +4,7 @@
 Kita sudah pernah melakukan upload container image `idn-belajar-node:1.0` ke Container service **hello-api**. Karena sudah ada versi terbaru yaitu `idn-belajar-node:2.0` maka kita juga harus melakukan push container image ini ke **hello-api**. Jalankan perintah di bawah ini.
 
 ```sh
-$ aws lightsail push-container-image \
+aws lightsail push-container-image \
 --region "ap-southeast-1" \
 --service-name "hello-api" \
 --label "idn-belajar-node" \

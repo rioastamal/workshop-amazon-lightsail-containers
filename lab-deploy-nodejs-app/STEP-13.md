@@ -31,7 +31,7 @@ Amazon Lightsail akan secara otomatis mendistribusikan _traffic_ ke 3 node yang 
 Sekarang kita tes respon dari API terutama pada atribut `network.eth1`, harusnya alamat IP dari setiap request bisa berbeda hasilnya tergantung node mana yang melayani. Lakukan request ke public endpoint dari container beberapa kali dan lihat hasilnya.
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
 ```
 
 ```json
@@ -46,7 +46,7 @@ $ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
 ```
 
 ```json
@@ -61,7 +61,7 @@ $ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
 ```
 
 ```json

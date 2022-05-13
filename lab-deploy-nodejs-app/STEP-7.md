@@ -6,7 +6,7 @@ Setiap container image yang di-push ke Amazon Lightsail terikat pada sebuah Cont
 Pada langkah ini kita akan melakukan push container image `idn-belajar-node:1.0` yang telah dibuat sebelumnya ke Container service **hello-api**. Jalankan perintah dibawah ini.
 
 ```sh
-$ aws lightsail push-container-image \
+aws lightsail push-container-image \
 --region "ap-southeast-1" \
 --service-name "hello-api" \
 --label "idn-belajar-node" \

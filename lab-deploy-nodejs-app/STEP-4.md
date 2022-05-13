@@ -4,19 +4,23 @@
 Pada langkah ini kita akan membuat sebuah API sederhana yang dibangun menggunakan framework Node.js yang populer yaitu Express.
 
 ```sh
-$ npm install --save express
+echo '{}' > package.json
+```
+
+```sh
+npm install --save express
 ```
 
 Selanjutnya buat sebuah direktori baru bernama `src/` untuk menempatkan kode sumber.
 
 ```sh
-$ mkdir src/
+mkdir src/
 ```
 
 Buat sebuah file `src/index.js`, ini adalah file utama dimana kode API yang akan kita buat.
 
 ```sh
-$ touch src/index.js
+touch src/index.js
 ```
 
 Salin kode di bawah ini dan masukkan ke dalam file `src/index.js`.
@@ -51,7 +55,7 @@ Kode diatas akan menjalankan sebuah HTTP server pada port `8080` secara default.
 Sekarang coba jalankan kode tersebut untuk memastikan bahwa API berjalan sesuai harapan.
 
 ```
-$ node src/index.js
+node src/index.js
 ```
 
 ```
@@ -61,7 +65,7 @@ API server running on port 8080
 Tes dengan melakukan HTTP request pada localhost port `8080`.
 
 ```sh
-$ curl -s -D /dev/stdout http://localhost:8080
+curl -s -D /dev/stdout http://localhost:8080
 ```
 
 ```

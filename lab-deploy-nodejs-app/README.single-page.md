@@ -45,13 +45,13 @@ Sebelum memulai workshop pastikan sudah memenuhi kebutuhan yang tercantum di baw
 Plugin CLI ini digunakan untuk mengupload container image dari komputer lokal ke Amazon Lightsail container service. Jalankan perintah berikut untuk menginstal Lightsail Control Plugin. Diasumsikan bahwa terdapat perintah `sudo` pada distribusi Linux yang anda gunakan.
 
 ```sh
-$ sudo curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
+sudo curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
 ```
 
 Tambahkan atribut _execute_ pada file `lightsailctl` yang baru saja didownload.
 
 ```sh
-$ sudo chmod +x /usr/local/bin/lightsailctl
+sudo chmod +x /usr/local/bin/lightsailctl
 ```
 
 [^back to top](#top)
@@ -65,22 +65,22 @@ $ sudo chmod +x /usr/local/bin/lightsailctl
 Pastikan anda sedang berada pada `$HOME` direktori yaitu `/home/ec2-user`.
 
 ```sh
-$ cd ~
-$ pwd 
+cd ~
+pwd 
 /home/ec2-user/
 ```
 
 Kemudian buat sebuah direktori baru bernama `nodejs-app`.
 
 ```sh
-$ mkdir nodejs-app
+mkdir nodejs-app
 ```
 
 Masuk pada direktori tersebut. Kita akan menempatkan file-file yang diperlukan disana.
 
 ```sh
-$ cd nodejs-app
-$ pwd
+cd nodejs-app
+pwd
 /home/ec2-user/nodejs-app
 ```
 
@@ -95,19 +95,23 @@ $ pwd
 Pada langkah ini kita akan membuat sebuah API sederhana yang dibangun menggunakan framework Node.js yang populer yaitu Express.
 
 ```sh
-$ npm install --save express
+echo '{}' > package.json
+```
+
+```sh
+npm install --save express
 ```
 
 Selanjutnya buat sebuah direktori baru bernama `src/` untuk menempatkan kode sumber.
 
 ```sh
-$ mkdir src/
+mkdir src/
 ```
 
 Buat sebuah file `src/index.js`, ini adalah file utama dimana kode API yang akan kita buat.
 
 ```sh
-$ touch src/index.js
+touch src/index.js
 ```
 
 Salin kode di bawah ini dan masukkan ke dalam file `src/index.js`.
@@ -142,7 +146,7 @@ Kode diatas akan menjalankan sebuah HTTP server pada port `8080` secara default.
 Sekarang coba jalankan kode tersebut untuk memastikan bahwa API berjalan sesuai harapan.
 
 ```
-$ node src/index.js
+node src/index.js
 ```
 
 ```
@@ -152,7 +156,7 @@ API server running on port 8080
 Tes dengan melakukan HTTP request pada localhost port `8080`.
 
 ```sh
-$ curl -s -D /dev/stdout http://localhost:8080
+curl -s -D /dev/stdout http://localhost:8080
 ```
 
 ```
@@ -185,7 +189,7 @@ Untuk membuat container image dari layanan API yang baru dibuat kita akan menggu
 Buat sebuah file baru dengan nama `Dockerfile`. File ini akan berisi perintah-perintah dalam membangun container image. Letakkan file ini di dalam root direktori project yaitu `nodejs-app/`.
 
 ```sh
-$ touch Dockerfile
+touch Dockerfile
 ```
 
 Salin kode dibawah ini dan masukkan ke dalam file `Dockerfile`.
@@ -208,7 +212,7 @@ Pada kode di atas, kita menggunakan Node.js versi 16 yang diambil dari Amazon EC
 Kita akan menamakan container image ini dengan nama `idn-belajar-node` dengan versi `1.0`. Untuk mulai membangun container image jalankan perintah berikut. Perhatikan ada `.` titik diakhir perintah.
 
 ```sh
-$ docker build --rm -t idn-belajar-node:1.0 .
+docker build --rm -t idn-belajar-node:1.0 .
 ```
 
 ```
@@ -224,7 +228,7 @@ Successfully tagged idn-belajar-node:1.0
 Pastikan image tersebut ada dalam daftar image di lokal mesin.
 
 ```sh
-$ docker images idn-belajar-node
+docker images idn-belajar-node
 ```
 
 ```
@@ -237,7 +241,7 @@ Dapat terlihat jika container image yang dibuat yaitu `idn-belajar-node` dengan 
 Sekarang coba jalankan container `idn-belajar-node:1.0` pada port `8080` untuk memastikan API yang dibuat dapat berjalan pada container.
 
 ```sh
-$ docker run --rm --name idn_belajar_1_0 -p 8080:8080 -d idn-belajar-node:1.0
+docker run --rm --name idn_belajar_1_0 -p 8080:8080 -d idn-belajar-node:1.0
 ```
 
 ```
@@ -247,7 +251,7 @@ ec43c5f4ab04b920df9907bf981d3b7b0dd2c287d8599e1b7768e290694b8f16
 Kemudian cek untuk memastikan container `idn-belajar-node:1.0` sedang berjalan.
 
 ```sh
-$ docker ps
+docker ps
 ```
 
 ```
@@ -258,7 +262,7 @@ ec43c5f4ab04   idn-belajar-node:1.0   "node src/index.js"   24 seconds ago   Up 
 Jalankan `curl` untuk melakukan HTTP request ke localhost port `8080` dan path `/`.
 
 ```sh
-$ curl -s http://localhost:8080/
+curl -s http://localhost:8080/
 ```
 
 ```json
@@ -270,7 +274,7 @@ $ curl -s http://localhost:8080/
 Mantab! API dapat berjalan dengan sempurna di container. Sekarang stop container tersebut.
 
 ```sh
-$ docker stop idn_belajar_1_0
+docker stop idn_belajar_1_0
 ```
 
 [^back to top](#top)
@@ -330,7 +334,7 @@ Setiap container image yang di-push ke Amazon Lightsail terikat pada sebuah Cont
 Pada langkah ini kita akan melakukan push container image `idn-belajar-node:1.0` yang telah dibuat sebelumnya ke Container service **hello-api**. Jalankan perintah dibawah ini.
 
 ```sh
-$ aws lightsail push-container-image \
+aws lightsail push-container-image \
 --region "ap-southeast-1" \
 --service-name "hello-api" \
 --label "idn-belajar-node" \
@@ -385,7 +389,7 @@ Proses ini digunakan untuk menempatkan container yang akan dijalankan ke Contain
 Jika status sudah **Running** maka kita dapat mencoba untuk mengakses aplikasi dengan membuka URL yang ada di public domain. Perlu dicatat jika protocol yang digunakan adalah HTTPS. Dalam contoh ini saya menggunakan `curl` untuk melakukan tes. Sesuaikan dengan public domain anda sendiri.
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 ```json
@@ -437,7 +441,7 @@ app.listen(port, function() {
 Terlihat kita menambahkan respon atribut baru yaitu `network`. Untuk mencobanya jalankan API server tersebut.
 
 ```sh
-$ node src/index.js
+node src/index.js
 ```
 
 ```
@@ -447,7 +451,7 @@ API server running on port 8080
 Kemudian lakukan HTTP request ke path `/` untuk melihat respon terbaru.
 
 ```sh
-$ curl -s http://localhost:8080/
+curl -s http://localhost:8080/
 ```
 
 ```json
@@ -491,7 +495,7 @@ Dapat terlihat informasi jaringan dari container ditampilkan pada atribut `netwo
 API versi terbaru sudah siap, saatnya melakukan update untuk container image `idn-belajar-node`. Kita akan merilis API versi terbaru ini dengan tag `2.0`. Untuk melakukannya ikuti langkah berikut.
 
 ```sh
-$ docker build --rm -t idn-belajar-node:2.0 .
+docker build --rm -t idn-belajar-node:2.0 .
 ```
 
 ```
@@ -507,7 +511,7 @@ Successfully tagged idn-belajar-node:2.0
 Kita lihat apakah container image baru tersebut sudah ada dalam daftar container image pada mesin kita.
 
 ```sh
-$ docker images idn-belajar-node
+docker images idn-belajar-node
 ```
 
 ```
@@ -519,7 +523,7 @@ idn-belajar-node   1.0       6c88b5d7ef4a   2 days ago       179MB
 Jalankan container versi baru tersebut untuk memastikan API berjalan sesuai harapan. 
 
 ```sh
-$ docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d idn-belajar-node:2.0
+docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d idn-belajar-node:2.0
 ```
 
 ```
@@ -529,7 +533,7 @@ d8df1a6d0dbd70de4cd36ff21e5b6a766a7bb0c21d28819d37fdff612aefe23c
 Lakukan HTTP request ke `localhost:8080` untuk melakukan tes respon dari API.
 
 ```sh
-$ curl -s http://localhost:8080/
+curl -s http://localhost:8080/
 ```
 
 ```json
@@ -563,7 +567,7 @@ Dapat terlihat jika respon dari API telah memiliki atribut `network`. Hasilnya b
 Kita sudah pernah melakukan upload container image `idn-belajar-node:1.0` ke Container service **hello-api**. Karena sudah ada versi terbaru yaitu `idn-belajar-node:2.0` maka kita juga harus melakukan push container image ini ke **hello-api**. Jalankan perintah di bawah ini.
 
 ```sh
-$ aws lightsail push-container-image \
+aws lightsail push-container-image \
 --region "ap-southeast-1" \
 --service-name "hello-api" \
 --label "idn-belajar-node" \
@@ -610,7 +614,7 @@ Setelah container image versi terbaru `idn-belajar-node:2.0` diupload ke Amazon 
 Setelah status kembali menjadi **Running** saatnya mengakses API versi terbaru apakah sudah menampilkan respon yang diinginkan. Gunakan web browser atau `curl` seperti di bawah untuk mengakses. Sesuaikan dengan URL dari container service anda sendiri.
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 ```json
@@ -708,7 +712,7 @@ Amazon Lightsail akan secara otomatis mendistribusikan _traffic_ ke 3 node yang 
 Sekarang kita tes respon dari API terutama pada atribut `network.eth1`, harusnya alamat IP dari setiap request bisa berbeda hasilnya tergantung node mana yang melayani. Lakukan request ke public endpoint dari container beberapa kali dan lihat hasilnya.
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
 ```
 
 ```json
@@ -723,7 +727,7 @@ $ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
 ```
 
 ```json
@@ -738,7 +742,7 @@ $ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
 ```
 
 ```json
@@ -785,7 +789,7 @@ Sebagai contoh kita akan melakukan rollback API kita ke versi sebelumnya. Carany
 Ketika rollback sudah selesai dan status kembali menjadi **Running** maka coba lakukan request ke API untuk melihat apakah respon sesuai dengan versi sebelumnya.
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 ```json
@@ -832,7 +836,7 @@ Perlu dicatat bahwa container image pada Amazon Lightsail terikat pada container
 Sekarang mari kita coba akses kembali URL endpoint container apakah masih bisa merespon atau mengembalikan error.
 
 ```sh
-$ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
 ```
 
 ```html
