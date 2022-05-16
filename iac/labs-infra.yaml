@@ -1,0 +1,122 @@
+Description: AWS Cloud9 Environment Demo
+Parameters:
+  EC2InstanceTypeParam:
+    Description: Type of EC2 instance used for Cloud9
+    Type: String
+    Default: t3.micro
+    AllowedValues:
+      - t2.micro
+      - t3.micro
+      - t3.small
+      - t3.medium
+  
+  HibernateInMinutesParam:
+    Description: How many minutes Cloud9 should wait before hibernate when there is no activity
+    Type: Number
+    Default: 30
+    AllowedValues:
+      - 30
+      - 60
+      - 0
+      
+Resources:
+  Cloud9IDE:
+    Type: 'AWS::Cloud9::EnvironmentEC2'
+    Properties:
+      Name: 
+        !Sub
+          - '${RandomGUID}-IDE'
+          - { RandomGUID: !Select [0, !Split ["-", !Select [2, !Split ["/", !Ref AWS::StackId ]]]] }
+      AutomaticStopTimeMinutes: !Ref HibernateInMinutesParam
+      InstanceType: !Ref EC2InstanceTypeParam
+      Tags:
+        - 
+          Key: SSMBootstrap
+          Value: Active
+        - 
+          Key: Environment
+          Value: Demo
+        - 
+          Key: WorkshopName
+          Value: AWS-Lightsail-Containers
+
+  Cloud9BootstrapCommand:
+    Type: 'AWS::SSM::Document'
+    Properties:
+      DocumentType: Command
+      Content:
+        schemaVersion: '2.2'
+        description: Run commands on Cloud9 EC2 instance
+        mainSteps:
+          - action: aws:runShellScript
+            name: cloud9commands
+            inputs:
+              runCommand:
+              - '#!/bin/bash'
+              - |
+                yum install -y jq
+                
+                sudo -i -u ec2-user sh -c 'source $HOME/.nvm/nvm.sh; nvm install 16'
+                
+                echo "Installing AWS CLI v2..." && \
+                cd /tmp && \
+                curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+                unzip -q awscliv2.zip && \
+                sudo ./aws/install
+                
+                # Resize Volume from defualt 8GB to 16GB
+                INSTANCE_ID=$( curl -s http://169.254.169.254/latest/meta-data/instance-id )
+                REGION=$( curl -s http://169.254.169.254/latest/meta-data/placement/region )
+                VOLUME_ID=$( aws ec2 describe-instances \
+                --instance-id $INSTANCE_ID \
+                --query "Reservations[0].Instances[0].BlockDeviceMappings[0].Ebs.VolumeId" \
+                --output text --region $REGION )
+                
+                aws ec2 modify-volume --volume-id $VOLUME_ID --size 16 --region $REGION
+                
+                while [ \
+                  "$( aws ec2 describe-volumes-modifications \
+                  --volume-id $VOLUME_ID \
+                  --filters Name=modification-state,Values="optimizing","completed" \
+                  --query "length(VolumesModifications)"\
+                  --output text --region $REGION )" != "1" ]; do
+                  sleep 1
+                done
+                
+                # Assume we are using default Amazon Linux and ebs type is gp2 
+                sudo growpart /dev/nvme0n1 1
+                sudo resize2fs /dev/nvme0n1p1
+              
+  Cloud9EC2AdminRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Tags:
+        - Key: Environment
+          Value: AWS Example
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+                - ssm.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns: 
+        - arn:aws:iam::aws:policy/AdministratorAccess
+      Path: '/'
+      
+  Cloud9InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: '/'
+      Roles:
+        - Ref: Cloud9EC2AdminRole
+
+Outputs:
+  Cloud9Url:
+    Value: 
+      !Sub 
+        - 'https://${AWS::Region}.console.aws.amazon.com/cloud9/ide/${UniqueId}'
+        - { UniqueId: !Ref Cloud9IDE }
