@@ -22,7 +22,7 @@ Sebagai contoh kita akan melakukan rollback API kita ke versi sebelumnya. Carany
 Ketika rollback sudah selesai dan status kembali menjadi **Running** maka coba lakukan request ke API untuk melihat apakah respon sesuai dengan versi sebelumnya.
 
 ```sh
-curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 ```
 
 ```json

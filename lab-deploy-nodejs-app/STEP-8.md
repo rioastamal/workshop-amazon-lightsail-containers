@@ -23,7 +23,7 @@ Proses ini digunakan untuk menempatkan container yang akan dijalankan ke Contain
 Jika status sudah **Running** maka kita dapat mencoba untuk mengakses aplikasi dengan membuka URL yang ada di public domain. Perlu dicatat jika protocol yang digunakan adalah HTTPS. Dalam contoh ini saya menggunakan `curl` untuk melakukan tes. Sesuaikan dengan public domain anda sendiri.
 
 ```sh
-curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 ```
 
 ```json

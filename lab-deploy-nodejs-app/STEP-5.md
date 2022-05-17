@@ -3,6 +3,12 @@
 
 Untuk membuat container image dari layanan API yang baru dibuat kita akan menggunakan Docker.
 
+Pastikan dulu telah berada pada direktori `nodejs-app/`.
+
+```
+cd ~/nodejs-app/
+```
+
 Buat sebuah file baru dengan nama `Dockerfile`. File ini akan berisi perintah-perintah dalam membangun container image. Letakkan file ini di dalam root direktori project yaitu `nodejs-app/`.
 
 ```sh

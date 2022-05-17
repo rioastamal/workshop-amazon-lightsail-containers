@@ -197,6 +197,12 @@ Keren. API kita sudah bisa berjalan sesuai harapan. Saatnya memaket menjadi cont
 
 Untuk membuat container image dari layanan API yang baru dibuat kita akan menggunakan Docker.
 
+Pastikan dulu telah berada pada direktori `nodejs-app/`.
+
+```
+cd ~/nodejs-app/
+```
+
 Buat sebuah file baru dengan nama `Dockerfile`. File ini akan berisi perintah-perintah dalam membangun container image. Letakkan file ini di dalam root direktori project yaitu `nodejs-app/`.
 
 ```sh
@@ -400,7 +406,7 @@ Proses ini digunakan untuk menempatkan container yang akan dijalankan ke Contain
 Jika status sudah **Running** maka kita dapat mencoba untuk mengakses aplikasi dengan membuka URL yang ada di public domain. Perlu dicatat jika protocol yang digunakan adalah HTTPS. Dalam contoh ini saya menggunakan `curl` untuk melakukan tes. Sesuaikan dengan public domain anda sendiri.
 
 ```sh
-curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 ```
 
 ```json
@@ -625,7 +631,7 @@ Setelah container image versi terbaru `idn-belajar-node:2.0` diupload ke Amazon 
 Setelah status kembali menjadi **Running** saatnya mengakses API versi terbaru apakah sudah menampilkan respon yang diinginkan. Gunakan web browser atau `curl` seperti di bawah untuk mengakses. Sesuaikan dengan URL dari container service anda sendiri.
 
 ```sh
-curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 ```
 
 ```json
@@ -723,7 +729,7 @@ Amazon Lightsail akan secara otomatis mendistribusikan _traffic_ ke 3 node yang 
 Sekarang kita tes respon dari API terutama pada atribut `network.eth1`, harusnya alamat IP dari setiap request bisa berbeda hasilnya tergantung node mana yang melayani. Lakukan request ke public endpoint dari container beberapa kali dan lihat hasilnya.
 
 ```sh
-curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/ | jq '.network.eth1[0]'
 ```
 
 ```json
@@ -738,7 +744,7 @@ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ |
 ```
 
 ```sh
-curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/ | jq '.network.eth1[0]'
 ```
 
 ```json
@@ -753,7 +759,7 @@ curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ |
 ```
 
 ```sh
-curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/ | jq '.network.eth1[0]'
+curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/ | jq '.network.eth1[0]'
 ```
 
 ```json
@@ -800,7 +806,7 @@ Sebagai contoh kita akan melakukan rollback API kita ke versi sebelumnya. Carany
 Ketika rollback sudah selesai dan status kembali menjadi **Running** maka coba lakukan request ke API untuk melihat apakah respon sesuai dengan versi sebelumnya.
 
 ```sh
-curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 ```
 
 ```json
@@ -847,7 +853,7 @@ Perlu dicatat bahwa container image pada Amazon Lightsail terikat pada container
 Sekarang mari kita coba akses kembali URL endpoint container apakah masih bisa merespon atau mengembalikan error.
 
 ```sh
-curl -s https://hello-api.ihcvtn9gpds60.ap-southeast-1.cs.amazonlightsail.com/
+curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 ```
 
 ```html
