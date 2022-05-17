@@ -18,6 +18,16 @@ Parameters:
       - 30
       - 60
       - 0
+  
+  Cloud9OwnerArnParam:
+    Description: This ARN can be the ARN of any AWS Identity and Access Management principal. If this value is not specified, the ARN defaults to this environment's creator
+    Type: String
+    Default: 'default_arn'
+    
+Conditions:
+  UsingCloud9DefaultArn: !Equals
+    - !Ref Cloud9OwnerArnParam
+    - 'default_arn'
       
 Resources:
   Cloud9IDE:
@@ -29,6 +39,11 @@ Resources:
           - { RandomGUID: !Select [0, !Split ["-", !Select [2, !Split ["/", !Ref AWS::StackId ]]]] }
       AutomaticStopTimeMinutes: !Ref HibernateInMinutesParam
       InstanceType: !Ref EC2InstanceTypeParam
+      OwnerArn: 
+        !If
+          - UsingCloud9DefaultArn
+          - !Sub 'arn:aws:sts::${AWS::AccountId}:assumed-role/TeamRole/MasterKey'
+          - !Ref Cloud9OwnerArnParam
       Tags:
         - 
           Key: SSMBootstrap
