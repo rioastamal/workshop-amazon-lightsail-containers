@@ -21,6 +21,8 @@ Peserta dapat mengikuti panduan workshop melalui step-step atau langkah-langkah 
 - [Step 14 - Rollback API ke Versi Sebelumnya](STEP-14.md)
 - [Step 15 - Menghapus Amazon Lightsail Container Service](STEP-15.md)
 
+Jika anda lebih menyukai semua langkah dalam satuhalaman maka silahkan membuka file [README.single-page.md](README.single-page.md).
+
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-15.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-1.md">Berikutnya &raquo;</a></td></tr></table>
 
 <sup>Workshop: Deploy Node.js App dengan Amazon Lightsail Containers  

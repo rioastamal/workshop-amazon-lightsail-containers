@@ -24,6 +24,8 @@ Peserta dapat mengikuti panduan workshop melalui step-step atau langkah-langkah 
 - [Step 14 - Rollback API ke Versi Sebelumnya](#step-14)
 - [Step 15 - Menghapus Amazon Lightsail Container Service](#step-15)
 
+Jika anda lebih menyukai semua langkah dalam satuhalaman maka silahkan membuka file [README.single-page.md](README.single-page.md).
+
 <!-- end step-0 -->
 
 <!-- begin step-1 -->
@@ -35,6 +37,7 @@ Sebelum memulai workshop pastikan sudah memenuhi kebutuhan yang tercantum di baw
 - Memiliki akun AWS aktif
 - Sudah menginstal Docker
 - Sudah menginstal AWS CLI v2 dan konfigurasinya
+- Sudah menginstal Node.js v16.x
 
 [^back to top](#top)
 
