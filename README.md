@@ -18,6 +18,27 @@ Pada setiap workshop poin utama yang menjadi bahasan adalah:
 - Scaling Container dengan Menambah Jumlah Node
 - Rollback Versi Container
 
+## Pre-Workshop Webinar
+
+Ini adalah sesi pre-workshop webinar dengan Indonesia Belajar. Sesi ini menjelaskan tenang Amazon Lightsail Containers dan alur workshop yang akan dijalankan. 
+
+[![Watch the video](https://img.youtube.com/vi/Ej5s5SwCo2s/hqdefault.jpg)](https://www.youtube.com/watch?v=Ej5s5SwCo2s)
+
+## Jadwal Workshop
+
+Berikut ini adalah jadwal workshop yang akan diselenggarakan kedepan.
+
+Tanggal | Organizer | Speaker | Judul | Live Stream | Lab 
+--------|-----------|---------|-------|-------------|-----
+Sabtu, 21 Mei 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Pre-Workshop Webinar: Deploy App dengan Amazon Lightsail Containers | [https://youtu.be/Ej5s5SwCo2s](https://youtu.be/Ej5s5SwCo2s) | -
+Sabtu, 28 Mei 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Node.js App dengan Amazon Lightsail Containers | [https://youtu.be/A7c65eIB0cg](https://youtu.be/A7c65eIB0cg) | [lab-deploy-nodejs-app](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-nodejs-app)
+Sabtu, 18 Juni 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Python Flask dengan Amazon Lightsail Containers | [https://youtu.be/C7ul435JnZk](https://youtu.be/C7ul435JnZk) | -
+Sabtu, 25 Juni 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Laravel App dengan Amazon Lightsail Containers | [https://youtu.be/NI0HgZ16cD0](https://youtu.be/NI0HgZ16cD0) | -
+
+## Forum Diskusi
+
+Silahkan menuju halaman GitHub [Discussions](https://github.com/rioastamal/workshop-amazon-lightsail-containers/discussions) pada repository ini untuk mengikuti diskusi atau ingin mengajukan pertanyaan seputar Workshop Amazon Lightsail Containers.
+
 ## Penulis
 
 Workshop ini ditulis oleh [Rio Astamal](https://rioastamal.net)
