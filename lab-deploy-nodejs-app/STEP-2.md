@@ -13,6 +13,18 @@ Tambahkan atribut _execute_ pada file `lightsailctl` yang baru saja didownload.
 sudo chmod +x /usr/local/bin/lightsailctl
 ```
 
+Pastikan atribut _execute_ sudah teraplikasikan ke file.
+
+```sh
+ls -l /usr/local/bin/lightsailctl
+```
+
+```
+-rwxr-xr-x 1 root root 13201408 May 28 03:16 /usr/local/bin/lightsailctl
+```
+
+Itu ditandai dengan adanya huruf `x` pada daftar atribut, contohnya `-rwxr-xr-x`.
+
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-1.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-3.md">Berikutnya &raquo;</a></td></tr></table>
 
