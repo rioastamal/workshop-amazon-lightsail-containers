@@ -49,7 +49,7 @@ python --version
 Python 3.8.13
 ```
 
-Jika output dari shell seperti di atas maka selamat anda sekarang bisa Python 3.8 di komputer anda.
+Jika output dari shell seperti di atas maka selamat anda sekarang bisa menggunakan Python 3.8 di komputer anda.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="README.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-2.md">Berikutnya &raquo;</a></td></tr></table>

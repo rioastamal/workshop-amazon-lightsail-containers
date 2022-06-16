@@ -80,7 +80,7 @@ python --version
 Python 3.8.13
 ```
 
-Jika output dari shell seperti di atas maka selamat anda sekarang bisa Python 3.8 di komputer anda.
+Jika output dari shell seperti di atas maka selamat anda sekarang bisa menggunakan Python 3.8 di komputer anda.
 
 [^back to top](#top)
 
