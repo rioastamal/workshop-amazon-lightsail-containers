@@ -88,7 +88,7 @@ Jika semua berjalan sukses maka pada halaman Amazon Lightsail Containers terdapa
 Karena kita menggunakan CloudFormation dalam membuat Amazon Lightsail Container dan deploymentnya, maka untuk menghapus keseluruhan cukup mudah.
 
 ```sh
-$ aws cloudformation delete-stack \
+aws cloudformation delete-stack \
 --stack-name "lab-lightsail-python-app"
 ```
 
