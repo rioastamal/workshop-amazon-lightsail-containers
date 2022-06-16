@@ -7,9 +7,9 @@ Pertama kita buat file `requirements.txt` untuk menginstal ketergantungan pustak
 
 ```sh
 echo '
-cowsay
-Flask
-gunicorn
+cowsay~=4.0
+Flask~=2.1.2
+gunicorn~=20.1.0
 ' > requirements.txt
 ```
 
