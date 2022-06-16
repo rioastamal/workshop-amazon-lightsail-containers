@@ -149,7 +149,7 @@ Content-Length: 833
                                               ||     ||
 ```
 
-Sekarang mari kita coba kirimkan parameter `text` dengna nilai `Hello%20Indonesia%20Belajar`. Kode `%20` mengindikasikan spasi.
+Sekarang mari kita coba kirimkan parameter `text` dengan nilai `Hello%20Indonesia%20Belajar`. Kode `%20` mengindikasikan spasi.
 
 ```sh
 curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar'
