@@ -272,11 +272,10 @@ bash /app/run-server.sh
 [2022-06-15 09:28:22 +0000] [13] [INFO] Booting worker with pid: 13
 ```
 
-Tes dengan melakukan HTTP request pada localhost port `8080` path `/` dan parameter `text`. Kode `%20` pada query string mengindikasikan sebuah spasi.
+Tes dengan melakukan HTTP request pada localhost port `8080` path `/` dan tanpa mengirimkan parameter apapun.
 
 ```sh
-curl -s -D /dev/stderr \
-'http://localhost:8080/?text=Hello%20Indonesia%20Belajar'
+curl -s -D /dev/stderr 'http://localhost:8080/'
 ```
 
 ```
@@ -305,6 +304,25 @@ Content-Length: 833
                                           (__)\       )\/\
                                               ||----w |
                                               ||     ||
+```
+
+Sekarang mari kita coba kirimkan parameter `text` dengna nilai `Hello%20Indonesia%20Belajar`. Kode `%20` mengindikasikan spasi.
+
+```sh
+curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar'
+```
+
+```
+  _______________________
+| Hello Indonesia Belajar |
+  =======================
+                       \
+                        \
+                          ^__^
+                          (oo)\_______
+                          (__)\       )\/\
+                              ||----w |
+                              ||     ||
 ```
 
 Keren. API kita sudah bisa berjalan sesuai harapan. Saatnya memaket menjadi container image. Tekan `CTRL+C` untuk menghentikan container.
