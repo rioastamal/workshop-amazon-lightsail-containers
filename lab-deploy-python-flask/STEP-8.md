@@ -11,7 +11,7 @@ Proses ini digunakan untuk menempatkan container yang akan dijalankan ke Contain
 
 2. Terdapat beberapa isian yang harus dilengkapi. Pertama isikan **hello-idn-belajar** untuk _Container name_. 
 3. Pada pilihan _Image_ klik **Choose stored image** untuk memilih container image yang sudah diupload sebelumnya. Pilih versi container image yang telah diupload.
-4. Aplikasi yang menggunakan dua opsional environment variable yaitu `APP_WORKER` dan `APP_BIND`. `APP_WORKER` menentukan jumlah worker (default 4) dan `APP_BIND` menentukan bind address dan nomor port (default `0.0.0.0:8080`). Kendati opsional pada contoh ini kita tetap mengisikan secara eksplisit.
+4. Aplikasi menggunakan dua opsional environment variable yaitu `APP_WORKER` dan `APP_BIND`. `APP_WORKER` menentukan jumlah gunicorn worker (default 4) dan `APP_BIND` menentukan bind address dan nomor port (default `0.0.0.0:8080`). Kendati opsional pada contoh ini kita tetap mengisikan secara eksplisit.
 5. Pada konfigurasi **Open ports** gunakan nomor port dimana aplikasi berjalan. Dalam hal ini sama dengan nilai dari `APP_BIND` yaitu `8080`. 
 6. Untuk **PUBLIC ENDPOINT** gunakan container **hello-idn-belajar** yang telah diinput pada bagian sebelumnya. Container service yang berjalan pada public domain akan melakukan koneksi pada `8080` yang dikonfigurasi pada **Open ports**.
 7. Jika semua sudah sesuai, klik **Save and deploy** untuk melakukan deployment. Proses ini akan memakan waktu beberapa menit. Tunggu hingga status dari Container service menjadi **Running**.

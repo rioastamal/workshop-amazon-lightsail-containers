@@ -3,7 +3,7 @@
 
 Setiap aplikasi hampir pasti akan selalu mengalami proses update entah itu untuk perbaikan atau penambahan fitur. Pada workshop ini kita akan coba mendemonstrasikan bagaimana melakukan update dari aplikasi menggunakan Amazon Lightsail Container service.
 
-Dalam contoh ini kita akan mengubah kode API dengan mengubah karakter dari sapi menjadi pinguin.
+Dalam contoh ini kita akan mengubah kode API dengan mengubah karakter dari sapi ke banyak karakter lain, seperti: 'beavis', 'cheese', 'daemon', 'cow', 'dragon', 'ghostbusters', 'kitty', 'meow', 'milk', 'pig', 'stegosaurus', 'stimpy', 'trex', 'turkey', 'turtle', 'tux'.
 
 Pastikan anda berada pada direktori `python-app`. Kemudian ubah isi dari file `src/index.py` menjadi seperti di bawah.
 
