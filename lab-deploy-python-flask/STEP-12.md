@@ -48,7 +48,7 @@ curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesi
 My Local IP: 172.17.0.2
 ```
 
-Keren! API terbaru sudah berhasil dideploy. Output dari API sekarang menyertakan atribut `network` yang pada versi sebelumnya tidak ada.
+Keren! API terbaru sudah berhasil dideploy. Output dari API sekarang menyertakan alamat ip lokal di server yang pada versi sebelumnya tidak ada.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-11.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-13.md">Berikutnya &raquo;</a></td></tr></table>
