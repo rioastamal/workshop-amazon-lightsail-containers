@@ -272,7 +272,7 @@ bash /app/run-server.sh
 [2022-06-15 09:28:22 +0000] [13] [INFO] Booting worker with pid: 13
 ```
 
-Tes dengan melakukan HTTP request pada localhost port `8080` path `/cow/` dan parameter `text`. Kode `%20` pada query string mengindikasikan sebuah spasi.
+Tes dengan melakukan HTTP request pada localhost port `8080` path `/` dan parameter `text`. Kode `%20` pada query string mengindikasikan sebuah spasi.
 
 ```sh
 curl -s -D /dev/stderr \
@@ -282,29 +282,29 @@ curl -s -D /dev/stderr \
 ```
 HTTP/1.1 200 OK
 Server: gunicorn
-Date: Wed, 15 Jun 2022 12:27:08 GMT
+Date: Thu, 16 Jun 2022 04:15:16 GMT
 Connection: close
-Content-Type: text/html; charset=utf-8
-Content-Length: 888
+content-type: text/plain
+Content-Length: 833
 
-  __________________________________________
- /                                          \
-| I do not understand what you're saying!    |
-| .                                          |
-| Usage:                                     |
-| /?text=TEXT                                |
-| .                                          |
-| Where:                                     |
-| TEXT is HTML encoded text you want to say. |
- \                                          /
-  ==========================================
-                                          \
-                                           \
-                                             ^__^
-                                             (oo)\_______
-                                             (__)\       )\/\
-                                                 ||----w |
-                                                 ||     ||
+  _______________________________________
+ /                                       \
+| I do not understand what you're saying! |
+| .                                       |
+| Usage:                                  |
+| /?text=TEXT                             |
+| .                                       |
+| Where:                                  |
+| TEXT is text you want to say.           |
+ \                                       /
+  =======================================
+                                       \
+                                        \
+                                          ^__^
+                                          (oo)\_______
+                                          (__)\       )\/\
+                                              ||----w |
+                                              ||     ||
 ```
 
 Keren. API kita sudah bisa berjalan sesuai harapan. Saatnya memaket menjadi container image. Tekan `CTRL+C` untuk menghentikan container.
