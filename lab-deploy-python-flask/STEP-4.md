@@ -83,6 +83,12 @@ Where:
 Untuk menjalankan API server kita akan menggunakan WSGI server yaitu gunicorn. Buat sebuah shell script untuk menjalankan gunicorn di dalam container.
 
 ```sh
+touch run-server.sh
+```
+
+Salin kode shell script di bawah ke dalam file `run-server.sh`.
+
+```sh
 #!/bin/bash
 # This script intended to be run inside a container
 
