@@ -44,5 +44,5 @@ Perlu diingat bahwa rollback juga adalah sebuah proses deployment jadi otomatis 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-13.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-15.md">Berikutnya &raquo;</a></td></tr></table>
 
 <sup>Workshop: Deploy Python Flask dengan Amazon Lightsail Containers  
-Version: 2022-14-06  
+Version: 2022-24-06  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>

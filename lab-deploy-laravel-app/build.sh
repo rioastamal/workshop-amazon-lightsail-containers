@@ -16,7 +16,7 @@ realpath() {
 
 BASE_DIR=$( dirname "$0" )
 ABS_DIR=$( realpath $BASE_DIR )
-WORKSHOP_VERSION=2022-14-06
+WORKSHOP_VERSION=2022-24-06
 
 echo "$@" | grep '\-\-split-pages' > /dev/null && {
     [ -z "$SOURCE_FILE" ] && SOURCE_FILE="README.single-page.md"
