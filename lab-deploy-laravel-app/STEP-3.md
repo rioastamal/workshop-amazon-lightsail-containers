@@ -56,6 +56,6 @@ drwxrwxr-x 13 ec2-user ec2-user 4096 Jun 24 16:55 laravel
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-2.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-4.md">Berikutnya &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploy Laravel App dengan Amazon Lightsail Containers
+<sup>Workshop: Deploy Laravel App dengan Amazon Lightsail Containers  
 Version: 2022-24-06  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>
