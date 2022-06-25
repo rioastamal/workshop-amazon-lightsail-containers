@@ -34,6 +34,6 @@ Pada halaman _Images_ dapat terlihat jika terdapat sebuah image `:hello-api.indo
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-6.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-8.md">Berikutnya &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploy Python Flask dengan Amazon Lightsail Containers  
+<sup>Workshop: Deploy Laravel App dengan Amazon Lightsail Containers
 Version: 2022-24-06  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>
