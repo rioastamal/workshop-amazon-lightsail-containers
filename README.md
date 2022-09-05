@@ -1,52 +1,54 @@
-## Workshop Amazon Lightsail Containers
+## Amazon Lightsail Containers Workshop
 
-Menjalankan aplikasi berbasis container memiliki banyak keunggulan diantaranya portabilitas, keamanan yang lebih baik dan kemudahan untuk melakukan scaling. Namun deployment container masih merupakan hal yang cukup kompleks dilakukan. Disinilah Amazon Lightsail Containers dapat membantu.
+Running container-based applications offer several advantages including portability, better security and ease of scaling. Running single container is easy, deploying container and scaling is still a fairly complex thing to do. This is where Amazon Lightsail Containers could help.
 
-Amazon Lightsail Containers adalah cara mudah menjalankan container di cloud. Cukup sediakan Docker image maka anda akan otomatis mendapatkan sebuah domain, load balancer dengan TLS certificate, blue/green deployment dan banyak lagi. Karena ini Amazon Lightsail maka biayanya mudah diprediksi secara bulanan.
+Amazon Lightsail Containers is an easy way to run containers in the cloud. Just provide a Docker image and you will automatically get a domain, load balancer with TLS certificate, blue/green deployment and more. Since it's Amazon Lightsail the costs are fixed and you won't need a calculator.
 
-Pada workshop ini anda akan belajar bagaimana melakukan deployment sebuah aplikasi menggunakan Amazon Lightsail Containers. Nantinya akan disediakan tiga workshop deployment yaitu untuk Node.js, Python dan PHP.
+In this workshop you will learn how to deploy an application using Amazon Lightsail Containers. There will be three deployment workshops provided, how to deploy Node.js, Python and PHP on Amazon Lightsail Containers.
 
-Pada setiap workshop poin utama yang menjadi bahasan adalah:
+In each workshop, the main points discussed are:
 
-- Menginstal Lightsail Control Plugin
-- Membuat Container Image
-- Membuat Container Service di Amazon Lightsail
-- Push Container Image ke Amazon Lightsail
-- Deploy Container
-- Update Container Image
-- Push Container Image Versi Terbaru
-- Scaling Container dengan Menambah Jumlah Node
-- Rollback Versi Container
+- Installing the Lightsail Control Plugin
+- Creating a container Image
+- Creating a Container Service in Amazon Lightsail
+- Push Container Image to Amazon Lightsail
+- Deploy container
+- Update container Image
+- Push the latest version of container Image
+- Scaling container by increasing number of nodes
+- Rollback container to previous deployment
 
 ## Pre-Workshop Webinar
 
-Ini adalah sesi pre-workshop webinar dengan Indonesia Belajar. Sesi ini menjelaskan tenang Amazon Lightsail Containers dan alur workshop yang akan dijalankan. 
+This is a pre-workshop webinar session held in Bahasa Indonesia. This session talk about Amazon Lightsail Containers and describe the whole agenda of the workshop.
 
 [![Watch the video](https://img.youtube.com/vi/Ej5s5SwCo2s/hqdefault.jpg)](https://www.youtube.com/watch?v=Ej5s5SwCo2s)
 
-## Jadwal Workshop
+## Workshop Schedule
 
-Berikut ini adalah jadwal workshop yang akan diselenggarakan kedepan.
+Below is the schedule of the workshops.
 
-Tanggal | Organizer | Speaker | Judul | Live Stream | Lab 
+Date | Organizer | Speaker | Title | Live Stream | Lab 
 --------|-----------|---------|-------|-------------|-----
-Sabtu, 21 Mei 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Pre-Workshop Webinar: Deploy App dengan Amazon Lightsail Containers | [https://youtu.be/Ej5s5SwCo2s](https://youtu.be/Ej5s5SwCo2s) | -
-Sabtu, 28 Mei 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Node.js App dengan Amazon Lightsail Containers | [https://youtu.be/A7c65eIB0cg](https://youtu.be/A7c65eIB0cg) | [lab-deploy-nodejs-app](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-nodejs-app)
-Sabtu, 18 Juni 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Python Flask dengan Amazon Lightsail Containers | [https://youtu.be/C7ul435JnZk](https://youtu.be/C7ul435JnZk) | [lab-deploy-python-flask](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-python-flask)
-Sabtu, 25 Juni 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Laravel App dengan Amazon Lightsail Containers | [https://youtu.be/NI0HgZ16cD0](https://youtu.be/NI0HgZ16cD0) | [lab-deploy-laravel-app](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-laravel-app)
+Sabtu, 21 Mei 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Pre-Workshop Webinar: Deploy an App using Amazon Lightsail Containers | [https://youtu.be/Ej5s5SwCo2s](https://youtu.be/Ej5s5SwCo2s) | -
+Sabtu, 28 Mei 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Node.js App using Amazon Lightsail Containers | [https://youtu.be/A7c65eIB0cg](https://youtu.be/A7c65eIB0cg) | [lab-deploy-nodejs-app](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-nodejs-app)
+Sabtu, 18 Juni 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Python Flask using Amazon Lightsail Containers | [https://youtu.be/C7ul435JnZk](https://youtu.be/C7ul435JnZk) | [lab-deploy-python-flask](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-python-flask)
+Sabtu, 25 Juni 2022 Pkl. 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Laravel App using Amazon Lightsail Containers | [https://youtu.be/NI0HgZ16cD0](https://youtu.be/NI0HgZ16cD0) | [lab-deploy-laravel-app](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-laravel-app)
 
-## Forum Diskusi
+## Discussion Forum
 
-Silahkan menuju halaman GitHub [Discussions](https://github.com/rioastamal/workshop-amazon-lightsail-containers/discussions) pada repository ini untuk mengikuti diskusi atau ingin mengajukan pertanyaan seputar Workshop Amazon Lightsail Containers.
+Please go to the GitHub [Discussions](https://github.com/rioastamal/workshop-amazon-lightsail-containers/discussions) page on this repository to join the discussion or to ask questions about the Amazon Lightsail Containers Workshop.
 
-## Penulis
+## Author
 
-Workshop ini ditulis oleh [Rio Astamal](https://rioastamal.net)
+This workshop is written by [Rio Astamal](https://rioastamal.net)
 
 ## Feedback
 
 Jika terdapat kesalahan pada workshop ini entah itu kode atau tata bahasa silahkan buka Issue atau submit PR.
 
-## Lisensi
+If you spot an  an error in this workshop, whether it's code or grammar, please open an Issue or submit a PR.
 
-Lisensi pada konten repository workshop adalah MIT. Bisa dilihat pada file LICENSE.md.
+## License
+
+All contents in this workshop are licensed under MIT. See LICENSE.md for details.
