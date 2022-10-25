@@ -1,4 +1,6 @@
 
+Language: Bahasa Indonesia | [English](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/english/lab-deploy-laravel-app)
+
 ## Workshop Deploy Laravel App dengan Amazon Lightsail Containers
 
 Pada workshop ini peserta akan mempraktikkan bagaimana melakukan deployment sebuah web app menggunakan Amazon Lightsail Containers. Sebuah app sederhana untuk melakukan konversi Markdown ke HTML yang dibangun dengan Laravel framework akan digunakan sebagai contoh pada praktik ini. 

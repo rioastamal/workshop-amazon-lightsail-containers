@@ -1,3 +1,5 @@
+Language: Bahasa Indonesia | [English](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/english)
+
 ## Workshop Amazon Lightsail Containers
 
 Menjalankan aplikasi berbasis container memiliki banyak keunggulan diantaranya portabilitas, keamanan yang lebih baik dan kemudahan untuk melakukan scaling. Namun deployment container masih merupakan hal yang cukup kompleks dilakukan. Disinilah Amazon Lightsail Containers dapat membantu.

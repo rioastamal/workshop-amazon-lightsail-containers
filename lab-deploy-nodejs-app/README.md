@@ -1,4 +1,6 @@
 
+Language: Bahasa Indonesia | [English](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/english/lab-deploy-nodejs-app)
+
 ## Workshop Deploy Node.js App dengan Amazon Lightsail Containers
 
 Pada workshop ini peserta akan mempraktikkan bagaimana melakukan deployment sebuah API menggunakan Amazon Lightsail Containers. Sebuah API sederhana dibangun dengan Node.js dan framework Express.js akan digunakan sebagai contoh pada praktik ini.

@@ -1,4 +1,6 @@
 
+Language: Bahasa Indonesia | [English](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/english/lab-deploy-python-flask)
+
 ## Workshop Deploy Python Flask dengan Amazon Lightsail Containers
 
 Pada workshop ini peserta akan mempraktikkan bagaimana melakukan deployment sebuah API menggunakan Amazon Lightsail Containers. Sebuah API sederhana dibangun dengan Python dan micro web framework Flask akan digunakan sebagai contoh pada praktik ini.
