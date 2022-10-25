@@ -1,21 +1,21 @@
 
-### <a name="step-5"></a>Step 5 - Membuat Container Image
+### <a name="step-5"></a>Step 5 - Create Container Image
 
-Untuk membuat container image dari layanan API yang baru dibuat kita akan menggunakan Docker.
+To create a container image of the newly created API service we will use Docker.
 
-Pastikan dulu telah berada pada direktori `nodejs-app/`.
+Make sure you're already inside directory `nodejs-app/`.
 
 ```
 cd ~/nodejs-app/
 ```
 
-Buat sebuah file baru dengan nama `Dockerfile`. File ini akan berisi perintah-perintah dalam membangun container image. Letakkan file ini di dalam root direktori project yaitu `nodejs-app/`.
+Create a new file named `Dockerfile`. This file will contain commands to build a container image. Put this file in the root of the project directory which should be inside `nodejs-app/`.
 
 ```sh
 touch Dockerfile
 ```
 
-Salin kode dibawah ini dan masukkan ke dalam file `Dockerfile`.
+Copy and paste code below into `Dockerfile`.
 
 ```dockerfile
 FROM public.ecr.aws/docker/library/node:16-slim
@@ -30,9 +30,9 @@ RUN npm install --production
 ENTRYPOINT ["node", "src/index.js"]
 ```
 
-Pada kode di atas, kita menggunakan Node.js versi 16 yang diambil dari Amazon ECR public repository. Kemudian menyalin file-file yang diperlukan ke dalam container dan menjalankan `npm install` untuk mendapatkan semua ketergantungan pustaka yang ada di `package-lock.json`.
+We are using Node.js version which taken from Amazon ECR public repository. Then we copy the required files to the container and run `npm install` to get all dependencies.
 
-Kita akan menamakan container image ini dengan nama `idn-belajar-node` dengan versi `1.0`. Untuk mulai membangun container image jalankan perintah berikut. Perhatikan ada `.` titik diakhir perintah.
+We will name the container `id-belajar-node` version `1.0`. To start building the container image run the following command. Notice there is .a dot at the end of the command.
 
 ```sh
 docker build --rm -t idn-belajar-node:1.0 .
@@ -48,7 +48,7 @@ Successfully built 6c88b5d7ef4a
 Successfully tagged idn-belajar-node:1.0
 ```
 
-Pastikan image tersebut ada dalam daftar image di lokal mesin.
+Make sure the image is available on our local machine.
 
 ```sh
 docker images idn-belajar-node
@@ -59,9 +59,9 @@ REPOSITORY         TAG       IMAGE ID       CREATED             SIZE
 idn-belajar-node   1.0       6c88b5d7ef4a   3 minutes ago       179MB
 ```
 
-Dapat terlihat jika container image yang dibuat yaitu `idn-belajar-node` dengan versi `1.0` berhasil dibuat.
+As we can see that the container image has been successfully created with name `idn-belajar-node` and tagged with version `1.0`.
 
-Sekarang coba jalankan container `idn-belajar-node:1.0` pada port `8080` untuk memastikan API yang dibuat dapat berjalan pada container.
+Now let's try to run the container `idn-belajar-node:1.0` on port `8080` to make sure that we can run the API using Docker.
 
 ```sh
 docker run --rm --name idn_belajar_1_0 -p 8080:8080 -d idn-belajar-node:1.0
@@ -71,7 +71,7 @@ docker run --rm --name idn_belajar_1_0 -p 8080:8080 -d idn-belajar-node:1.0
 ec43c5f4ab04b920df9907bf981d3b7b0dd2c287d8599e1b7768e290694b8f16
 ```
 
-Kemudian cek untuk memastikan container `idn-belajar-node:1.0` sedang berjalan.
+Run `ps` to make sure the container `idn-belajar-node:1.0` is up and running.
 
 ```sh
 docker ps
@@ -82,7 +82,7 @@ CONTAINER ID   IMAGE                  COMMAND               CREATED          STA
 ec43c5f4ab04   idn-belajar-node:1.0   "node src/index.js"   24 seconds ago   Up 22 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   idn_belajar_1_0
 ```
 
-Jalankan `curl` untuk melakukan HTTP request ke localhost port `8080` dan path `/`.
+Let's try to hit our current container using HTTP request on port `8080` and path `/`.
 
 ```sh
 curl -s http://localhost:8080/
@@ -94,7 +94,7 @@ curl -s http://localhost:8080/
 }
 ```
 
-Mantab! API dapat berjalan dengan sempurna di container. Sekarang stop container tersebut.
+Cool! The API run flawlessly in containers. Now stop the container.
 
 ```sh
 docker stop idn_belajar_1_0
@@ -103,6 +103,6 @@ docker stop idn_belajar_1_0
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-4.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-6.md">Berikutnya &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploy Node.js App dengan Amazon Lightsail Containers  
+<sup>Workshop: Deploying Node.js App using Amazon Lightsail Containers  
 Version: 2022-05-12  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>

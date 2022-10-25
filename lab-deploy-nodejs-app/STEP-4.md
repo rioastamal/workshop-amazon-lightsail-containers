@@ -1,7 +1,7 @@
 
-### <a name="step-4"></a>Step 4 - Membuat Node.js API
+### <a name="step-4"></a>Step 4 - Create Node.js API
 
-Pada langkah ini kita akan membuat sebuah API sederhana yang dibangun menggunakan framework Node.js yang populer yaitu Express.
+In this step we will create a simple API built using Express, one of the most popular Node.js framework for web development.
 
 ```sh
 echo '{}' > package.json
@@ -11,7 +11,7 @@ echo '{}' > package.json
 npm install --save express
 ```
 
-Selanjutnya buat sebuah direktori baru bernama `src/` untuk menempatkan kode sumber.
+Next create a new directory named `src/` to place the source code.
 
 ```sh
 mkdir src/
@@ -19,11 +19,13 @@ mkdir src/
 
 Buat sebuah file `src/index.js`, ini adalah file utama dimana kode API yang akan kita buat.
 
+Create a file `src/index.js`, this is the file where we will put our main API codes.
+
 ```sh
 touch src/index.js
 ```
 
-Salin kode di bawah ini dan masukkan ke dalam file `src/index.js`.
+Copy and paste code below into `src/index.js`.
 
 ```js
 const express = require('express');
@@ -44,7 +46,7 @@ app.listen(port, function() {
 });
 ```
 
-Kode diatas akan menjalankan sebuah HTTP server pada port `8080` secara default. Ketika path `/` diakses maka akan mengembalikan sebuah JSON dengan format sebagai berikut.
+Code above will run HTTP server on port 8080. When we access path `/` it should return JSON with the following format.
 
 ```json
 {
@@ -52,7 +54,7 @@ Kode diatas akan menjalankan sebuah HTTP server pada port `8080` secara default.
 }
 ```
 
-Sekarang coba jalankan kode tersebut untuk memastikan bahwa API berjalan sesuai harapan.
+Now try to run the code to make sure it the API runs as expected.
 
 ```
 node src/index.js
@@ -62,7 +64,7 @@ node src/index.js
 API server running on port 8080
 ```
 
-Tes dengan melakukan HTTP request pada localhost port `8080`.
+Test by doing HTTP request to the localhost port `8080`.
 
 ```sh
 curl -s -D /dev/stdout http://localhost:8080
@@ -83,11 +85,11 @@ Keep-Alive: timeout=5
 }
 ```
 
-Keren. API kita sudah bisa berjalan sesuai harapan. Saatnya memaket menjadi container image.
+Cool!. Our API successfully run as expected. It's time to package it into a container image.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-3.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-5.md">Berikutnya &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploy Node.js App dengan Amazon Lightsail Containers  
+<sup>Workshop: Deploying Node.js App using Amazon Lightsail Containers  
 Version: 2022-05-12  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>

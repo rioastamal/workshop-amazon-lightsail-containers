@@ -1,9 +1,9 @@
 
-### <a name="step-7"></a>Step 7 - Push Container Image ke Amazon Lightsail
+### <a name="step-7"></a>Step 7 - Push Container Image to Amazon Lightsail
 
-Setiap container image yang di-push ke Amazon Lightsail terikat pada sebuah Container service. Karena itulah kita membuat **hello-api** Container service terlebih dahulu sebelum melakukan push container image.
+Each container image pushed to Amazon Lightsail is bound to a container cervice. That's why we created the **hello-api** container service first before pushing the container image.
 
-Pada langkah ini kita akan melakukan push container image `idn-belajar-node:1.0` yang telah dibuat sebelumnya ke Container service **hello-api**. Jalankan perintah dibawah ini.
+In this step we will push `idn-belajar-node:1.0` the previously created container image to **hello-api** container service. Run command below.
 
 ```sh
 aws lightsail push-container-image \
@@ -21,19 +21,19 @@ Image "idn-belajar-node:1.0" registered.
 Refer to this image as ":hello-api.idn-belajar-node.2" in deployments.
 ```
 
-Jika berhasil maka anda akan mendapatkan pesan mirip seperti diatas. Container image akan disimpan dengan penamaan `:<container-service>:<label>.<versi-upload>` pada contoh diatas penamaannya adalah `:hello-api.idn-belajar.2`.
+You will get a message similar to the one above once the push is successfull. The container image will be saved with the name `:<container-service>:<label>.<upload-number>` in the example above the name is `:hello-api.idn-belajar.2`. Yours `upload-number` could be different.
 
-Sekarang pastikan container image tersebut ada dalam daftar container yang telah diupload. Masuk ke halaman dashboard dari container service **hello api** kemudian masuk ke halaman **Images**.
+Now make sure the container image has been uploaded, go to the **Images** page.
 
 [![Lightsail hello-api Image](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-image.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-image.png)
 
-> Gambar 7. Daftar container image yang telah diupload
+> Figure 7. List of uploaded container images
 
-Pada halaman _Images_ dapat terlihat jika terdapat sebuah image `:hello-api.idn-belajar.2` seperti yang telah diupload pada proses sebelumnya. Kita akan menggunakan image ini untuk melakukan deployment.
+As you can see on the _Images_ page there is an container image `:hello-api.idn-belajar.2` that we just uploaded from previous step. We will use this image to do the deployment.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-6.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-8.md">Berikutnya &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploy Node.js App dengan Amazon Lightsail Containers  
+<sup>Workshop: Deploying Node.js App using Amazon Lightsail Containers  
 Version: 2022-05-12  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>

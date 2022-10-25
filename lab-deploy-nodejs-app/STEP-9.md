@@ -1,11 +1,11 @@
 
-### <a name="step-9"></a>Step 9 - Membuat Versi Baru dari API
+### <a name="step-9"></a>Step 9 - Create New Version of the API
 
-Setiap aplikasi hampir pasti akan selalu mengalami proses update entah itu untuk perbaikan atau penambahan fitur. Pada workshop ini kita akan coba mendemonstrasikan bagaimana melakukan update dari aplikasi menggunakan Amazon Lightsail Container service.
+Every application will almost certainly having an update whether for bug fixes or adding new features. In this step we will try to demonstrate how to update an application on Amazon Lightsail Container service.
 
-Namun sebelumnya kita akan mengubah kode dari API yang dibuat dengan menambahkan fitur untuk menampilkan informasi jaringan dari container.
+We will change the API code by adding new feature to display network information of the system.
 
-Pastikan anda berada pada direktori `nodejs-app`. Kemudian ubah isi dari file `src/index.js` menjadi seperti di bawah.
+Make sure you're in `nodejs-app` directory. Then change the contents of `src/index.js` as shown below.
 
 ```js
 const express = require('express');
@@ -31,7 +31,7 @@ app.listen(port, function() {
 });
 ```
 
-Terlihat kita menambahkan respon atribut baru yaitu `network`. Untuk mencobanya jalankan API server tersebut.
+As you see we add `network` attribute to the response. To test the new code, run the API server.
 
 ```sh
 node src/index.js
@@ -41,7 +41,7 @@ node src/index.js
 API server running on port 8080
 ```
 
-Kemudian lakukan HTTP request ke path `/` untuk melihat respon terbaru.
+Do a HTTP request to the API to URL `http://localhost:8080/`.
 
 ```sh
 curl -s http://localhost:8080/
@@ -75,11 +75,11 @@ curl -s http://localhost:8080/
 }
 ```
 
-Dapat terlihat informasi jaringan dari container ditampilkan pada atribut `network`.
+The API works as expected by returning network attribute.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-8.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-10.md">Berikutnya &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploy Node.js App dengan Amazon Lightsail Containers  
+<sup>Workshop: Deploying Node.js App using Amazon Lightsail Containers  
 Version: 2022-05-12  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>
