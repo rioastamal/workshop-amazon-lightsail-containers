@@ -1,7 +1,7 @@
 
 ### <a name="step-10"></a>Step 10 - Update Container Image
 
-API versi terbaru sudah siap, saatnya melakukan update untuk container image `indonesia-belajar`. Kita akan merilis API versi terbaru ini dengan tag `2.0`. Untuk melakukannya ikuti langkah berikut.
+Our new API is ready, next is to update the container image `indonesia-belajar`. We will release the new API with tag `2.0`. To do this follow step below.
 
 ```sh
 docker build --rm -t indonesia-belajar:2.0 .
@@ -29,7 +29,7 @@ indonesia-belajar   2.0       b3846915d8d0   6 seconds ago   144MB
 indonesia-belajar   1.0       32dc2a5baec9   4 hours ago     144MB
 ```
 
-Jalankan container versi baru tersebut untuk memastikan API berjalan sesuai harapan. 
+Let's run our `indonesia-belajar:2.0` to make sure it is working as expected.
 
 ```sh
 docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d indonesia-belajar:2.0
@@ -39,7 +39,7 @@ docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d indonesia-belajar:2.0
 d8df1a6d0dbd70de4cd36ff21e5b6a766a7bb0c21d28819d37fdff612aefe23c
 ```
 
-Lakukan HTTP request ke `localhost:8080` untuk melakukan tes respon dari API.
+Do a HTTP request to the API to URL `http://localhost:8080/` to check the API response.
 
 ```sh
 curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar&char=milk'
@@ -72,7 +72,7 @@ curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar&char=milk'
 My Local IP: 172.17.0.2
 ```
 
-Dapat terlihat jika respon dari API menampilkan karakter `milk` (susu).
+The API return `milk` character as expected.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-9.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-11.md">Berikutnya &raquo;</a></td></tr></table>

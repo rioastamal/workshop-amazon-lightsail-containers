@@ -1,7 +1,7 @@
 
-### <a name="step-3"></a>Step 3 - Membuat Direktori untuk Project
+### <a name="step-3"></a>Step 3 - Create Directory for the Project
 
-Pastikan anda sedang berada pada `$HOME` direktori yaitu `/home/ec2-user`.
+Make sure you're in `$HOME` directory which is `/home/ec2-user`.
 
 ```sh
 cd ~
@@ -12,13 +12,13 @@ pwd
 /home/ec2-user/
 ```
 
-Kemudian buat sebuah direktori baru bernama `python-app`.
+Then create new directory named `python-app`.
 
 ```sh
 mkdir python-app
 ```
 
-Masuk pada direktori tersebut. Kita akan menempatkan file-file yang diperlukan disana.
+Go to that directory as we will put all necessary files there.
 
 ```sh
 cd python-app

@@ -1,9 +1,9 @@
 
-### <a name="step-4"></a>Step 4 - Membuat Python Flask API
+### <a name="step-4"></a>Step 4 - Create Python Flask API
 
-Pada langkah ini kita akan membuat sebuah API sederhana yang dibangun menggunakan web framework di Python yang populer yaitu Flask. API yang dibuat akan mengembalikan karakter sapi dan teks dalam format ASCII. Mirip dengan yang ditemukan pada utilitas di Unix/Linux `cowsay`.
+In this step we will create a simple API built using the popular Python web framework, Flask. The API will return cow characters and text in ASCII format. Similar to those found on utilities on Unix/Linux cowsay.
 
-Pertama kita buat file `requirements.txt` untuk menginstal ketergantungan pustaka menggunakan pip yaitu package manager untuk Python.
+First create a file `requirements.txt` to list all packages used on this app using pip which is the package manager for Python.
 
 ```sh
 echo '
@@ -13,9 +13,9 @@ gunicorn~=20.1.0
 ' > requirements.txt
 ```
 
-Karena kita menjalankan Python via Docker maka kita akan melakukan mount lokal direktori `python-app` ke Docker container. Hal ini kita lakukan karena pustaka akan kita tempatkan di komputer host bukan di dalam container agar ketika container dimatikan pustaka tersebut tidak ikut hilang.
+Since we are running Python via Docker we will mount local directory `python-app` to the Docker container. We do this because we will place the packages on the host computer, not in a container so that when the container is turned off the packages will not be lost.
 
-Direktori `/home/ec2-user/python-app` akan kita mount ke `/app` di dalam container. Semua paket yang diinstal oleh pip akan dimasukkan ke `/app/libs`.
+We will mount `/home/ec2-user/python-app` to `/app` inside the container. All the packages installed by pip will be placed to `/app/libs` .
 
 ```sh
 docker run -v $(pwd):/app --rm -it \
@@ -23,7 +23,7 @@ public.ecr.aws/docker/library/python:3.8-slim \
 pip install -r /app/requirements.txt --target=/app/libs
 ```
 
-Jika digunakan perintah `ls`, maka sekarang harusnya terdapat direktori baru `libs/` yang ownernya adalah root.
+If you use `ls` command, there should be a new directory `libs` whose owner is root.
 
 ```sh
 ls -l libs/
@@ -41,19 +41,19 @@ drwxr-xr-x 2 root root 4096 Jun 15 09:10 gunicorn-20.1.0.dist-info
 ....
 ```
 
-Selanjutnya buat sebuah direktori baru bernama `src/` untuk menempatkan kode sumber.
+Next create a new directory `src/` to place API source code.
 
 ```sh
 mkdir src/
 ```
 
-Buat sebuah file `src/index.py`, ini adalah file utama dimana kode API yang akan kita buat.
+Create new file `src/index.py`, this is the main file for the API.
 
 ```sh
 touch src/index.py
 ```
 
-Salin kode di bawah ini dan masukkan ke dalam file `src/index.py`.
+Copy and paste code below to `src/index.py`.
 
 ```py
 from flask import Flask
@@ -82,11 +82,13 @@ Where:
 
 Untuk menjalankan API server kita akan menggunakan WSGI server yaitu gunicorn. Buat sebuah shell script untuk menjalankan gunicorn di dalam container.
 
+To run API server we will use a WSGI server, gunicorn. Create a shell script to run gunicorn in container.
+
 ```sh
 touch run-server.sh
 ```
 
-Salin kode shell script di bawah ke dalam file `run-server.sh`.
+Copy this shell script code to file `run-server.sh`.
 
 ```sh
 #!/bin/bash
@@ -105,6 +107,8 @@ $PYTHONPATH/bin/gunicorn \
 
 Eksekusi gunicorn WSGI server menggunakan Docker.
 
+Run gunicurn using Docker.
+
 ```sh
 docker run -v $(pwd):/app --rm -it -p 8080:8080 \
 public.ecr.aws/docker/library/python:3.8-slim \
@@ -121,7 +125,7 @@ bash /app/run-server.sh
 [2022-06-15 09:28:22 +0000] [13] [INFO] Booting worker with pid: 13
 ```
 
-Tes dengan melakukan HTTP request pada localhost port `8080` path `/` dan tanpa mengirimkan parameter apapun.
+You can test by issuing HTTP request to localhost port `8080` and path `/`.
 
 ```sh
 curl -s -D /dev/stderr 'http://localhost:8080/'
@@ -155,7 +159,7 @@ Content-Length: 833
                                               ||     ||
 ```
 
-Sekarang mari kita coba kirimkan parameter `text` dengan nilai `Hello%20Indonesia%20Belajar`. Kode `%20` mengindikasikan spasi.
+Let's do another request by adding parameter to the query string. Send a `text` paramter with value `Hello%20Indonesia%20Belajar`. String `%20` represent space.
 
 ```sh
 curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar'
@@ -174,7 +178,7 @@ curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar'
                               ||     ||
 ```
 
-Keren. API kita sudah bisa berjalan sesuai harapan. Saatnya memaket menjadi container image. Tekan `CTRL+C` untuk menghentikan container.
+Cool! Our API is run as expected. It's time to package this API into a container image. Press `CTRL+C` to stop the container.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-3.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-5.md">Berikutnya &raquo;</a></td></tr></table>

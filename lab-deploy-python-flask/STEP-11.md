@@ -1,7 +1,7 @@
 
-### <a name="step-11"></a>Step 11 - Push Container Image Versi Terbaru
+### <a name="step-11"></a>Step 11 - Push New Version of Container Image
 
-Kita sudah pernah melakukan upload container image `indonesia-belajar:1.0` ke Container service **hello-api**. Karena sudah ada versi terbaru yaitu `indonesia-belajar:2.0` maka kita juga harus melakukan push container image ini ke **hello-api**. Jalankan perintah di bawah ini.
+We have uploaded previous container image `indonesia-belajar:1.0` to **hello-api** container service. Now it's time to upload the new version with tag `2.0`.
 
 ```sh
 aws lightsail push-container-image \
@@ -19,13 +19,13 @@ Image "indonesia-belajar:2.0" registered.
 Refer to this image as ":hello-api.indonesia-belajar.13" in deployments.
 ```
 
-Pada kasus milik saya image yang tersimpan di Container service adalah `:hello-api.indonesia-belajar.13`. Nomor versi upload `.13` bisa berbeda dengan milik anda.
+In my case the image was stored as `:hello-api.indonesia-belajar.13`. The upload version `13` could be different from yours.
 
-Untuk memastikan container telah terupload dengan sukses masuk pada dashboard Container service **hello-api** dan klik menu **Images**. Harusnya image sudah muncul di halaman tersebut.
+To make sure that container image has been uploaded successfully check **_Images** page. The new image should be there.
 
 [![Lightsail Container New Image](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-new-image.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-new-image.png)
 
-> Gambar 10. Container image versi terbaru
+> Figure 10. Container image version 2.0
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-10.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-12.md">Berikutnya &raquo;</a></td></tr></table>

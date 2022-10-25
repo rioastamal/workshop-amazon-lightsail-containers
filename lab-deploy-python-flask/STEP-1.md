@@ -1,14 +1,13 @@
 
-### <a name="step-1"></a>Step 1 - Kebutuhan
+### <a name="step-1"></a>Step 1 - Requirements
 
-Sebelum memulai workshop pastikan sudah memenuhi kebutuhan yang tercantum di bawah ini.
+Before starting the workshop, make sure you have an active AWS account and have installed requirements listed below.
 
-- Memiliki akun AWS aktif
-- Sudah menginstal Docker
-- Sudah menginstal AWS CLI v2 dan konfigurasinya
+- Docker
+- AWS CLI v2 and its configuration
 - Python v3.8 dan pip via Docker
 
-Untuk menginstal Python 3.8 menggunakan Docker gunakan perintah berikut.
+To install Python 3.8 using Docker use following command.
 
 ```sh
 docker pull public.ecr.aws/docker/library/python:3.8-slim
@@ -26,7 +25,7 @@ Status: Downloaded newer image for public.ecr.aws/docker/library/python:3.8-slim
 public.ecr.aws/docker/library/python:3.8-slim
 ```
 
-Perintah diatas akan mendownload container image Python 3.8 versi slim dari registry publik Amazon ECR. Untuk memastikan container image telah didownload gunakan perintah.
+The above command will download a slim version of the Python 3.8 container image from the Amazon ECR public registry. To make sure the container image has been downloaded run command below.
 
 ```sh
 docker images
@@ -37,7 +36,7 @@ REPOSITORY                             TAG          IMAGE ID       CREATED      
 public.ecr.aws/docker/library/python   3.8-slim     61c56c60bb49   11 days ago     124MB
 ```
 
-Jalankan perintah di bawah ini untuk mencoba menjalankan container Python 3.8.
+Next is try to run Python 3.8 interpreter using Docker.
 
 ```sh
 docker run --rm \
@@ -49,7 +48,7 @@ python --version
 Python 3.8.13
 ```
 
-Jika output dari shell seperti di atas maka selamat anda sekarang bisa menggunakan Python 3.8 di komputer anda.
+If you see output as above then congratulations you can now use Python 3.8 on your computer.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="README.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-2.md">Berikutnya &raquo;</a></td></tr></table>

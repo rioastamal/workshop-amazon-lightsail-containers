@@ -1,24 +1,24 @@
 
-### <a name="step-15"></a>Step 15 - Menghapus Amazon Lightsail Container Service
+### <a name="step-15"></a>Step 15 - Remove Amazon Lightsail Container
 
-Jika aplikasi sudah tidak dibutuhkan maka tidak ada alasan untuk menjalankannya. Jika Container Service hanya kita _disabled_ maka kita tetap terkena charge meskipun container dan endpoint tidak dapat diakses. 
+If the application is no longer needed then there is no reason to run it. Disabling the container service does not stop the incurring charge.
 
-Jika sudah tidak diperlukan maka menghapus container adalah cara yang tepat. Ikuti langkah berikut.
+To stop incurring charge you need to remove the container service.
 
-1. Kembali ke dashboard Amazon Lightsail
-2. Kemudian klik menu **Containers** untuk masuk ke halaman container service.
-3. Disana harusnya terdapat container service **hello-api**, klik tombol titik tiga untuk membuka menu kemudian klik pilihan **Delete**.
+1. Back to Amazon Lightsail dashboard
+2. Click **Containers** menu
+3. There should be a **hello-api** container service, click the 3 dots and click the **Delete** option.
 
 [![Lightsail Delete Container Service](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-delete.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-delete.png)
 
-> Gambar 17. Menghapus container service
+> Figure 17. Removing a container service
 
-4. Pada dialog konfirmasi klik tombol **Yes, delete** untuk menghapus container service.
-5. Harusnya container service **hello-api** sudah tidak ada dalam daftar.
+4. Click **Yes, delete** to delete container service.
+6. **hello-api** container should be deleted and gone from the list.
 
-Perlu dicatat bahwa container image pada Amazon Lightsail terikat pada container service. Jadi menghapus container service juga akan menghapus semua container image yang telah diupload pada container service tersebut. Dalam hal ini, dua container image yang kita upload sebelumnya yaitu `indonesia-belajar:1.0` dan `indonesia-belajar:2.0` juga ikut dihapus.
+It's worth noting that container images on Amazon Lightsail are tied to a container service. So removing the container service will also delete all container images that have been uploaded to the container service. In this case, the two container images that we uploaded earlier are `indonesia-belajar:1.0` and `indonesia-belajar:2.0` were deleted.
 
-Sekarang mari kita coba akses kembali URL endpoint container apakah masih bisa merespon atau mengembalikan error.
+Now let's try to access the container's endpoint URL to see the response.
 
 ```sh
 curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
@@ -34,14 +34,14 @@ curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 </html>
 ```
 
-Dapat terlihat bahwa public URL yang sebelumnya digunakan sekarang mengembalikan HTTP error 404. Artinya tidak ada container service yang berjalan.
+The endpoint URL should return 404 HTTP error, it means no container service is running.
 
 
 ---
 
-SELAMAT! Anda telah menyelesaikan workshop deployment Python Flask dengan menggunakan Amazon Lightsail Containers.
+Congrats! You have completed a Python Flask deployment workshop on Amazon Lightsail Containers.
 
-Jangan lupa berikan tanda ⭐ untuk repo ini. Sampai bertemu diworkshop selanjutnya.
+Don't forget to ⭐ this repo. See you at next workshop.
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-14.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="README.md">Berikutnya &raquo;</a></td></tr></table>
 

@@ -1,19 +1,19 @@
 
-### <a name="step-2"></a>Step 2 - Menginstal Lightsail Control Plugin
+### <a name="step-2"></a>Step 2 - Install Lightsail Control Plugin
 
-Plugin CLI ini digunakan untuk mengupload container image dari komputer lokal ke Amazon Lightsail container service. Jalankan perintah berikut untuk menginstal Lightsail Control Plugin. Diasumsikan bahwa terdapat perintah `sudo` pada distribusi Linux yang anda gunakan.
+This CLI plugin is used to upload container image from your local computer to the Amazon Lightsail container service. Run the following command to install the Lightsail Control Plugin. It is assumed that there is `sudo` command on your Linux distribution.
 
 ```sh
 sudo curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
 ```
 
-Tambahkan atribut _execute_ pada file `lightsailctl` yang baru saja didownload.
+Add an execute attribute to `lightsailctl` file.
 
 ```sh
 sudo chmod +x /usr/local/bin/lightsailctl
 ```
 
-Pastikan atribut _execute_ sudah teraplikasikan ke file.
+Make sure the attribute is applied to the file. It is indicated by letter `x` in the attribute list, for an example `rwxr-xr-x`
 
 ```sh
 ls -l /usr/local/bin/lightsailctl
@@ -22,8 +22,6 @@ ls -l /usr/local/bin/lightsailctl
 ```
 -rwxr-xr-x 1 root root 13201408 May 28 03:16 /usr/local/bin/lightsailctl
 ```
-
-Itu ditandai dengan adanya huruf `x` pada daftar atribut, contohnya `-rwxr-xr-x`.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-1.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-3.md">Berikutnya &raquo;</a></td></tr></table>

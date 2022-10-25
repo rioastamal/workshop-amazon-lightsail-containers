@@ -1,11 +1,11 @@
 
-### <a name="step-9"></a>Step 9 - Membuat Versi Baru dari API
+### <a name="step-9"></a>Step 9 - Create New Version of the API
 
-Setiap aplikasi hampir pasti akan selalu mengalami proses update entah itu untuk perbaikan atau penambahan fitur. Pada workshop ini kita akan coba mendemonstrasikan bagaimana melakukan update dari aplikasi menggunakan Amazon Lightsail Container service.
+Every application will almost certainly having an update whether for bug fixes or adding new features. In this step we will try to demonstrate how to update an application on Amazon Lightsail Container service.
 
-Dalam contoh ini kita akan mengubah kode API dengan mengubah karakter dari sapi ke banyak karakter lain, seperti: 'beavis', 'cheese', 'daemon', 'cow', 'dragon', 'ghostbusters', 'kitty', 'meow', 'milk', 'pig', 'stegosaurus', 'stimpy', 'trex', 'turkey', 'turtle', 'tux'.
+In this example we will update the API to support character other than cow. List of new characters: 'beavis', 'cheese', 'daemon', 'cow', 'dragon', 'ghostbusters', 'kitty', 'meow', 'milk', 'pig', 'stegosaurus', 'stimpy', 'trex', 'turkey', 'turtle', 'tux'.
 
-Pastikan anda berada pada direktori `python-app`. Kemudian ubah isi dari file `src/index.py` menjadi seperti di bawah.
+Make sure you are in directory `python-app`. Then change the contents of the file `src/index.pyto` as shown below.
 
 ```py
 from flask import Flask
@@ -44,9 +44,9 @@ Where:
     return the_text, 200, { 'content-type': 'text/plain' }
 ```
 
-Terlihat kita menambahkan parameter baru pada inputan query string yaitu `char`. Dimana ini akan menentukan karakter yang ditampilkan selain `cow` seperti `tux`, `dragon`, `ghostbusters` dan lain-lain. Selain itu pada bagian bawah kita juga menampilkan alamat ip lokal server yang berjalan.
+We add new parameter `char` via query string. This parameter will determine what character to shown. In addition we also add new section to show our local IP address.
 
-Jalankan kembali aplikasi kita melalui Docker.
+Run the API using Docker.
 
 ```sh
 docker run -v $(pwd):/app --rm -it -p 8080:8080 \
@@ -55,6 +55,8 @@ bash /app/run-server.sh
 ```
 
 Kemudian lakukan HTTP request ke path `/` dengan mengirimkan parameter `text` dan `char` di query string.
+
+Try to call the API to show tux character. We need to pass query string `char=tux`.
 
 ```sh
 curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar&char=tux'
@@ -77,7 +79,7 @@ curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar&char=tux'
 My Local IP: 172.17.0.2
 ```
 
-Dapat terlihat bahwa sekarang karakter yang muncul adalah `tux` (pinguin) dan terdapat alamat IP lokal dari server.
+Now our API able to support many characters and display local IP of the server.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-8.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-10.md">Berikutnya &raquo;</a></td></tr></table>

@@ -2,44 +2,47 @@
 
 <!-- begin step-0 -->
 
-## Workshop Deploy Python Flask dengan Amazon Lightsail Containers
+Language: [Bahasa Indonesia](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-python-flask) | English
 
-Pada workshop ini peserta akan mempraktikkan bagaimana melakukan deployment sebuah API menggunakan Amazon Lightsail Containers. Sebuah API sederhana dibangun dengan Python dan micro web framework Flask akan digunakan sebagai contoh pada praktik ini.
+DRAFT - Need a review for any spelling or grammatical errors.
 
-Peserta dapat mengikuti panduan workshop melalui step-step atau langkah-langkah yang telah disediakan secara berurutan mulai dari step 1 hingga step 15.
+## Workshop Deploying Python Flask on Amazon Lightsail Containers
 
-- [Step 1 - Kebutuhan](#step-1)
-- [Step 2 - Menginstal Lightsail Control Plugin](#step-2)
-- [Step 3 - Membuat Direktori untuk Project](#step-3)
-- [Step 4 - Membuat Python Flask API](#step-4)
-- [Step 5 - Membuat Container Image](#step-5)
-- [Step 6 - Membuat Container Service di Amazon Lightsail](#step-6)
-- [Step 7 - Push Container Image ke Amazon Lightsail](#step-7)
-- [Step 8 - Deploy Container](#step-8)
-- [Step 9 - Membuat Versi Baru dari API](#step-9)
-- [Step 10 - Update Container Image](#step-10)
-- [Step 11 - Push Container Image Versi Terbaru](#step-11)
-- [Step 12 - Deploy Versi Terbaru dari API](#step-12)
-- [Step 13 - Menambah Jumlah Node](#step-13)
-- [Step 14 - Rollback API ke Versi Sebelumnya](#step-14)
-- [Step 15 - Menghapus Amazon Lightsail Container Service](#step-15)
+In this workshop, participants will be guided how to deploy an API on Amazon Lightsail Containers. A simple API built using Python and Flask microframework will be used as an example in this workshop.
 
-Jika anda lebih menyukai semua langkah dalam satu halaman maka silahkan membuka file [README.single-page.md](README.single-page.md).
+Participants can follow the workshop guide through steps that have been provided sequentially starting from step 1 to step 15.
+
+- [Step 1 - Requirements](#step-1)
+- [Step 2 - Install Lightsail Control Plugin](#step-2)
+- [Step 3 - Create Directory for the Project](#step-3)
+- [Step 4 - Create Python Flask API](#step-4)
+- [Step 5 - Create Container Image](#step-5)
+- [Step 6 - Create Container Service on Amazon Lightsail](#step-6)
+- [Step 7 - Push Container Image to Amazon Lightsail](#step-7)
+- [Step 8 - Deploy Container Service](#step-8)
+- [Step 9 - Create New Version of the API](#step-9)
+- [Step 10 - Updating Container Image](#step-10)
+- [Step 11 - Pushing New Version of Container Image](#step-11)
+- [Step 12 - Deploying the New API](#step-12)
+- [Step 13 - Increasing Number of Nodes](#step-13)
+- [Step 14 - Rollback Container to Previous Deployment](#step-14)
+- [Step 15 - Remove Amazon Lightsail Container Service](#step-15)
+
+If you prefer all steps in one page then please open [README.single-page.md](README.single-page.md).
 
 <!-- end step-0 -->
 
 <!-- begin step-1 -->
 
-### <a name="step-1"></a>Step 1 - Kebutuhan
+### <a name="step-1"></a>Step 1 - Requirements
 
-Sebelum memulai workshop pastikan sudah memenuhi kebutuhan yang tercantum di bawah ini.
+Before starting the workshop, make sure you have an active AWS account and have installed requirements listed below.
 
-- Memiliki akun AWS aktif
-- Sudah menginstal Docker
-- Sudah menginstal AWS CLI v2 dan konfigurasinya
+- Docker
+- AWS CLI v2 and its configuration
 - Python v3.8 dan pip via Docker
 
-Untuk menginstal Python 3.8 menggunakan Docker gunakan perintah berikut.
+To install Python 3.8 using Docker use following command.
 
 ```sh
 docker pull public.ecr.aws/docker/library/python:3.8-slim
@@ -57,7 +60,7 @@ Status: Downloaded newer image for public.ecr.aws/docker/library/python:3.8-slim
 public.ecr.aws/docker/library/python:3.8-slim
 ```
 
-Perintah diatas akan mendownload container image Python 3.8 versi slim dari registry publik Amazon ECR. Untuk memastikan container image telah didownload gunakan perintah.
+The above command will download a slim version of the Python 3.8 container image from the Amazon ECR public registry. To make sure the container image has been downloaded run command below.
 
 ```sh
 docker images
@@ -68,7 +71,7 @@ REPOSITORY                             TAG          IMAGE ID       CREATED      
 public.ecr.aws/docker/library/python   3.8-slim     61c56c60bb49   11 days ago     124MB
 ```
 
-Jalankan perintah di bawah ini untuk mencoba menjalankan container Python 3.8.
+Next is try to run Python 3.8 interpreter using Docker.
 
 ```sh
 docker run --rm \
@@ -80,7 +83,7 @@ python --version
 Python 3.8.13
 ```
 
-Jika output dari shell seperti di atas maka selamat anda sekarang bisa menggunakan Python 3.8 di komputer anda.
+If you see output as above then congratulations you can now use Python 3.8 on your computer.
 
 [^back to top](#top)
 
@@ -88,21 +91,21 @@ Jika output dari shell seperti di atas maka selamat anda sekarang bisa menggunak
 
 <!-- begin step-2 -->
 
-### <a name="step-2"></a>Step 2 - Menginstal Lightsail Control Plugin
+### <a name="step-2"></a>Step 2 - Install Lightsail Control Plugin
 
-Plugin CLI ini digunakan untuk mengupload container image dari komputer lokal ke Amazon Lightsail container service. Jalankan perintah berikut untuk menginstal Lightsail Control Plugin. Diasumsikan bahwa terdapat perintah `sudo` pada distribusi Linux yang anda gunakan.
+This CLI plugin is used to upload container image from your local computer to the Amazon Lightsail container service. Run the following command to install the Lightsail Control Plugin. It is assumed that there is `sudo` command on your Linux distribution.
 
 ```sh
 sudo curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
 ```
 
-Tambahkan atribut _execute_ pada file `lightsailctl` yang baru saja didownload.
+Add an execute attribute to `lightsailctl` file.
 
 ```sh
 sudo chmod +x /usr/local/bin/lightsailctl
 ```
 
-Pastikan atribut _execute_ sudah teraplikasikan ke file.
+Make sure the attribute is applied to the file. It is indicated by letter `x` in the attribute list, for an example `rwxr-xr-x`
 
 ```sh
 ls -l /usr/local/bin/lightsailctl
@@ -112,17 +115,15 @@ ls -l /usr/local/bin/lightsailctl
 -rwxr-xr-x 1 root root 13201408 May 28 03:16 /usr/local/bin/lightsailctl
 ```
 
-Itu ditandai dengan adanya huruf `x` pada daftar atribut, contohnya `-rwxr-xr-x`.
-
 [^back to top](#top)
 
 <!-- end step-2 -->
 
 <!-- begin step-3 -->
 
-### <a name="step-3"></a>Step 3 - Membuat Direktori untuk Project
+### <a name="step-3"></a>Step 3 - Create Directory for the Project
 
-Pastikan anda sedang berada pada `$HOME` direktori yaitu `/home/ec2-user`.
+Make sure you're in `$HOME` directory which is `/home/ec2-user`.
 
 ```sh
 cd ~
@@ -133,13 +134,13 @@ pwd
 /home/ec2-user/
 ```
 
-Kemudian buat sebuah direktori baru bernama `python-app`.
+Then create new directory named `python-app`.
 
 ```sh
 mkdir python-app
 ```
 
-Masuk pada direktori tersebut. Kita akan menempatkan file-file yang diperlukan disana.
+Go to that directory as we will put all necessary files there.
 
 ```sh
 cd python-app
@@ -156,11 +157,11 @@ pwd
 
 <!-- begin step-4 -->
 
-### <a name="step-4"></a>Step 4 - Membuat Python Flask API
+### <a name="step-4"></a>Step 4 - Create Python Flask API
 
-Pada langkah ini kita akan membuat sebuah API sederhana yang dibangun menggunakan web framework di Python yang populer yaitu Flask. API yang dibuat akan mengembalikan karakter sapi dan teks dalam format ASCII. Mirip dengan yang ditemukan pada utilitas di Unix/Linux `cowsay`.
+In this step we will create a simple API built using the popular Python web framework, Flask. The API will return cow characters and text in ASCII format. Similar to those found on utilities on Unix/Linux cowsay.
 
-Pertama kita buat file `requirements.txt` untuk menginstal ketergantungan pustaka menggunakan pip yaitu package manager untuk Python.
+First create a file `requirements.txt` to list all packages used on this app using pip which is the package manager for Python.
 
 ```sh
 echo '
@@ -170,9 +171,9 @@ gunicorn~=20.1.0
 ' > requirements.txt
 ```
 
-Karena kita menjalankan Python via Docker maka kita akan melakukan mount lokal direktori `python-app` ke Docker container. Hal ini kita lakukan karena pustaka akan kita tempatkan di komputer host bukan di dalam container agar ketika container dimatikan pustaka tersebut tidak ikut hilang.
+Since we are running Python via Docker we will mount local directory `python-app` to the Docker container. We do this because we will place the packages on the host computer, not in a container so that when the container is turned off the packages will not be lost.
 
-Direktori `/home/ec2-user/python-app` akan kita mount ke `/app` di dalam container. Semua paket yang diinstal oleh pip akan dimasukkan ke `/app/libs`.
+We will mount `/home/ec2-user/python-app` to `/app` inside the container. All the packages installed by pip will be placed to `/app/libs` .
 
 ```sh
 docker run -v $(pwd):/app --rm -it \
@@ -180,7 +181,7 @@ public.ecr.aws/docker/library/python:3.8-slim \
 pip install -r /app/requirements.txt --target=/app/libs
 ```
 
-Jika digunakan perintah `ls`, maka sekarang harusnya terdapat direktori baru `libs/` yang ownernya adalah root.
+If you use `ls` command, there should be a new directory `libs` whose owner is root.
 
 ```sh
 ls -l libs/
@@ -198,19 +199,19 @@ drwxr-xr-x 2 root root 4096 Jun 15 09:10 gunicorn-20.1.0.dist-info
 ....
 ```
 
-Selanjutnya buat sebuah direktori baru bernama `src/` untuk menempatkan kode sumber.
+Next create a new directory `src/` to place API source code.
 
 ```sh
 mkdir src/
 ```
 
-Buat sebuah file `src/index.py`, ini adalah file utama dimana kode API yang akan kita buat.
+Create new file `src/index.py`, this is the main file for the API.
 
 ```sh
 touch src/index.py
 ```
 
-Salin kode di bawah ini dan masukkan ke dalam file `src/index.py`.
+Copy and paste code below to `src/index.py`.
 
 ```py
 from flask import Flask
@@ -239,11 +240,13 @@ Where:
 
 Untuk menjalankan API server kita akan menggunakan WSGI server yaitu gunicorn. Buat sebuah shell script untuk menjalankan gunicorn di dalam container.
 
+To run API server we will use a WSGI server, gunicorn. Create a shell script to run gunicorn in container.
+
 ```sh
 touch run-server.sh
 ```
 
-Salin kode shell script di bawah ke dalam file `run-server.sh`.
+Copy this shell script code to file `run-server.sh`.
 
 ```sh
 #!/bin/bash
@@ -262,6 +265,8 @@ $PYTHONPATH/bin/gunicorn \
 
 Eksekusi gunicorn WSGI server menggunakan Docker.
 
+Run gunicurn using Docker.
+
 ```sh
 docker run -v $(pwd):/app --rm -it -p 8080:8080 \
 public.ecr.aws/docker/library/python:3.8-slim \
@@ -278,7 +283,7 @@ bash /app/run-server.sh
 [2022-06-15 09:28:22 +0000] [13] [INFO] Booting worker with pid: 13
 ```
 
-Tes dengan melakukan HTTP request pada localhost port `8080` path `/` dan tanpa mengirimkan parameter apapun.
+You can test by issuing HTTP request to localhost port `8080` and path `/`.
 
 ```sh
 curl -s -D /dev/stderr 'http://localhost:8080/'
@@ -312,7 +317,7 @@ Content-Length: 833
                                               ||     ||
 ```
 
-Sekarang mari kita coba kirimkan parameter `text` dengan nilai `Hello%20Indonesia%20Belajar`. Kode `%20` mengindikasikan spasi.
+Let's do another request by adding parameter to the query string. Send a `text` paramter with value `Hello%20Indonesia%20Belajar`. String `%20` represent space.
 
 ```sh
 curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar'
@@ -331,7 +336,7 @@ curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar'
                               ||     ||
 ```
 
-Keren. API kita sudah bisa berjalan sesuai harapan. Saatnya memaket menjadi container image. Tekan `CTRL+C` untuk menghentikan container.
+Cool! Our API is run as expected. It's time to package this API into a container image. Press `CTRL+C` to stop the container.
 
 [^back to top](#top)
 
@@ -339,23 +344,23 @@ Keren. API kita sudah bisa berjalan sesuai harapan. Saatnya memaket menjadi cont
 
 <!-- begin step-5 -->
 
-### <a name="step-5"></a>Step 5 - Membuat Container Image
+### <a name="step-5"></a>Step 5 - Create Container Image
 
-Untuk membuat container image dari layanan API yang baru dibuat kita akan menggunakan Docker.
+To create a container image of the newly created API service we will use Docker.
 
-Pastikan dulu telah berada pada direktori `python-app/`.
+Make sure you're already inside directory `python-app/`.
 
 ```
 cd ~/python-app/
 ```
 
-Buat sebuah file baru dengan nama `Dockerfile`. File ini akan berisi perintah-perintah dalam membangun container image. Letakkan file ini di dalam root direktori project yaitu `python-app/`.
+Create a new file named `Dockerfile`. This file will contain commands to build a container image. Put this file in the root of the project directory which should be inside `python-app/`.
 
 ```sh
 touch Dockerfile
 ```
 
-Salin kode dibawah ini dan masukkan ke dalam file `Dockerfile`.
+Copy and paste code below into `Dockerfile`.
 
 ```dockerfile
 FROM public.ecr.aws/docker/library/python:3.8-slim
@@ -370,9 +375,9 @@ RUN pip install -r requirements.txt --target=/app/libs
 ENTRYPOINT ["bash", "/app/run-server.sh"]
 ```
 
-Pada kode di atas, kita menggunakan Python versi 3.8 yang diambil dari Amazon ECR public repository. Kemudian menyalin file-file yang diperlukan ke dalam container dan menjalankan `pip install` untuk mendapatkan semua ketergantungan pustaka yang ada di `requirements.txt`. Pustaka yang diinstal oleh pip akan ditempatkan di `/app/libs/`.
+In Dockerfile above, we are using Python 3.8 which taken from Amazon ECR public repository. Then we copy source code files from host to container and run `pip install` to install all required packages. All the packages saved to `/app/libs`.
 
-Kita akan menamakan container image ini dengan nama `indonesia-belajar` dengan versi `1.0`. Untuk mulai membangun container image jalankan perintah berikut. Perhatikan ada `.` titik diakhir perintah.
+We will name this container image `indonesia-belajar` version `1.0`. To start building container image run following command. Notic there is `.` a dot at the end of the command.
 
 ```sh
 docker build --rm -t indonesia-belajar:1.0 .
@@ -389,7 +394,7 @@ Successfully built 32dc2a5baec9
 Successfully tagged indonesia-belajar:1.0
 ```
 
-Pastikan image tersebut ada dalam daftar image di lokal mesin.
+Check the image on the local machine.
 
 ```sh
 docker images indonesia-belajar
@@ -400,9 +405,7 @@ REPOSITORY          TAG       IMAGE ID       CREATED          SIZE
 indonesia-belajar   1.0       32dc2a5baec9   11 seconds ago   144MB
 ```
 
-Dapat terlihat jika container image yang dibuat yaitu `indonesia-belajar` dengan versi `1.0` berhasil dibuat.
-
-Sekarang coba jalankan container `indonesia-belajar:1.0` pada port `8080` untuk memastikan API yang dibuat dapat berjalan pada container.
+We successfully create container image `indonesia-belajar` version `1.0`. Next is to run our API from this new container image.
 
 ```sh
 docker run --rm --name idn_belajar_1_0 -p 8080:8080 -d indonesia-belajar:1.0
@@ -412,7 +415,7 @@ docker run --rm --name idn_belajar_1_0 -p 8080:8080 -d indonesia-belajar:1.0
 da1a191143ed8b030e6e3d7536871821a35627384fdfe856114ae26406c1220b
 ```
 
-Kemudian cek untuk memastikan container `indonesia-belajar:1.0` sedang berjalan.
+Check using `ps` command to make sure the container is running.
 
 ```sh
 docker ps
@@ -423,7 +426,7 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED         
 da1a191143ed   indonesia-belajar:1.0   "bash /app/run-serve…"   9 seconds ago   Up 7 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   idn_belajar_1_0
 ```
 
-Jalankan `curl` untuk melakukan HTTP request ke localhost port `8080` dan teks "Hello Indonesia Belajar".
+Run `curl` command to make HTTP request to localhost port `8080` with parameter `text` is `Hello Belajar Indonesia`.
 
 ```sh
 curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar'
@@ -442,7 +445,7 @@ curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar'
                               ||     ||
 ```
 
-Mantab! API dapat berjalan dengan sempurna di container. Sekarang stop container tersebut.
+Great! The API runs flawlessly in container. Now stop the container.
 
 ```sh
 docker stop idn_belajar_1_0
@@ -454,43 +457,43 @@ docker stop idn_belajar_1_0
 
 <!-- begin step-6 -->
 
-### <a name="step-6"></a>Step 6 - Membuat Container Service di Amazon Lightsail
+### <a name="step-6"></a>Step 6 - Create Container Service on Amazon Lightsail
 
-Container service adalah sumber daya komputasi tempat dimana container dijalankan. Container service memiliki banyak pilihan kapasitas RAM dan vCPU yang bisa dipilih sesuai dengan kebutuhan aplikasi. Selain itu anda juga bisa menentukan jumlah node yang berjalan.
+Container service is compute resource on which the container is run. It provides many choices of RAM and vCPU capacities that can be selected according to your application needs. In addition you can also specify the number of nodes on which container is running.
 
-1. Sekarang masuk ke AWS Management Console kemudian masuk ke halaman Amazon Lightsail. Pada dashboard Amazon Lightsail klik menu **Containers**.
+1. Go to AWS Management Console then go to Amazon Lightsail page. On the Amazon Lightsail Dashboard click the **Containers** menu.
 
 [![Lightsail Containers Menu](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-menu-containers.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-menu-containers.png)
 
-> Gambar 1. Menu Containers pada Amazon Lightsail
+> Figure 1. Containers menu on Amazon Lightsail
 
-2. Pada halaman Containers klik tombol **Create Instance** untuk mulai membuat sebuah Container service.
+2. On the Containers page click the **Create container service** button to start creating a Container service.
 
 [![Lightsail Create Instance Button](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-button-create-instance.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-button-create-instance.png)
 
-> Gambar 2. Halaman Containers yang berisi daftar container yang telah dibuat
+> Figure 2. Containers page contain a list of containers
 
-3. Kemudian kita akan dihadapkan beberapa pilihan. Pada pilihan _Container service location_ pilih region **Singapore**. Klik link **Change AWS Region** untuk melakukannya. Pada pilihan kapasitas container pilih **Nano** dengan RAM 512MB dan vCPU 0.25. Pilihan _Choose the scale_ adalah untuk menentukan jumlah container yang akan diluncurkan, pilih **x1**. Artinya kita hanya akan meluncurkan 1 buah container.
+3. Then we will be faced with several choices. In the _Container service location_ option, select the a region, in this case I choose **Singapore**. Click the **Change AWS Region** link to do so. In the container capacity option, select **Nano** which consist of 512MB RAM and 0.25 vCPU. For the scale option specify **x1**. It means that we will only launch 1 node to run the containers.
 
 [![Lightsail Choose Container Capacity](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-choose-container-capacity.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-choose-container-capacity.png)
 
-> Gambar 3. Memilih region dan kapasitas dari container
+> Figure 3. Selecting region and capacity of the container
 
-4. Lanjut pada pilihan selanjutnya adalah menentukan nama layanan. Pada bagian _Identify your service_ isi dengan **hello-api**. Pastikan pada bagian _Summary_ bahwa kita akan meluncurkan sebuah container dengan kapasitas **Nano** (512MB RAM, 0.25 vCPU) sebanyak **x1**. Total biaya untuk kapasitas tersebut adalah **$7 USD** per bulan. Jika sudah sesuai maka klik tombol **Create container service** untuk menyelesaikan pembuatan container service.
+4. Next is to determine the name of the service. In the _Identify your service_ section, enter **hello-api**. At the _Summary_ section as we can see we will launch a container with a **Nano** capacity (512MB RAM, 0.25 vCPU)  **x1**. Total cost for this container service is **$7** per month. All is set now click  **Create container service** button.
 
 [![Lightsail Choose Service Name](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-choose-service-name.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-choose-service-name.png)
 
-> Gambar 4. Memasukkan nama container service
+> Figure 4. Entering the container service name
 
-5. Setelah itu Lightsail akan mulai memproses pembuatan container service **hello-api**. Ini akan memakan waktu beberapa menit, jadi mohon ditunggu. Setelah selesai anda akan dibawa ke dashboard dari halaman container service **hello-api**. ANda akan mendapat domain yang digunakan untuk mengakses container. Domain tersebut terlihat di bagian _Public domain_. Tunggu hingga status menjadi **Ready** kemudian klik domain tersebut untuk membuka aplikasi **hello-api**. Ketika domain tersebut dikunjungi harusnya terdapat error 404 karena belum ada container image yang dideploy pada **hello-api**.
+5. Container service creation will take few minutes, so be patient. Once done you will be taken to the dashboard of the **hello-api** container service page. You will get a domain to used to access your container. The domain is located at the _Public domain_ section. Wait until the status becomes **Ready** then click the domain to open **hello-api** container service. It should be still 404 error because no container image has been deployed to the container service.
 
 [![Lightsail hello-api Dashboard](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-dashboard.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-dashboard.png)
 
-> Gambar 5. Dashboard dari container service hello-api
+> Figure 5. Dashboard of the hello-api container service
 
 [![Lightsail hello-api 404](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-404-hello-api.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-404-hello-api.png)
 
-> Gambar 6. Layanan hello-api masih 404 karena belum ada container image yang dideploy
+> Figure 6. hello-api service returns 404 because no container image has been deployed
 
 [^back to top](#top)
 
@@ -498,11 +501,11 @@ Container service adalah sumber daya komputasi tempat dimana container dijalanka
 
 <!-- begin step-7 -->
 
-### <a name="step-7"></a>Step 7 - Push Container Image ke Amazon Lightsail
+### <a name="step-7"></a>Step 7 - Push Container Image to Amazon Lightsail
 
-Setiap container image yang di-push ke Amazon Lightsail terikat pada sebuah Container service. Karena itulah kita membuat **hello-api** Container service terlebih dahulu sebelum melakukan push container image.
+Each container image pushed to Amazon Lightsail is bound to a container service. That's why we created the **hello-api** container service first before pushing the container image.
 
-Pada langkah ini kita akan melakukan push container image `indonesia-belajar:1.0` yang telah dibuat sebelumnya ke Container service **hello-api**. Jalankan perintah dibawah ini.
+In this step we will push `indonesia-belajar:1.0` the previously created container image to **hello-api** container service. Run command below.
 
 ```sh
 aws lightsail push-container-image \
@@ -520,15 +523,15 @@ Image "indonesia-belajar:1.0" registered.
 Refer to this image as ":hello-api.indonesia-belajar.12" in deployments.
 ```
 
-Jika berhasil maka anda akan mendapatkan pesan mirip seperti diatas. Container image akan disimpan dengan penamaan `:<container-service>:<label>.<versi-upload>` pada contoh diatas penamaannya adalah `:hello-api.indonesia-belajar.12`.
+You will get a message similar to the one above once the push is successfull. The container image will be saved with the name `:<container-service>:<label>.<upload-number>` in the example above the name is `:hello-api.indonesia-belajar.12`. Your `upload-number` could be different.
 
-Sekarang pastikan container image tersebut ada dalam daftar container yang telah diupload. Masuk ke halaman dashboard dari container service **hello api** kemudian masuk ke halaman **Images**.
+Now make sure the container image has been uploaded, go to the **Images** page.
 
 [![Lightsail hello-api Image](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-image.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-image.png)
 
-> Gambar 7. Daftar container image yang telah diupload
+> Figure 7. List of uploaded container images
 
-Pada halaman _Images_ dapat terlihat jika terdapat sebuah image `:hello-api.indonesia-belajar.12` seperti yang telah diupload pada proses sebelumnya. Kita akan menggunakan image ini untuk melakukan deployment.
+As you can see on the _Images_ page there is an container image `:hello-api.indonesia-belajar.12` that we just uploaded from previous step. We will use this image to do the deployment.
 
 [^back to top](#top)
 
@@ -536,28 +539,28 @@ Pada halaman _Images_ dapat terlihat jika terdapat sebuah image `:hello-api.indo
 
 <!-- begin step-8 -->
 
-### <a name="step-8"></a>Step 8 - Deploy Container
+### <a name="step-8"></a>Step 8 - Deploy Container Service
 
-Proses ini digunakan untuk menempatkan container yang akan dijalankan ke Container service yang telah tersedia. Pada contoh ini kita telah membuat sebuah Container service dengan nama **hello-api** dengan kapasitas 512MB RAM dan 0.25 vCPU dan hanya berjumlah 1.
+This step will create new deployment for **hello-api** container service using container image `:hello-api.indonesia-belajar.12`.
 
-1. Pada halaman dashboard **hello-api** klik menu **Deployments** kemudian klik link **Create your first deployment**.
+1. On the **hello-api** dashboard click the **Deployments** menu and then click the **Create your first deployment** link.
 
 [![Lightsail Create Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployments-menu.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployments-menu.png)
 
-> Gambar 8. Membuka halaman deployment
+> Figure 8. Create your first deployment link
 
-2. Terdapat beberapa isian yang harus dilengkapi. Pertama isikan **hello-idn-belajar** untuk _Container name_. 
-3. Pada pilihan _Image_ klik **Choose stored image** untuk memilih container image yang sudah diupload sebelumnya. Pilih versi container image yang telah diupload.
-4. Aplikasi menggunakan dua opsional environment variable yaitu `APP_WORKER` dan `APP_BIND`. `APP_WORKER` menentukan jumlah gunicorn worker (default 4) dan `APP_BIND` menentukan bind address dan nomor port (default `0.0.0.0:8080`). Kendati opsional pada contoh ini kita tetap mengisikan secara eksplisit.
-5. Pada konfigurasi **Open ports** gunakan nomor port dimana aplikasi berjalan. Dalam hal ini sama dengan nilai dari `APP_BIND` yaitu `8080`. 
-6. Untuk **PUBLIC ENDPOINT** gunakan container **hello-idn-belajar** yang telah diinput pada bagian sebelumnya. Container service yang berjalan pada public domain akan melakukan koneksi pada `8080` yang dikonfigurasi pada **Open ports**.
-7. Jika semua sudah sesuai, klik **Save and deploy** untuk melakukan deployment. Proses ini akan memakan waktu beberapa menit. Tunggu hingga status dari Container service menjadi **Running**.
+2. There are several things need to be configured. First enter **hello-idn-belajar** for the _Container name_. 
+3. For the _Image_ option, click **Choose stored image** then choose our container image that has been uploaded.
+4. API uses two optional environment variables: `APP_WORKER` and `APP_BIND`. `APP_WORKER` used to determine number of gunicorn worker (default is 4) and `APP_BIND` used to determine the bind address and port number (default is `0.0.0.0:8080`).
+5. For **Open Ports** use the same port as `APP_BIND` environment variable in this case `8080` and HTTP for the protocol.
+6. For **PUBLIC ENDPOINT** use container **idn-hello-belajar**. All traffic coming from public endpoint will be forwarded to this container.
+7. Click **Save and deploy** to begin deployment.
 
 [![Lightsail Configure Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-configure-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-configure-deployment.png)
 
-> Gambar 9. Konfigurasi deployment untuk container
+> Figure 9. Deployment configuration for containers
 
-Jika status sudah **Running** maka kita dapat mencoba untuk mengakses aplikasi dengan membuka URL yang ada di public domain. Perlu dicatat jika protocol yang digunakan adalah HTTPS. Dalam contoh ini saya menggunakan `curl` untuk melakukan tes. Sesuaikan dengan public domain anda sendiri.
+When the status is **Running** we can try to access the API by opening the URL shown on the public domain section. The public endpoint use HTTPS protocol. We will use curl to do the test. Run command below and replace with your own public domain.
 
 ```sh
 curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesia%20Belajar'
@@ -576,7 +579,7 @@ curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesi
                               ||     ||
 ```
 
-Selamat! anda telah sukses melakukan deployment sebuah aplikasi Python Flask menggunakan Amazon Lightsail Container service. Cukup mudah bukan?
+Congrats! You gave successfully deployed a Python Flask API on Amazon Lightsail Container service. Pretty easy isn't it?
 
 [^back to top](#top)
 
@@ -584,13 +587,13 @@ Selamat! anda telah sukses melakukan deployment sebuah aplikasi Python Flask men
 
 <!-- begin step-9 -->
 
-### <a name="step-9"></a>Step 9 - Membuat Versi Baru dari API
+### <a name="step-9"></a>Step 9 - Create New Version of the API
 
-Setiap aplikasi hampir pasti akan selalu mengalami proses update entah itu untuk perbaikan atau penambahan fitur. Pada workshop ini kita akan coba mendemonstrasikan bagaimana melakukan update dari aplikasi menggunakan Amazon Lightsail Container service.
+Every application will almost certainly having an update whether for bug fixes or adding new features. In this step we will try to demonstrate how to update an application on Amazon Lightsail Container service.
 
-Dalam contoh ini kita akan mengubah kode API dengan mengubah karakter dari sapi ke banyak karakter lain, seperti: 'beavis', 'cheese', 'daemon', 'cow', 'dragon', 'ghostbusters', 'kitty', 'meow', 'milk', 'pig', 'stegosaurus', 'stimpy', 'trex', 'turkey', 'turtle', 'tux'.
+In this example we will update the API to support character other than cow. List of new characters: 'beavis', 'cheese', 'daemon', 'cow', 'dragon', 'ghostbusters', 'kitty', 'meow', 'milk', 'pig', 'stegosaurus', 'stimpy', 'trex', 'turkey', 'turtle', 'tux'.
 
-Pastikan anda berada pada direktori `python-app`. Kemudian ubah isi dari file `src/index.py` menjadi seperti di bawah.
+Make sure you are in directory `python-app`. Then change the contents of the file `src/index.pyto` as shown below.
 
 ```py
 from flask import Flask
@@ -629,9 +632,9 @@ Where:
     return the_text, 200, { 'content-type': 'text/plain' }
 ```
 
-Terlihat kita menambahkan parameter baru pada inputan query string yaitu `char`. Dimana ini akan menentukan karakter yang ditampilkan selain `cow` seperti `tux`, `dragon`, `ghostbusters` dan lain-lain. Selain itu pada bagian bawah kita juga menampilkan alamat ip lokal server yang berjalan.
+We add new parameter `char` via query string. This parameter will determine what character to shown. In addition we also add new section to show our local IP address.
 
-Jalankan kembali aplikasi kita melalui Docker.
+Run the API using Docker.
 
 ```sh
 docker run -v $(pwd):/app --rm -it -p 8080:8080 \
@@ -640,6 +643,8 @@ bash /app/run-server.sh
 ```
 
 Kemudian lakukan HTTP request ke path `/` dengan mengirimkan parameter `text` dan `char` di query string.
+
+Try to call the API to show tux character. We need to pass query string `char=tux`.
 
 ```sh
 curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar&char=tux'
@@ -662,7 +667,7 @@ curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar&char=tux'
 My Local IP: 172.17.0.2
 ```
 
-Dapat terlihat bahwa sekarang karakter yang muncul adalah `tux` (pinguin) dan terdapat alamat IP lokal dari server.
+Now our API able to support many characters and display local IP of the server.
 
 [^back to top](#top)
 
@@ -672,7 +677,7 @@ Dapat terlihat bahwa sekarang karakter yang muncul adalah `tux` (pinguin) dan te
 
 ### <a name="step-10"></a>Step 10 - Update Container Image
 
-API versi terbaru sudah siap, saatnya melakukan update untuk container image `indonesia-belajar`. Kita akan merilis API versi terbaru ini dengan tag `2.0`. Untuk melakukannya ikuti langkah berikut.
+Our new API is ready, next is to update the container image `indonesia-belajar`. We will release the new API with tag `2.0`. To do this follow step below.
 
 ```sh
 docker build --rm -t indonesia-belajar:2.0 .
@@ -700,7 +705,7 @@ indonesia-belajar   2.0       b3846915d8d0   6 seconds ago   144MB
 indonesia-belajar   1.0       32dc2a5baec9   4 hours ago     144MB
 ```
 
-Jalankan container versi baru tersebut untuk memastikan API berjalan sesuai harapan. 
+Let's run our `indonesia-belajar:2.0` to make sure it is working as expected.
 
 ```sh
 docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d indonesia-belajar:2.0
@@ -710,7 +715,7 @@ docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d indonesia-belajar:2.0
 d8df1a6d0dbd70de4cd36ff21e5b6a766a7bb0c21d28819d37fdff612aefe23c
 ```
 
-Lakukan HTTP request ke `localhost:8080` untuk melakukan tes respon dari API.
+Do a HTTP request to the API to URL `http://localhost:8080/` to check the API response.
 
 ```sh
 curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar&char=milk'
@@ -743,7 +748,7 @@ curl -s 'http://localhost:8080/?text=Hello%20Indonesia%20Belajar&char=milk'
 My Local IP: 172.17.0.2
 ```
 
-Dapat terlihat jika respon dari API menampilkan karakter `milk` (susu).
+The API return `milk` character as expected.
 
 [^back to top](#top)
 
@@ -751,9 +756,9 @@ Dapat terlihat jika respon dari API menampilkan karakter `milk` (susu).
 
 <!-- begin step-11 -->
 
-### <a name="step-11"></a>Step 11 - Push Container Image Versi Terbaru
+### <a name="step-11"></a>Step 11 - Push New Version of Container Image
 
-Kita sudah pernah melakukan upload container image `indonesia-belajar:1.0` ke Container service **hello-api**. Karena sudah ada versi terbaru yaitu `indonesia-belajar:2.0` maka kita juga harus melakukan push container image ini ke **hello-api**. Jalankan perintah di bawah ini.
+We have uploaded previous container image `indonesia-belajar:1.0` to **hello-api** container service. Now it's time to upload the new version with tag `2.0`.
 
 ```sh
 aws lightsail push-container-image \
@@ -771,13 +776,13 @@ Image "indonesia-belajar:2.0" registered.
 Refer to this image as ":hello-api.indonesia-belajar.13" in deployments.
 ```
 
-Pada kasus milik saya image yang tersimpan di Container service adalah `:hello-api.indonesia-belajar.13`. Nomor versi upload `.13` bisa berbeda dengan milik anda.
+In my case the image was stored as `:hello-api.indonesia-belajar.13`. The upload version `13` could be different from yours.
 
-Untuk memastikan container telah terupload dengan sukses masuk pada dashboard Container service **hello-api** dan klik menu **Images**. Harusnya image sudah muncul di halaman tersebut.
+To make sure that container image has been uploaded successfully check **_Images** page. The new image should be there.
 
 [![Lightsail Container New Image](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-new-image.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-new-image.png)
 
-> Gambar 10. Container image versi terbaru
+> Figure 10. Container image version 2.0
 
 [^back to top](#top)
 
@@ -785,21 +790,21 @@ Untuk memastikan container telah terupload dengan sukses masuk pada dashboard Co
 
 <!-- begin step-12 -->
 
-## <a name="step-12"></a>Step 12 - Deploy Versi Terbaru dari API
+## <a name="step-12"></a>Step 12 - Deploy Latest Version of the API
 
-Setelah container image versi terbaru `indonesia-belajar:2.0` diupload ke Amazon Lightsail Containers maka kita dapat melakukan deployment versi terbaru dari API menggunakan image tersebut.
+Once the container image `-belajar:2.0` uploaded to Amazon Lightsail Containers, we can deploy the latest version of the API using that image.
 
-1. Masuk pada halaman dashboard Contianer service **hello-api** dan pastikan berada pada halaman _Deployments_.
-2. Klik tombol **Modify your deployment**, maka akan terbuka halaman konfigurasi yang sama ketika membuat deployment baru.
-3. Konfigurasi yang perlu diubah adalah container image yang digunakan. Klik tombol **Choose stored image** kemudian pilih versi terbaru dari container image yang diupload.
-4. Sisanya tidak perlu diubah, untuk memulai deployment klik tombol **Save and deploy**.
-5. Tunggu beberapa menit hidda status berubah menjadi **Running** kembali.
+1. Go to Dashboard of the container service **hello-api** and make sure you're at the _Deployments_ page.
+2. Click the **Modify your deployment** to open the configuration section to create new deployment.
+3. The only configuration that need to change is container image which being used. Klik the **Choose stored image** then pick the latest one.
+4. No need to change the rest of the configuration.
+5. Wait few minutes for the status to change back to **Running**.
 
 [![Lightsail Update Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-modify-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-general-app/images/lightsail-hello-api-modify-deployment.png)
 
-> Gambar 11. Deployment versi terbaru dari container
+> Figure 11. Deployment of new version
 
-Setelah status kembali menjadi **Running** saatnya mengakses API versi terbaru apakah sudah menampilkan respon yang diinginkan. Gunakan web browser atau `curl` seperti di bawah untuk mengakses. Sesuaikan dengan URL dari container service anda sendiri.
+After the status back to **Running** it's time to test it out using HTTP request. Use cURL or your browser to test the new deployment.
 
 ```sh
 curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesia%20Belajar&char=beavis'
@@ -834,7 +839,7 @@ curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesi
 My Local IP: 172.17.0.2
 ```
 
-Keren! API terbaru sudah berhasil dideploy. Output dari API sekarang menyertakan alamat ip lokal di server yang pada versi sebelumnya tidak ada.
+Cool! The new version API has been successfully deployed. Now it contains new character and local IP address of the server.
 
 [^back to top](#top)
 
@@ -842,36 +847,36 @@ Keren! API terbaru sudah berhasil dideploy. Output dari API sekarang menyertakan
 
 <!-- begin step-13 -->
 
-### <a name="step-13"></a>Step 13 - Menambah Jumlah Node
+### <a name="step-13"></a>Step 13 - Increasing Number of Nodes
 
-Ketika anda ingin meningkatkan kemampuan aplikasi dalam merespon _traffic_ salah satu cara yang bisa dilakukan adalah dengan melakukan _vertical scaling_ yaitu menambah kombinasi CPU dan RAM atau _horizontal scaling_ menambah jumlah node. 
+When you when to increase the performance of your app to respond traffic, one of the solution is to do vertical scaling which means increasing your server's specs. The other way around is to do horizontal scaling which increasing number of nodes, which exactly what we are going to do.
 
-Kali ini kita akan melakukan _horizontal scaling_ dengan menambah jumlah node dari 1 menjadi 3.
+This time we will increase number of nodes from 1 to 3.
 
-1. Masuk pada dashboard dari **hello-api** container service.
-2. Klik menu **Capacity**
-3. Klik tombol **Change capacity** akan muncul dialog konfirmasi. Klik tombol **Yes, continue** untuk melanjutkan.
+1. Go to **hello-api** dashboard
+2. Click the **Capacity**
+3. Then click the **Change capacity** a window dialog will popping up, click **Yes, continue**.
 
 [![Lightsail Capacity](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-menu.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-menu.png)
 
-> Gambar 12. Halaman capacity pada container service
+> Figure 12. Changing container service capacity
 
-4. Kita akan tetap menggunakan tipe Nano jadi yang akan kita ubah adalah jumlah node. Pada **Choose the scale** geser slider ke angka **3**. 
+4. We are still going to use Nano type for the capacity and for the scale move it to **3**.
 
 [![Lightsail Add Node](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-add-node.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-add-node.png)
 
-> Gambar 13. Menambah jumlah node untuk container service
+> Figure 13. Adding more nodes for container service
 
-5. Proses akan memakan waktu beberapa menit, klik **I understand** untuk menutup dialog.
-6. Tunggu hingga status dari container service kembali **Running**.
+5. This process will several minutes to complete, click **I understand** to close the dialog.
+6. Wait for the status of the container service back to **Running**.
 
 [![Lightsail New Capacity](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-new-capacity-applied.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-new-capacity-applied.png)
 
-> Gambar 14. Kapasitas jumlah node telah bertambah
+> Figure 14. Number of nodes has been increased
 
-Amazon Lightsail akan secara otomatis mendistribusikan _traffic_ ke 3 node yang telah berjalan pada **hello-api** container service. Anda tidak perlu melakukan konfigurasi apapun, sangat memudahkan.
+Amazon Lightsail automatically will distributes the traffic to the 3 nodes running on **hello-api** container service. You don't need to configure anything including the load balancer.
 
-Sekarang kita tes respon dari API dan melihat nilai dari lokal IP yang dikembalikan. Harusnya alamat IP dari setiap request bisa berbeda hasilnya tergantung node mana yang melayani. Lakukan request ke public endpoint dari container beberapa kali dan lihat hasilnya.
+Now test the response from the API and see the value of the local IP that is returned. The IP address of each request should have different results depending on which node is serving. Make a request to the public endpoint of the container several times and see the results.
 
 ```sh
 curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesia%20Belajar'
@@ -927,9 +932,9 @@ curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesi
 My Local IP: 172.26.40.244
 ```
 
-Dapat terlihat jika alamat IP yang dikembalikan berbeda-beda mengindikasikan bahwa node yang menangani _request_ adalah node yang berbeda. Lakukan beberapa kali jika mendapatkan hasil yang sama.
+As can be seen that the IP addresses returned are different indicating that the request are served by different node. Do it several times if you still got the same result.
 
-Okey, sebelum lanjut ke langkah berikutnya kembalikan terlebih dahulu jumlah node dari **3** menjadi **1**. Tentu masih ingat caranya bukan?
+Before proceeding to the next step, first set the number of nodes back from **3** to **1**. Do you still remember how to do it right?
 
 [^back to top](#top)
 
@@ -937,27 +942,27 @@ Okey, sebelum lanjut ke langkah berikutnya kembalikan terlebih dahulu jumlah nod
 
 <!-- begin step-14 -->
 
-### <a name="step-14"></a>Step 14 - Rollback API ke Versi Sebelumnya
+### <a name="step-14"></a>Step 14 - Rollback Container to Previous Deployment
 
-Kehidupan di dunia tidak selalu indah, benar? Begitu juga proses deployment kadang versi baru yang kita deploy malah tidak berfungsi dan menyebabkan error. Salah satu keuntungan menggunakan deployment berbasis container adalah kita dapat melakukan rollback dengan mudah.
+There's a situation where your new deployment is not working and causes errors. One of the advantages of using a container based-deployment is we can rollback easily.
 
-Sebagai contoh kita akan melakukan rollback API kita ke versi sebelumnya. Caranya sangat mudah.
+To rollback our API deployment to previous version it's easy.
 
-1. Pertama pastikan anda berada pada halaman dashboard dari container service **hello-api**.
-2. Pastikan anda berada pada halaman _Deployments_.
-3. Scroll bagian bawah yaitu **Deployment versions**. Disana terlihat kita telah melakukan dua kali deployment. Deployment yang terakhir adalah untuk image `indonesia-belajar:2.0`.
-4. Klik titik tiga **Version 1** kemudian klik **Modify and redeploy**.
+1. First make sure you are on the dashboard page of the **hello-api** container service.
+2. Go to the _Deployments_ page.
+3. Scroll down to Deployment versions . There we can see that we have done two deployments. The last deployment is for image `indonesia-belajar:2.0`.
+4. Click the three dots Version 1 then click **Modify and redeploy**.
 
 [![Lightsail Rollback Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)
 
-> Gambar 15. Rollback Deployment ke Versi Sebelumnya
+> Figure 15. Rollback deployment to previous version
 
-5. Akan muncul dialog konfirmasi untuk melakukan deployment, klik tombol **Yes, continue**.
-6. Proses deployment belum dilakukan, ini hanya otomatis nilai konfigurasi _Image_ akan berubah menjadi versi sebelumnya yaitu `:hello-api.indonesia-belajar.12`. Nomor versi upload `.12` bisa berbeda ditempat anda.
-7. Klik tombol **Save and deploy** untuk memulai proses rollback deployment dari image sebelumnya.
-8. Tunggu hingga status dari container service kembali menjadi **Running**.
+5. A confirmation dialog will appear, click **Yes button, continue**.
+6. The deployment process has not been carried out, it only autofill the Image configuration value that changed the image previous version, namely `:hello-api.indonesia-belajar.12`. The uploaded version number `.12` may be different on your side.
+7. Click **Save and deploy** button to start the rollback deployment process from the previous image.
+8. Wait until the status of the container service returns to Running.
 
-Ketika rollback sudah selesai dan status kembali menjadi **Running** maka coba lakukan request ke API untuk melihat apakah respon sesuai dengan versi sebelumnya.
+When rollback is complete and the status returns to _Running_, try to make a request to the API to see if the response matches the previous version.
 
 ```sh
 curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesia%20Belajar'
@@ -978,13 +983,15 @@ curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesi
 
 Dapat terlihat bahwa API kita telah kembali ke versi sebelumnya yaitu `indonesia-belajar:1.0`. Respon tidak mengembalikan lokal IP dari server seperti yang seharusnya ada di versi `indonesia-belajar:2.0`.
 
-Jadi sebenarnya untuk melakukan rollback sesimple anda mengganti versi container image yang akan dijalankan.
+Now API does not return the local IP of the server as it should be in version `indonesia-belajar:2.0`, instead it return response from previous deployment using `indonesia-belajar:1.0` image.
 
-Perlu diingat bahwa rollback juga adalah sebuah proses deployment jadi otomatis itu akan menambah daftar pada **Deployment versions**. Seperti yang terlihat pada gambar di bawah, rollback yang kita lakukan menghasilkan deployment versi 3.
+So doing rollback is as simple as changing the version of the container image to run.
+
+Keep in mind that rollback is also a deployment process so it will increase deployment version as seen in the image below, our rollback results in a version 3 deployment.
 
 [![Lightsail Deployment Versions](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)
 
-> Gambar 16. Rollback juga menghasilkan versi deployment baru
+> Gambar 16. Rollback produces new deployment version
 
 [^back to top](#top)
 
@@ -992,26 +999,26 @@ Perlu diingat bahwa rollback juga adalah sebuah proses deployment jadi otomatis 
 
 <!-- begin step-15 -->
 
-### <a name="step-15"></a>Step 15 - Menghapus Amazon Lightsail Container Service
+### <a name="step-15"></a>Step 15 - Remove Amazon Lightsail Container
 
-Jika aplikasi sudah tidak dibutuhkan maka tidak ada alasan untuk menjalankannya. Jika Container Service hanya kita _disabled_ maka kita tetap terkena charge meskipun container dan endpoint tidak dapat diakses. 
+If the application is no longer needed then there is no reason to run it. Disabling the container service does not stop the incurring charge.
 
-Jika sudah tidak diperlukan maka menghapus container adalah cara yang tepat. Ikuti langkah berikut.
+To stop incurring charge you need to remove the container service.
 
-1. Kembali ke dashboard Amazon Lightsail
-2. Kemudian klik menu **Containers** untuk masuk ke halaman container service.
-3. Disana harusnya terdapat container service **hello-api**, klik tombol titik tiga untuk membuka menu kemudian klik pilihan **Delete**.
+1. Back to Amazon Lightsail dashboard
+2. Click **Containers** menu
+3. There should be a **hello-api** container service, click the 3 dots and click the **Delete** option.
 
 [![Lightsail Delete Container Service](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-delete.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-delete.png)
 
-> Gambar 17. Menghapus container service
+> Figure 17. Removing a container service
 
-4. Pada dialog konfirmasi klik tombol **Yes, delete** untuk menghapus container service.
-5. Harusnya container service **hello-api** sudah tidak ada dalam daftar.
+4. Click **Yes, delete** to delete container service.
+6. **hello-api** container should be deleted and gone from the list.
 
-Perlu dicatat bahwa container image pada Amazon Lightsail terikat pada container service. Jadi menghapus container service juga akan menghapus semua container image yang telah diupload pada container service tersebut. Dalam hal ini, dua container image yang kita upload sebelumnya yaitu `indonesia-belajar:1.0` dan `indonesia-belajar:2.0` juga ikut dihapus.
+It's worth noting that container images on Amazon Lightsail are tied to a container service. So removing the container service will also delete all container images that have been uploaded to the container service. In this case, the two container images that we uploaded earlier are `indonesia-belajar:1.0` and `indonesia-belajar:2.0` were deleted.
 
-Sekarang mari kita coba akses kembali URL endpoint container apakah masih bisa merespon atau mengembalikan error.
+Now let's try to access the container's endpoint URL to see the response.
 
 ```sh
 curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
@@ -1027,14 +1034,14 @@ curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 </html>
 ```
 
-Dapat terlihat bahwa public URL yang sebelumnya digunakan sekarang mengembalikan HTTP error 404. Artinya tidak ada container service yang berjalan.
+The endpoint URL should return 404 HTTP error, it means no container service is running.
 
 [^back to top](#top)
 
 ---
 
-SELAMAT! Anda telah menyelesaikan workshop deployment Python Flask dengan menggunakan Amazon Lightsail Containers.
+Congrats! You have completed a Python Flask deployment workshop on Amazon Lightsail Containers.
 
-Jangan lupa berikan tanda ⭐ untuk repo ini. Sampai bertemu diworkshop selanjutnya.
+Don't forget to ⭐ this repo. See you at next workshop.
 
 <!-- end step-15 -->
