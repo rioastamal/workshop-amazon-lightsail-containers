@@ -1,9 +1,9 @@
 
 ### <a name="step-3"></a>Step 3 - Download Contoh Aplikasi
 
-Pada praktik ini sudah disediakan sebuah contoh aplikasi Markdown converter sederhana dibangun dengan Laravel.
+In this step we will download sampel app, a Markdown converter built with Laravel.
 
-Pastikan anda sedang berada pada `$HOME` direktori yaitu `/home/ec2-user`.
+Make sure you're in `$HOME` directory which is `/home/ec2-user`.
 
 ```sh
 cd ~
@@ -14,32 +14,32 @@ pwd
 /home/ec2-user/
 ```
 
-Download kode sumber dari GitHub menggunakan utilitas cURL.
+Download source code from GitHub using cURL or your browser.
 
 ```sh
 curl -s -L -o 'hello-markdown.zip' \
 'https://github.com/rioastamal-examples/laravel-hello-markdown/archive/refs/heads/main.zip'
 ```
 
-Ekstrak file `hello-markdown.zip` ke direktori saat ini.
+Extract `hello-markdown.zip` to current directory.
 
 ```sh
 unzip hello-markdown.zip
 ```
 
-Rename direktori hasil ekstrak menjadi `laravel-app`.
+Rename extracted directory to `laravel-app`.
 
 ```sh
 mv laravel-hello-markdown-main laravel-app
 ```
 
-Kemudian masuk ke dalam direktori `laravel-app`. Kita akan bekerja dari dalam direktori ini.
+Go to directory `laravel-app` as we will working within this directory.
 
 ```sh
 cd laravel-app
 ```
 
-Untuk melihat isinya gunakan perintah berikut.
+Below is how the sample app files and directories are structured.
 
 ```sh
 ls -l

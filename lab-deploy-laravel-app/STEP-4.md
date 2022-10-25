@@ -1,7 +1,7 @@
 
-### <a name="step-4"></a>Step 4 - Menjalankan untuk Development
+### <a name="step-4"></a>Step 4 - Running for Development
 
-Pertama kita instal semua ketergantungan pustaka yang diperlukan Laravel menggunakan Composer via Docker. 
+Install all dependencies required by Laravel using Composer via Docker. 
 
 ```sh
 docker run --rm -i \
@@ -19,17 +19,19 @@ Package manifest generated successfully.
 Use the `composer fund` command to find out more!
 ```
 
-Perintah diatas akan melakukan mount direktori `laravel/` ke `/app/` di Container. Composer akan membaca file `composer.lock` dan menginstal ketergantungan. Kemudian semua pustaka akan otomatis tersedia di direktori `laravel/vendor/`.
+Command above will mount local directory `laravel/` to `/app/` inside the container. Composer read `composer.lock` file and install all the dependencies. It will automatically available to `laravel/vendor/`.
 
-Untuk menjalankan maka kita perlu melakukan build container image tersebut terlebih dulu. Hal ini karena base image `php:8.1-apache` masih ada ekstensi dan konfigurasi yang tidak tersedia.
+To run the app, we need to build the container image first. This is because the base image `php:8.1-apache` has no extensions and configurations needed.
 
 Buat dulu environment file untuk development dan production.
+
+Create two environment files for development and production.
 
 ```sh
 touch laravel/.env .env.prod
 ```
 
-Buat nilai yang akan digunakan pada APP_KEY.
+Generate `APP_KEY` by running command below. The value shown here may differ from yours.
 
 ```sh
 docker run --rm -v $(pwd)/laravel:/var/www/html \
@@ -42,6 +44,8 @@ base64:bcHcNZAfo0/m4RePQ4Jk0H671ZVOk+CQGbPYXtvTyAs=
 ```
 
 Update konfigurasi dari file `laravel/.env` seperti berikut.
+
+Update local Laravel configuration file `laravel.env` as follows.
 
 ```
 cat <<EOF > laravel/.env
@@ -57,15 +61,15 @@ LOG_LEVEL=debug
 EOF
 ```
 
-File `laravel/.env` tidak akan masuk ke proses build karena masuk daftar _ignore_.
+File `laravel/.env` won't included into build process because it is on ignore list.
 
-Berikutnya pastikan direktori `laravel/storage` writable.
+Make sure directory `laravel/storage` is writable.
 
 ```sh
 sudo chmod 0777 -R laravel/storage/
 ```
 
-Kita akan menamakan image ini `indonesia-belajar` dengan versi `1.0`.
+Build and the container image `indonesia-belajar` version `1.0`.
 
 ```sh
 docker build --rm -t indonesia-belajar:1.0 .
@@ -85,7 +89,7 @@ Successfully built d10aba77d9fd
 Successfully tagged indonesia-belajar:1.0
 ```
 
-Pastikan image tersebut ada dalam daftar image di lokal mesin.
+Make sure our image are successfully build on local machine.
 
 ```sh
 docker images indonesia-belajar
@@ -96,9 +100,9 @@ REPOSITORY          TAG       IMAGE ID       CREATED             SIZE
 indonesia-belajar   1.1       e0070a43c4d7   29 minutes ago      478MB
 ```
 
-Dapat terlihat jika container image yang dibuat yaitu `indonesia-belajar` dengan versi `1.0` berhasil dibuat.
+As we can see now we have new container image `indonesia-belajar` version `1.0`.
 
-Sekarang coba jalankan container `indonesia-belajar:1.0` pada port `8080` untuk memastikan API yang dibuat dapat berjalan pada container. Apache pada container berjalan pada port `80`.
+Let's test the API by running this container on port `8080`. We will forward all the network request to port `80` since Apache 2 inside the container is running on that port. We mount our `laravel/` directory to `/var/www/html/` inside the container.
 
 ```sh
 docker run --rm --name idn_belajar_1_0 -p 8080:80 \
@@ -106,7 +110,7 @@ docker run --rm --name idn_belajar_1_0 -p 8080:80 \
 indonesia-belajar:1.0
 ```
 
-Kemudian cek untuk memastikan container `indonesia-belajar:1.0` sedang berjalan.
+Check with `ps` command to make sure our container is running.
 
 ```sh
 docker ps
@@ -117,13 +121,13 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED         
 edc39c6eca83   indonesia-belajar:1.0   "docker-php-entrypoi…"   15 seconds ago   Up 14 seconds   0.0.0.0:8080->80/tcp, :::8080->80/tcp   idn_belajar_1_0
 ```
 
-Buka browser untuk mengecek jalannya aplikasi pada port `8080`.
+Open `localhost:8080` using your browser to see the app.
 
 [![Markdown Converter](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-laravel-app/images/lightsail-hello-api-home.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-laravel-app/images/lightsail-hello-api-home.png)
 
-> Gambar 0. Halaman Markdown Converter
+> Figure 1. Markdown converter
 
-Pada terminal kita dapat mencoba untuk melakukan konversi dari Markdown ke HTML menggunakan cURL.
+We can also use cURL to convert Makrdown to HTML.
 
 ```sh
 curl localhost:8080 -d '# Hello World
@@ -145,6 +149,8 @@ This text will be converted to **HTML**.
 ```
 
 Mantab! Proses konversi markdown berjalan sukses. Sekarang stop container tersebut atau tekan `CTRL-C`.
+
+Great! we are able to convert Markdown to text. Now stop the container by pressing `CTRL-C`.
 
 ```sh
 docker stop idn_belajar_1_0

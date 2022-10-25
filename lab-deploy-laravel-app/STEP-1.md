@@ -1,28 +1,28 @@
 
-### <a name="step-1"></a>Step 1 - Kebutuhan
+### <a name="step-1"></a>Step 1 - Requirements
 
-Sebelum memulai workshop pastikan sudah memenuhi kebutuhan yang tercantum di bawah ini.
+Before starting the workshop, make sure you have an active AWS account and have installed requirements listed below.
 
-- Memiliki akun AWS aktif
-- Sudah menginstal Docker
-- Sudah menginstal AWS CLI v2 dan konfigurasinya
+- An active AWS account
+- Docker
+- AWS CLI v2 and its configuration
 - Apache 2
 - PHP 8.1
 - Composer 2.3
 
-Untuk menginstal PHP 8.1 dan Apache 2 gunakan perintah berikut.
+To install PHP 8.1 and Apache 2 run following commnad.
 
 ```sh
 docker pull public.ecr.aws/docker/library/php:8.1-apache
 ```
 
-Untuk Composer 2.3 gunakan perintah berikut.
+For Composer 2.3 run following command to install.
 
 ```sh
 docker pull public.ecr.aws/docker/library/composer:2.3
 ```
 
-Untuk memastikan image sudah ada pada lokal mesin, jalankan perintah ini.
+Make sure those images are fully downloaded and exists on local machine.
 
 ```sh
 docker images

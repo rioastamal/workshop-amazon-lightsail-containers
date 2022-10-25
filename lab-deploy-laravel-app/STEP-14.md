@@ -1,25 +1,25 @@
 
-### <a name="step-14"></a>Step 14 - Rollback API ke Versi Sebelumnya
+### <a name="step-14"></a>Step 14 - Rollback Container to Previous Deployment
 
-Kehidupan di dunia tidak selalu indah, benar? Begitu juga proses deployment kadang versi baru yang kita deploy malah tidak berfungsi dan menyebabkan error. Salah satu keuntungan menggunakan deployment berbasis container adalah kita dapat melakukan rollback dengan mudah.
+There's a situation where your new deployment is not working and causes errors. One of the advantages of using a container based-deployment is we can rollback easily.
 
-Sebagai contoh kita akan melakukan rollback API kita ke versi sebelumnya. Caranya sangat mudah.
+To rollback our API deployment to previous version it's easy.
 
-1. Pertama pastikan anda berada pada halaman dashboard dari container service **hello-api**.
-2. Pastikan anda berada pada halaman _Deployments_.
-3. Scroll bagian bawah yaitu **Deployment versions**. Disana terlihat kita telah melakukan dua kali deployment. Deployment yang terakhir adalah untuk image `indonesia-belajar:2.0`.
-4. Klik titik tiga **Version 1** kemudian klik **Modify and redeploy**.
+1. First make sure you are on the dashboard page of the **hello-api** container service.
+2. Go to the _Deployments_ page.
+3. Scroll down to Deployment versions . There we can see that we have done two deployments. The last deployment is for image `indonesia-belajar:2.0`.
+4. Click the three dots Version 1 then click **Modify and redeploy**.
 
 [![Lightsail Rollback Deployment](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-rollback-deployment.png)
 
-> Gambar 16. Rollback Deployment ke Versi Sebelumnya
+> Figure 17. Rollback deployment to previous version
 
-5. Akan muncul dialog konfirmasi untuk melakukan deployment, klik tombol **Yes, continue**.
-6. Proses deployment belum dilakukan, ini hanya otomatis nilai konfigurasi _Image_ akan berubah menjadi versi sebelumnya yaitu `:hello-api.indonesia-belajar.12`. Nomor versi upload `.12` bisa berbeda ditempat anda.
-7. Klik tombol **Save and deploy** untuk memulai proses rollback deployment dari image sebelumnya.
-8. Tunggu hingga status dari container service kembali menjadi **Running**.
+5. A confirmation dialog will appear, click **Yes button, continue**.
+6. The deployment process has not been carried out, it only autofill the Image configuration value that changed the image previous version, namely `:hello-api.indonesia-belajar.12`. The uploaded version number `.12` may be different on your side.
+7. Click **Save and deploy** button to start the rollback deployment process from the previous image.
+8. Wait until the status of the container service returns to Running.
 
-Ketika rollback sudah selesai dan status kembali menjadi **Running** maka coba lakukan request ke API untuk melihat apakah respon sesuai dengan versi sebelumnya.
+When rollback is complete and the status returns to _Running_, try to make a request to the API to see if the response matches the previous version.
 
 ```sh
 curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?output=raw' \
@@ -30,15 +30,15 @@ curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?output=raw' \
 <h1>Hello World</h1>
 ```
 
-Dapat terlihat bahwa API kita telah kembali ke versi sebelumnya yaitu `indonesia-belajar:1.0`. Respon tidak mengembalikan lokal IP dari server seperti yang seharusnya ada di versi `indonesia-belajar:2.0`.
+Now API does not return the local IP of the server as it should be in version `indonesia-belajar:2.0`, instead it return response from previous deployment using `indonesia-belajar:1.0` image.
 
-Jadi sebenarnya untuk melakukan rollback sesimple anda mengganti versi container image yang akan dijalankan.
+So doing rollback is as simple as changing the version of the container image to run.
 
-Perlu diingat bahwa rollback juga adalah sebuah proses deployment jadi otomatis itu akan menambah daftar pada **Deployment versions**. Seperti yang terlihat pada gambar di bawah, rollback yang kita lakukan menghasilkan deployment versi 3.
+Keep in mind that rollback is also a deployment process so it will increase deployment version as seen in the image below, our rollback results in a version 3 deployment.
 
 [![Lightsail Deployment Versions](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)
 
-> Gambar 17. Rollback juga menghasilkan versi deployment baru
+> Figure 18. Rollback produces new deployment version
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-13.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-15.md">Berikutnya &raquo;</a></td></tr></table>

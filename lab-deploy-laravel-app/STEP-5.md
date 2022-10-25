@@ -3,6 +3,8 @@
 
 Untuk menjalankan di production kita akan menggunakan file konfigurasi terpisah. Yang akan kita gunakan adalah file `.env.prod`. Generate dulu APP_KEY untuk production.
 
+To run for production we will use a separate configuration file `.env.prod`. First generate APP_KEY for production. Keep in mind, the value should be different on your side.
+
 ```sh
 docker run --rm -v $(pwd)/laravel:/var/www/html \
 indonesia-belajar:1.0 \
@@ -13,7 +15,7 @@ php artisan key:generate --show
 base64:+pELmqnKzeJue5lJzkkUFI3RRfjBz54CUXHdIeZ8QrU=
 ```
 
-Update konfigurasi dari file `.env.prod` seperti berikut.
+Overwrite the contents of `.env.prod` as shown below.
 
 ```
 cat <<EOF > .env.prod
@@ -29,13 +31,15 @@ LOG_LEVEL=debug
 EOF
 ```
 
-Build ulang `indonesia-belajar` dengan versi yang sama yaitu `1.0`. Proses ini hanya untuk update file konfigurasi.
+Rebuild `indonesia-belajar:1.0` container image. This process only to update the configuration file.
+
+Keep it mind that storing configuration file inside container is not best practice. As an alternative, you may specify all this config on environment variables on Lightsail container service console.
 
 ```sh
 docker build --rm -t indonesia-belajar:1.0 .
 ```
 
-Nantinya kita akan mempush image ini ke Lightsail container service.
+We will push this image to Lightsail container service. 
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-4.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-6.md">Berikutnya &raquo;</a></td></tr></table>

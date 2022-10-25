@@ -1,11 +1,11 @@
 
-### <a name="step-9"></a>Step 9 - Membuat Versi Baru dari API
+### <a name="step-9"></a>Step 9 - Create New Version of the API
 
-Setiap aplikasi hampir pasti akan selalu mengalami proses update entah itu untuk perbaikan atau penambahan fitur. Pada workshop ini kita akan coba mendemonstrasikan bagaimana melakukan update dari aplikasi menggunakan Amazon Lightsail Container service.
+Every application will almost certainly having an update whether for bug fixes or adding new features. In this step we will try to demonstrate how to update an application on Amazon Lightsail Container service.
 
-Dalam contoh ini kita akan ingin agar pengguna dapat mengkonversi Markdown dari web interface. Untuk itu kita ubah file `laravel/resources/views/welcome.blade.php`. Kita juga menampilkan alamat lokal IP dari server.
+In this example we want user able to convert Markdown using the web interface. We will modify `laravel/resources/views/welcome.blade.php`. We will also shows the IP address of the server.
 
-Ganti konten file tersebut dengan yang di bawah.
+Change the content of `welcome.blade.php` as shown below.
 
 ```php
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ Ganti konten file tersebut dengan yang di bawah.
 </html>
 ```
 
-File berikutnya yang akan kita ganti adalah `routes/web.php`. Ganti isi file tersebut dengan berikut.
+Next, we need to modify our router file `routes/web.php`.
 
 ```php
 <?php
@@ -131,23 +131,22 @@ Route::post('/', function(Request $request) {
 
 ```
 
-Jalankan kembali aplikasi kita melalui Docker.
+After all modification, run this app using Docker.
 
 ```sh
 docker run --rm --name idn_belajar_1_0 -p 8080:80 \
 -v $(pwd)/laravel:/var/www/html \
 indonesia-belajar:1.0
 ```
-
-Buka kembali aplikasi di localhost harusnya tampilan sudah berubah. Terdapat textbox untuk mengisi markdown dan tombol **convert**.
+Open the app via browser. There should be a new textbox component to enter Markdown text and a button **convert**.
 
 [![Versi Terbaru](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-laravel-app/images/lightsail-hello-api-home-v2.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-laravel-app/images/lightsail-hello-api-home-v2.png)
 
-> Gambar 10. Versi terbaru Markdown converter
+> Figure 11. New version of Markdown converter
 
 Sedangkan untuk tetap mengembalikan secara raw atau teks HTML dari markdown saja maka gunakan parameter `output=raw` pada query string.
 
-Salin perintah berikut untuk mencoba.
+In order to return raw or only HTML text from the Markdown then we need to pass paramter `output=raw` on query string.
 
 ```sh
 curl 'localhost:8080/?output=raw' \
@@ -172,7 +171,7 @@ This text will be converted to **HTML**.
 Local IP Address: 172.17.0.2
 ```
 
-Tekan `CTRL+C` untuk menghentikan container yang berjalan.
+Press `CTRL+C` to stop the container.
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-8.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-10.md">Berikutnya &raquo;</a></td></tr></table>
