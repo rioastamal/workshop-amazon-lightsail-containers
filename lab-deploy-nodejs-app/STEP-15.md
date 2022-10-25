@@ -1,5 +1,5 @@
 
-### <a name="step-15"></a>Step 15 - Removing Amazon Lightsail Container Service
+### <a name="step-15"></a>Step 15 - Remove Amazon Lightsail Container Service
 
 If the application is no longer needed then there is no reason to run it. Disabling the container service does not stop the incurring charge.
 
@@ -16,7 +16,7 @@ To stop incurring charge you need to remove the container service.
 4. Click **Yes, delete** to delete container service.
 6. **hello-api** container should be deleted and gone from the list.
 
-It's worth noting that container images on Amazon Lightsail are tied to a container service. So removing the container service will also delete all container images that have been uploaded to the container service. In this case, the two container images that we uploaded earlier are `indonesia-belajar:1.0` and `indonesia-belajar:2.0` were deleted.
+It's worth noting that container images on Amazon Lightsail are tied to a container service. So removing the container service will also delete all container images that have been uploaded to the container service. In this case, the two container images that we uploaded earlier are `idn-belajar-node:1.0` and `idn-belajar-node:2.0` were deleted.
 
 Now let's try to access the container's endpoint URL to see the response.
 

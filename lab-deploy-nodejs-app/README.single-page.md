@@ -2,6 +2,8 @@
 
 <!-- begin step-0 -->
 
+Language: [Bahasa Indonesia](https://github.com/rioastamal/workshop-amazon-lightsail-containers) | English
+
 DRAFT - Need a review for any spelling or grammatical errors.
 
 ## Workshop Deploying Node.js App on Amazon Lightsail Containers
@@ -26,7 +28,7 @@ Participants can follow the workshop guide through steps that have been provided
 - [Step 14 - Rollback Container to Previous Deployment](#step-14)
 - [Step 15 - Remove Amazon Lightsail Container Service](#step-15)
 
-If you prefer all steps on one page then please open [README.single-page.md](README.single-page.md).
+If you prefer all steps in one page then please open [README.single-page.md](README.single-page.md).
 
 <!-- end step-0 -->
 
@@ -316,22 +318,21 @@ docker stop idn_belajar_1_0
 
 ### <a name="step-6"></a>Step 6 - Create Container Service on Amazon Lightsail
 
-The container service is the compute resource on which the container is run. It provides many choices of RAM and vCPU capacities that can be selected according to your application needs. In addition you can also specify the number of nodes on which container is running.
+Container service is compute resource on which the container is run. It provides many choices of RAM and vCPU capacities that can be selected according to your application needs. In addition you can also specify the number of nodes on which container is running.
 
 1. Go to AWS Management Console then go to Amazon Lightsail page. On the Amazon Lightsail Dashboard click the **Containers** menu.
 
 [![Lightsail Containers Menu](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-menu-containers.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-menu-containers.png)
 
-> Figure 1. The Containers menu on Amazon Lightsail
+> Figure 1. Containers menu on Amazon Lightsail
 
 2. On the Containers page click the **Create container service** button to start creating a Container service.
 
 [![Lightsail Create Instance Button](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-button-create-instance.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-button-create-instance.png)
 
-> Figure 2. Containers page contain a list of containers created
+> Figure 2. Containers page contain a list of containers
 
 3. Then we will be faced with several choices. In the _Container service location_ option, select the a region, in this case I choose **Singapore**. Click the **Change AWS Region** link to do so. In the container capacity option, select **Nano** which consist of 512MB RAM and 0.25 vCPU. For the scale option specify **x1**. It means that we will only launch 1 node to run the containers.
-
 
 [![Lightsail Choose Container Capacity](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-choose-container-capacity.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-choose-container-capacity.png)
 
@@ -343,7 +344,7 @@ The container service is the compute resource on which the container is run. It 
 
 > Figure 4. Entering the container service name
 
-5. The creation of container service will take few minutes, so be patient. Once done you will be taken to the dashboard of the **hello-api** container service page. You will get a domain to used to access your container. The domain is located at the _Public domain_ section. Wait until the status becomes **Ready** then click the domain to open **hello-api** container service. It should be still 404 error because no container image has been deployed to the container service.
+5. Container service creation will take few minutes, so be patient. Once done you will be taken to the dashboard of the **hello-api** container service page. You will get a domain to used to access your container. The domain is located at the _Public domain_ section. Wait until the status becomes **Ready** then click the domain to open **hello-api** container service. It should be still 404 error because no container image has been deployed to the container service.
 
 [![Lightsail hello-api Dashboard](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-dashboard.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-dashboard.png)
 
@@ -361,7 +362,7 @@ The container service is the compute resource on which the container is run. It 
 
 ### <a name="step-7"></a>Step 7 - Push Container Image to Amazon Lightsail
 
-Each container image pushed to Amazon Lightsail is bound to a container cervice. That's why we created the **hello-api** container service first before pushing the container image.
+Each container image pushed to Amazon Lightsail is bound to a container service. That's why we created the **hello-api** container service first before pushing the container image.
 
 In this step we will push `idn-belajar-node:1.0` the previously created container image to **hello-api** container service. Run command below.
 
@@ -381,7 +382,7 @@ Image "idn-belajar-node:1.0" registered.
 Refer to this image as ":hello-api.idn-belajar-node.2" in deployments.
 ```
 
-You will get a message similar to the one above once the push is successfull. The container image will be saved with the name `:<container-service>:<label>.<upload-number>` in the example above the name is `:hello-api.idn-belajar.2`. Yours `upload-number` could be different.
+You will get a message similar to the one above once the push is successfull. The container image will be saved with the name `:<container-service>:<label>.<upload-number>` in the example above the name is `:hello-api.idn-belajar.2`. Your `upload-number` could be different.
 
 Now make sure the container image has been uploaded, go to the **Images** page.
 
@@ -407,7 +408,7 @@ This step will create new deployment for **hello-api** container service using c
 
 > Figure 8. Create your first deployment link
 
-2. There are several fields need to be completed. First enter **hello-idn-belajar** for the _Container name_. 
+2. There are several things need to be configured. First enter **hello-idn-belajar** for the _Container name_. 
 3. For the _Image_ option, click **Choose stored image** then choose our container image that has been uploaded.
 4. The API only uses single environment variable named `APP_PORT` to determine which port the app should bind to. Default to port `8080`. Although it is optional we will explicitly provide the env just to make it more clear.
 5. For the **Open ports** configuration, use port number where the app is running in this case should be the same as `APP_PORT` value which is `8080`.
@@ -420,7 +421,7 @@ This process will take several minutes. Wait until the status of the Container s
 
 > Figure 9. Deployment configuration for containers
 
-When the status is **Running** then we can try to access the API by opening the URL in the public domain section. The public endpoint use HTTPS protocol. We will use curl to do the test. Run command below and replace with your own public domain.
+When the status is **Running** we can try to access the API by opening the URL shown on the public domain section. The public endpoint use HTTPS protocol. We will use curl to do the test. Run command below and replace with your own public domain.
 
 ```sh
 curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
@@ -554,7 +555,7 @@ idn-belajar-node   2.0       c83f20a98c54   22 minutes ago   179MB
 idn-belajar-node   1.0       6c88b5d7ef4a   2 days ago       179MB
 ```
 
-Let's run our `idn-belajar-node:2.0` to make sure it is run as expected.
+Let's run our `idn-belajar-node:2.0` to make sure it is working as expected.
 
 ```sh
 docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d idn-belajar-node:2.0
@@ -722,7 +723,7 @@ This time we will increase number of nodes from 1 to 3.
 
 1. Go to **hello-api** dashboard
 2. Click the **Capacity**
-3. Then click the **Change capacity** a window dialog will popping up, click "Yes, continue".
+3. Then click the **Change capacity** a window dialog will popping up, click **Yes, continue**.
 
 [![Lightsail Capacity](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-menu.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-menu.png)
 
@@ -808,7 +809,7 @@ To rollback our API deployment to previous version it's easy.
 
 1. First make sure you are on the dashboard page of the **hello-api** container service.
 2. Go to the _Deployments_ page.
-3. Scroll down to Deployment versions . There we can see that we have done two deployments. The last deployment is for image `indonesia-belajar:2.0`.
+3. Scroll down to Deployment versions . There we can see that we have done two deployments. The last deployment is for image `idn-belajar-node:2.0`.
 4. Click the three dots Version 1 then click **Modify and redeploy**.
 
 
@@ -817,7 +818,7 @@ To rollback our API deployment to previous version it's easy.
 > Figure 15. Rollback deployment to previous version
 
 5. A confirmation dialog will appear, click **Yes button, continue**.
-6. The deployment process has not been carried out, it only autofill the Image configuration value that changed the image previous version, namely `:hello-api.indonesia-belajar.12`. The uploaded version number `.12` may be different in your side.
+6. The deployment process has not been carried out, it only autofill the Image configuration value that changed the image previous version, namely `:hello-api.idn-belajar.3`. The uploaded version number `.3` may be different on your side.
 7. Click **Save and deploy** button to start the rollback deployment process from the previous image.
 8. Wait until the status of the container service returns to Running.
 
@@ -833,7 +834,7 @@ curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 }
 ```
 
-Now API does not return the local IP of the server as it should be in version `indonesia-belajar:2.0`, instead it return response from previous deployment using `indonesia-belajar:1.0` image.
+Now API does not return the local IP of the server as it should be in version `idn-belajar-node:2.0`, instead it return response from previous deployment using `idn-belajar-node:1.0` image.
 
 So doing rollback is as simple as changing the version of the container image to run.
 
@@ -841,7 +842,7 @@ Keep in mind that rollback is also a deployment process so it will increase depl
 
 [![Lightsail Deployment Versions](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)
 
-> Gambar 16. Rollback juga menghasilkan versi deployment baru
+> Gambar 16. Rollback produces new deployment version
 
 [^back to top](#top)
 
@@ -849,7 +850,7 @@ Keep in mind that rollback is also a deployment process so it will increase depl
 
 <!-- begin step-15 -->
 
-### <a name="step-15"></a>Step 15 - Removing Amazon Lightsail Container Service
+### <a name="step-15"></a>Step 15 - Remove Amazon Lightsail Container Service
 
 If the application is no longer needed then there is no reason to run it. Disabling the container service does not stop the incurring charge.
 
@@ -866,7 +867,7 @@ To stop incurring charge you need to remove the container service.
 4. Click **Yes, delete** to delete container service.
 6. **hello-api** container should be deleted and gone from the list.
 
-It's worth noting that container images on Amazon Lightsail are tied to a container service. So removing the container service will also delete all container images that have been uploaded to the container service. In this case, the two container images that we uploaded earlier are `indonesia-belajar:1.0` and `indonesia-belajar:2.0` were deleted.
+It's worth noting that container images on Amazon Lightsail are tied to a container service. So removing the container service will also delete all container images that have been uploaded to the container service. In this case, the two container images that we uploaded earlier are `idn-belajar-node:1.0` and `idn-belajar-node:2.0` were deleted.
 
 Now let's try to access the container's endpoint URL to see the response.
 

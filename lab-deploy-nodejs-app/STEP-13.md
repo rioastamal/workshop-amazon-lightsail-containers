@@ -7,7 +7,7 @@ This time we will increase number of nodes from 1 to 3.
 
 1. Go to **hello-api** dashboard
 2. Click the **Capacity**
-3. Then click the **Change capacity** a window dialog will popping up, click "Yes, continue".
+3. Then click the **Change capacity** a window dialog will popping up, click **Yes, continue**.
 
 [![Lightsail Capacity](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-menu.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-capacity-menu.png)
 

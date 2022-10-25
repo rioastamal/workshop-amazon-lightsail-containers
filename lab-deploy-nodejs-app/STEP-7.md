@@ -1,7 +1,7 @@
 
 ### <a name="step-7"></a>Step 7 - Push Container Image to Amazon Lightsail
 
-Each container image pushed to Amazon Lightsail is bound to a container cervice. That's why we created the **hello-api** container service first before pushing the container image.
+Each container image pushed to Amazon Lightsail is bound to a container service. That's why we created the **hello-api** container service first before pushing the container image.
 
 In this step we will push `idn-belajar-node:1.0` the previously created container image to **hello-api** container service. Run command below.
 
@@ -21,7 +21,7 @@ Image "idn-belajar-node:1.0" registered.
 Refer to this image as ":hello-api.idn-belajar-node.2" in deployments.
 ```
 
-You will get a message similar to the one above once the push is successfull. The container image will be saved with the name `:<container-service>:<label>.<upload-number>` in the example above the name is `:hello-api.idn-belajar.2`. Yours `upload-number` could be different.
+You will get a message similar to the one above once the push is successfull. The container image will be saved with the name `:<container-service>:<label>.<upload-number>` in the example above the name is `:hello-api.idn-belajar.2`. Your `upload-number` could be different.
 
 Now make sure the container image has been uploaded, go to the **Images** page.
 

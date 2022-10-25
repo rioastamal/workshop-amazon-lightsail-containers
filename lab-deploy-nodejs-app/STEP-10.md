@@ -29,7 +29,7 @@ idn-belajar-node   2.0       c83f20a98c54   22 minutes ago   179MB
 idn-belajar-node   1.0       6c88b5d7ef4a   2 days ago       179MB
 ```
 
-Let's run our `idn-belajar-node:2.0` to make sure it is run as expected.
+Let's run our `idn-belajar-node:2.0` to make sure it is working as expected.
 
 ```sh
 docker run --rm --name idn_belajar_2_0 -p 8080:8080 -d idn-belajar-node:2.0

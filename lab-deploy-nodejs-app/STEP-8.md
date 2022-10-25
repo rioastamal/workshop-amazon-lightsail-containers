@@ -9,7 +9,7 @@ This step will create new deployment for **hello-api** container service using c
 
 > Figure 8. Create your first deployment link
 
-2. There are several fields need to be completed. First enter **hello-idn-belajar** for the _Container name_. 
+2. There are several things need to be configured. First enter **hello-idn-belajar** for the _Container name_. 
 3. For the _Image_ option, click **Choose stored image** then choose our container image that has been uploaded.
 4. The API only uses single environment variable named `APP_PORT` to determine which port the app should bind to. Default to port `8080`. Although it is optional we will explicitly provide the env just to make it more clear.
 5. For the **Open ports** configuration, use port number where the app is running in this case should be the same as `APP_PORT` value which is `8080`.
@@ -22,7 +22,7 @@ This process will take several minutes. Wait until the status of the Container s
 
 > Figure 9. Deployment configuration for containers
 
-When the status is **Running** then we can try to access the API by opening the URL in the public domain section. The public endpoint use HTTPS protocol. We will use curl to do the test. Run command below and replace with your own public domain.
+When the status is **Running** we can try to access the API by opening the URL shown on the public domain section. The public endpoint use HTTPS protocol. We will use curl to do the test. Run command below and replace with your own public domain.
 
 ```sh
 curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
