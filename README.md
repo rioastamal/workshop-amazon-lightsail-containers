@@ -1,3 +1,7 @@
+Language: [Bahasa Indonesia](https://github.com/rioastamal/workshop-amazon-lightsail-containers) | English
+
+DRAFT - Need a review for any spelling or grammatical errors.
+
 ## Amazon Lightsail Containers Workshop
 
 Running container-based applications offer several advantages including portability, better security and ease of scaling. Running single container is easy, deploying container and scaling is still a fairly complex thing to do. This is where Amazon Lightsail Containers could help.
@@ -45,9 +49,7 @@ This workshop is written by [Rio Astamal](https://rioastamal.net)
 
 ## Feedback
 
-Jika terdapat kesalahan pada workshop ini entah itu kode atau tata bahasa silahkan buka Issue atau submit PR.
-
-If you spot an  an error in this workshop, whether it's code or grammar, please open an Issue or submit a PR.
+If you spot an  an error in this workshop, whether it's code, spelling or grammar, please open an Issue or submit a PR.
 
 ## License
 
