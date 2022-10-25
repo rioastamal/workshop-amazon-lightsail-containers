@@ -32,7 +32,7 @@ Now make sure the container image has been uploaded, go to the **Images** page.
 As you can see on the _Images_ page there is an container image `:hello-api.indonesia-belajar.12` that we just uploaded from previous step. We will use this image to do the deployment.
 
 
-<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-6.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-8.md">Berikutnya &raquo;</a></td></tr></table>
+<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-6.md">&laquo; Previous</td><td align="center"><a href="README.md">Index</a></td><td align="right"><a href="STEP-8.md">Next &raquo;</a></td></tr></table>
 
 <sup>Workshop: Deploy Python Flask dengan Amazon Lightsail Containers  
 Version: 2022-14-06  

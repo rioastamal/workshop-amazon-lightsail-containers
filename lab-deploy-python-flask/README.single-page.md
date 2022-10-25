@@ -6,7 +6,7 @@ Language: [Bahasa Indonesia](https://github.com/rioastamal/workshop-amazon-light
 
 DRAFT - Need a review for any spelling or grammatical errors.
 
-## Workshop Deploying Python Flask on Amazon Lightsail Containers
+## Workshop: Deploy Python Flask on Amazon Lightsail Containers
 
 In this workshop, participants will be guided how to deploy an API on Amazon Lightsail Containers. A simple API built using Python and Flask microframework will be used as an example in this workshop.
 

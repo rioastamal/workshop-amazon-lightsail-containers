@@ -28,7 +28,7 @@ To make sure that container image has been uploaded successfully check **_Images
 > Figure 10. Container image version 2.0
 
 
-<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-10.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-12.md">Berikutnya &raquo;</a></td></tr></table>
+<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-10.md">&laquo; Previous</td><td align="center"><a href="README.md">Index</a></td><td align="right"><a href="STEP-12.md">Next &raquo;</a></td></tr></table>
 
 <sup>Workshop: Deploy Python Flask dengan Amazon Lightsail Containers  
 Version: 2022-14-06  

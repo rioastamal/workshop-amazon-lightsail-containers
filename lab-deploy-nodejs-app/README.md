@@ -3,7 +3,7 @@ Language: [Bahasa Indonesia](https://github.com/rioastamal/workshop-amazon-light
 
 DRAFT - Need a review for any spelling or grammatical errors.
 
-## Workshop Deploying Node.js App on Amazon Lightsail Containers
+## Workshop: Deploy Node.js App on Amazon Lightsail Containers
 
 In this workshop, participants will be guided how to deploy an API on Amazon Lightsail Containers. A simple API built with Node.js and Express.js framework will be used as an example in this workshop.
 
@@ -27,8 +27,8 @@ Participants can follow the workshop guide through steps that have been provided
 
 If you prefer all steps in one page then please open [README.single-page.md](README.single-page.md).
 
-<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-15.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-1.md">Berikutnya &raquo;</a></td></tr></table>
+<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-15.md">&laquo; Previous</td><td align="center"><a href="README.md">Index</a></td><td align="right"><a href="STEP-1.md">Next &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploying Node.js App using Amazon Lightsail Containers  
+<sup>Workshop: Deploying Node.js App on Amazon Lightsail Containers  
 Version: 2022-05-12  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>

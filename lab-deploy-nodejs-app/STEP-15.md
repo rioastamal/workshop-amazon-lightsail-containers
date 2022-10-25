@@ -43,8 +43,8 @@ Congrats! You have completed a Node.js deployment workshop on Amazon Lightsail C
 
 Don't forget to ⭐ this repo. See you at next workshop.
 
-<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-14.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="README.md">Berikutnya &raquo;</a></td></tr></table>
+<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-14.md">&laquo; Previous</td><td align="center"><a href="README.md">Index</a></td><td align="right"><a href="README.md">Next &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploying Node.js App using Amazon Lightsail Containers  
+<sup>Workshop: Deploying Node.js App on Amazon Lightsail Containers  
 Version: 2022-05-12  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>

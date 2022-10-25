@@ -62,9 +62,9 @@ echo "$@" | grep '\-\-split-pages' > /dev/null && {
       sed -i '/\[\^back to top\]/d' $CURRENT_FILE
       
       cat <<EOF >> $CURRENT_FILE
-<table border="0" style="width: 100%; display: table;"><tr><td><a href="${PREV_LINK}">&laquo; Sebelumnya</td><td align="center"><a href="$INDEX_LINK">Daftar Isi</a></td><td align="right"><a href="$NEXT_LINK">Berikutnya &raquo;</a></td></tr></table>
+<table border="0" style="width: 100%; display: table;"><tr><td><a href="${PREV_LINK}">&laquo; Previous</td><td align="center"><a href="$INDEX_LINK">Index</a></td><td align="right"><a href="$NEXT_LINK">Next &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploying Node.js App using Amazon Lightsail Containers  
+<sup>Workshop: Deploying Node.js App on Amazon Lightsail Containers  
 Version: ${WORKSHOP_VERSION}  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>
 EOF

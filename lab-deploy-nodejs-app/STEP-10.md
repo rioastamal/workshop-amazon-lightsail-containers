@@ -66,8 +66,8 @@ curl -s http://localhost:8080/
 As you can see we have `network` attribute from the response. The ouput not exactly similar with non-container because the network interfaces inside the container are different from the host.
 
 
-<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-9.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-11.md">Berikutnya &raquo;</a></td></tr></table>
+<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-9.md">&laquo; Previous</td><td align="center"><a href="README.md">Index</a></td><td align="right"><a href="STEP-11.md">Next &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploying Node.js App using Amazon Lightsail Containers  
+<sup>Workshop: Deploying Node.js App on Amazon Lightsail Containers  
 Version: 2022-05-12  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>

@@ -42,7 +42,7 @@ curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesi
 Congrats! You gave successfully deployed a Python Flask API on Amazon Lightsail Container service. Pretty easy isn't it?
 
 
-<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-7.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-9.md">Berikutnya &raquo;</a></td></tr></table>
+<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-7.md">&laquo; Previous</td><td align="center"><a href="README.md">Index</a></td><td align="right"><a href="STEP-9.md">Next &raquo;</a></td></tr></table>
 
 <sup>Workshop: Deploy Python Flask dengan Amazon Lightsail Containers  
 Version: 2022-14-06  

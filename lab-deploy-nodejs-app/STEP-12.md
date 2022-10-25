@@ -77,8 +77,8 @@ curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 Cool! The new version of the API deployed. Now it contains `network` attribute as part of the output which not exists previously.
 
 
-<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-11.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-13.md">Berikutnya &raquo;</a></td></tr></table>
+<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-11.md">&laquo; Previous</td><td align="center"><a href="README.md">Index</a></td><td align="right"><a href="STEP-13.md">Next &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploying Node.js App using Amazon Lightsail Containers  
+<sup>Workshop: Deploying Node.js App on Amazon Lightsail Containers  
 Version: 2022-05-12  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>

@@ -43,8 +43,8 @@ d8df1a6d0dbd70de4cd36ff21e5b6a766a7bb0c21d28819d37fdff612aefe23c
 Open `loclahost:8080` on your browser dan do some test to convert Markdown.
 
 
-<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-9.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-11.md">Berikutnya &raquo;</a></td></tr></table>
+<table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-9.md">&laquo; Previous</td><td align="center"><a href="README.md">Index</a></td><td align="right"><a href="STEP-11.md">Next &raquo;</a></td></tr></table>
 
-<sup>Workshop: Deploy Laravel App dengan Amazon Lightsail Containers  
+<sup>Workshop: Deploy Laravel App on Amazon Lightsail Containers  
 Version: 2022-24-06  
 Author: [@rioastamal](https://github.com/rioastamal)</sup>
