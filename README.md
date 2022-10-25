@@ -1,4 +1,4 @@
-Language: [Bahasa Indonesia](https://github.com/rioastamal/workshop-amazon-lightsail-containers) | English
+Language: [Bahasa Indonesia](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main) | English
 
 DRAFT - Need a review for any spelling or grammatical errors.
 
@@ -49,7 +49,7 @@ This workshop is written by [Rio Astamal](https://rioastamal.net)
 
 ## Feedback
 
-If you spot an  an error in this workshop, whether it's code, spelling or grammar, please open an Issue or submit a PR.
+If you spot an  error in this workshop, whether it's code, spelling or grammar, please open an Issue or submit a PR.
 
 ## License
 

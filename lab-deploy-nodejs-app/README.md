@@ -1,5 +1,5 @@
 
-Language: [Bahasa Indonesia](https://github.com/rioastamal/workshop-amazon-lightsail-containers) | English
+Language: [Bahasa Indonesia](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-nodejs-app) | English
 
 DRAFT - Need a review for any spelling or grammatical errors.
 
