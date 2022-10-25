@@ -1,9 +1,9 @@
 
 DRAFT - Need a review for any spelling or grammatical errors.
 
-## Workshop Deploying Node.js App using Amazon Lightsail Containers
+## Workshop Deploying Node.js App on Amazon Lightsail Containers
 
-In this workshop, participants will be guided how to deploy an API using Amazon Lightsail Containers. A simple API built with Node.js and Express.js framework will be used as an example in this workshop.
+In this workshop, participants will be guided how to deploy an API on Amazon Lightsail Containers. A simple API built with Node.js and Express.js framework will be used as an example in this workshop.
 
 Participants can follow the workshop guide through steps that have been provided sequentially starting from step 1 to step 15.
 

@@ -39,7 +39,7 @@ The endpoint URL should return 404 HTTP error, it means no container service is 
 
 ---
 
-Congrats! You have completed a Node.js deployment workshop using Amazon Lightsail Containers.
+Congrats! You have completed a Node.js deployment workshop on Amazon Lightsail Containers.
 
 Don't forget to ⭐ this repo. See you at next workshop.
 

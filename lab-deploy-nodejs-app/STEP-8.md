@@ -34,7 +34,7 @@ curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 }
 ```
 
-Congrats! You gave successfully deployed a Node.js API using Amazon Lightsail Container service. Pretty easy isn't it?
+Congrats! You gave successfully deployed a Node.js API on Amazon Lightsail Container service. Pretty easy isn't it?
 
 
 <table border="0" style="width: 100%; display: table;"><tr><td><a href="STEP-7.md">&laquo; Sebelumnya</td><td align="center"><a href="README.md">Daftar Isi</a></td><td align="right"><a href="STEP-9.md">Berikutnya &raquo;</a></td></tr></table>

@@ -4,7 +4,7 @@ Running container-based applications offer several advantages including portabil
 
 Amazon Lightsail Containers is an easy way to run containers in the cloud. Just provide a Docker image and you will automatically get a domain, load balancer with TLS certificate, blue/green deployment and more. Since it's Amazon Lightsail the costs are fixed and you won't need a calculator.
 
-In this workshop you will learn how to deploy an application using Amazon Lightsail Containers. There will be three deployment workshops provided, how to deploy Node.js, Python and PHP on Amazon Lightsail Containers.
+In this workshop you will learn how to deploy an application on Amazon Lightsail Containers. There will be three deployment workshops provided, how to deploy Node.js, Python and PHP on Amazon Lightsail Containers.
 
 In each workshop, the main points discussed are:
 
@@ -30,10 +30,10 @@ Below is the schedule of the workshops.
 
 Date | Organizer | Speaker | Title | Live Stream | Lab 
 --------|-----------|---------|-------|-------------|-----
-Saturday, 21 May 2022 at 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Pre-Workshop Webinar: Deploy an App using Amazon Lightsail Containers | [https://youtu.be/Ej5s5SwCo2s](https://youtu.be/Ej5s5SwCo2s) | -
-Saturday, 28 May 2022 at 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Node.js App using Amazon Lightsail Containers | [https://youtu.be/A7c65eIB0cg](https://youtu.be/A7c65eIB0cg) | [lab-deploy-nodejs-app](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-nodejs-app)
-Saturday, 18 June 2022 at 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Python Flask using Amazon Lightsail Containers | [https://youtu.be/C7ul435JnZk](https://youtu.be/C7ul435JnZk) | [lab-deploy-python-flask](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-python-flask)
-Saturday, 25 June 2022 at 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Laravel App using Amazon Lightsail Containers | [https://youtu.be/NI0HgZ16cD0](https://youtu.be/NI0HgZ16cD0) | [lab-deploy-laravel-app](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-laravel-app)
+Saturday, 21 May 2022 at 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Pre-Workshop Webinar: Deploy an App on Amazon Lightsail Containers | [https://youtu.be/Ej5s5SwCo2s](https://youtu.be/Ej5s5SwCo2s) | -
+Saturday, 28 May 2022 at 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Node.js App on Amazon Lightsail Containers | [https://youtu.be/A7c65eIB0cg](https://youtu.be/A7c65eIB0cg) | [lab-deploy-nodejs-app](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-nodejs-app)
+Saturday, 18 June 2022 at 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Python Flask on Amazon Lightsail Containers | [https://youtu.be/C7ul435JnZk](https://youtu.be/C7ul435JnZk) | [lab-deploy-python-flask](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-python-flask)
+Saturday, 25 June 2022 at 13:00 WIB | [Indonesia Belajar](https://www.youtube.com/c/IndonesiaBelajarKomputer) | [Rio Astamal (AWS)](https://github.com/rioastamal) | Deploy Laravel App on Amazon Lightsail Containers | [https://youtu.be/NI0HgZ16cD0](https://youtu.be/NI0HgZ16cD0) | [lab-deploy-laravel-app](https://github.com/rioastamal/workshop-amazon-lightsail-containers/tree/main/lab-deploy-laravel-app)
 
 ## Discussion Forum
 

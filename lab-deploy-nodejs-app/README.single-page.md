@@ -4,9 +4,9 @@
 
 DRAFT - Need a review for any spelling or grammatical errors.
 
-## Workshop Deploying Node.js App using Amazon Lightsail Containers
+## Workshop Deploying Node.js App on Amazon Lightsail Containers
 
-In this workshop, participants will be guided how to deploy an API using Amazon Lightsail Containers. A simple API built with Node.js and Express.js framework will be used as an example in this workshop.
+In this workshop, participants will be guided how to deploy an API on Amazon Lightsail Containers. A simple API built with Node.js and Express.js framework will be used as an example in this workshop.
 
 Participants can follow the workshop guide through steps that have been provided sequentially starting from step 1 to step 15.
 
@@ -432,7 +432,7 @@ curl -s https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/
 }
 ```
 
-Congrats! You gave successfully deployed a Node.js API using Amazon Lightsail Container service. Pretty easy isn't it?
+Congrats! You gave successfully deployed a Node.js API on Amazon Lightsail Container service. Pretty easy isn't it?
 
 [^back to top](#top)
 
@@ -890,7 +890,7 @@ The endpoint URL should return 404 HTTP error, it means no container service is 
 
 ---
 
-Congrats! You have completed a Node.js deployment workshop using Amazon Lightsail Containers.
+Congrats! You have completed a Node.js deployment workshop on Amazon Lightsail Containers.
 
 Don't forget to ⭐ this repo. See you at next workshop.
 
