@@ -17,7 +17,7 @@ Successfully built b3846915d8d0
 Successfully tagged indonesia-belajar:2.0
 ```
 
-Kita lihat apakah container image baru tersebut sudah ada dalam daftar container image pada mesin kita.
+Let's see if our new container image is already on the list.
 
 ```sh
 docker images indonesia-belajar

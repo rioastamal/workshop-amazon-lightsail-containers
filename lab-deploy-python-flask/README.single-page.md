@@ -21,9 +21,9 @@ Participants can follow the workshop guide through steps that have been provided
 - [Step 7 - Push Container Image to Amazon Lightsail](#step-7)
 - [Step 8 - Deploy Container Service](#step-8)
 - [Step 9 - Create New Version of the API](#step-9)
-- [Step 10 - Updating Container Image](#step-10)
-- [Step 11 - Pushing New Version of Container Image](#step-11)
-- [Step 12 - Deploying the New API](#step-12)
+- [Step 10 - Update Container Image](#step-10)
+- [Step 11 - Push New Version of Container Image](#step-11)
+- [Step 12 - Deploy Latest Version of the API](#step-12)
 - [Step 13 - Increasing Number of Nodes](#step-13)
 - [Step 14 - Rollback Container to Previous Deployment](#step-14)
 - [Step 15 - Remove Amazon Lightsail Container Service](#step-15)
@@ -38,6 +38,7 @@ If you prefer all steps in one page then please open [README.single-page.md](REA
 
 Before starting the workshop, make sure you have an active AWS account and have installed requirements listed below.
 
+- An active AWS account
 - Docker
 - AWS CLI v2 and its configuration
 - Python v3.8 dan pip via Docker
@@ -693,7 +694,7 @@ Successfully built b3846915d8d0
 Successfully tagged indonesia-belajar:2.0
 ```
 
-Kita lihat apakah container image baru tersebut sudah ada dalam daftar container image pada mesin kita.
+Let's see if our new container image is already on the list.
 
 ```sh
 docker images indonesia-belajar
@@ -981,8 +982,6 @@ curl -s 'https://YOUR_OWN_CONTAINER_SERVICE_PUBLIC_DOMAIN/?text=Hello%20Indonesi
                               ||     ||
 ```
 
-Dapat terlihat bahwa API kita telah kembali ke versi sebelumnya yaitu `indonesia-belajar:1.0`. Respon tidak mengembalikan lokal IP dari server seperti yang seharusnya ada di versi `indonesia-belajar:2.0`.
-
 Now API does not return the local IP of the server as it should be in version `indonesia-belajar:2.0`, instead it return response from previous deployment using `indonesia-belajar:1.0` image.
 
 So doing rollback is as simple as changing the version of the container image to run.
@@ -991,7 +990,7 @@ Keep in mind that rollback is also a deployment process so it will increase depl
 
 [![Lightsail Deployment Versions](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-deployment-versions.png)
 
-> Gambar 16. Rollback produces new deployment version
+> Figure 16. Rollback produces new deployment version
 
 [^back to top](#top)
 

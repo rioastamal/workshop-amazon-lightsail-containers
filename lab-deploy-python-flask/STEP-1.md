@@ -3,6 +3,7 @@
 
 Before starting the workshop, make sure you have an active AWS account and have installed requirements listed below.
 
+- An active AWS account
 - Docker
 - AWS CLI v2 and its configuration
 - Python v3.8 dan pip via Docker
