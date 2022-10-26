@@ -1,10 +1,10 @@
 ## Python Flask Demo App
 
-Direktori ini berisi kode aplikasi dan CloudFormation template dari Workshop Deploy Python Flask dengan Amazon Lightsail Containers. Langkah-langkah pada workshop diduplikasi pada demo ini hanya dengan beberapa langkah karena menggunakan Infrastructure as Code (IaC) yaitu CloudFormation.
+This directory contains application code and CloudFormation templates used for the workshop. The steps in the workshop are duplicated in this demo with only a few steps because it uses CloudFormation an Infrastructure as Code (IaC).
 
 ### Membuat Container Image
 
-Kita akan langsung build container image versi `2.0` karena kode pada commit terakhir merepresentasikan versi tersebut.
+We will build the container image version `2.0` because code in the last commit represents that version.
 
 ```sh
 docker build --rm -t indonesia-belajar:2.0 .
@@ -21,11 +21,11 @@ REPOSITORY          TAG       IMAGE ID       CREATED          SIZE
 indonesia-belajar   2.0       08d5d95a6cb8   19 seconds ago   144MB
 ```
 
-### Deploy Container ke Amazon Lightsail Containers
+### Deploy Container to Amazon Lightsail Containers
 
-Pertama kita harus membuat Container service terlebih dahulu, karena akan digunakan untuk menampung container image yang diupload.
+A container image is bound to container service so we need to create a container service first.
 
-Kita akan memanfaatkan CloudFormation untuk melakukan deployment ke Amazon Lightsail.
+We are going to use our CloudFormation template and provide a parameter which indicate that we want to create container service first.
 
 ```sh
 aws cloudformation create-stack \
@@ -40,11 +40,11 @@ aws cloudformation create-stack \
 }
 ```
 
-Perintah diatas membuat sebuah Contaienr service dengan nama **hello-api**. Lihat template CloudFormation untuk lebih detil.
+Command above will create container service **hello-api**, you can see CloudFormation template for more details.
 
-Tunggu beberapa saat hingga stack selesai. Anda bisa masuk ke CloudFormation console untuk melihat atau menggunakan AWS CLI.
+Wait a few moments till the stack creation complete. You may go to CloudFormation console or using AWS CLI to check the progress.
 
-Setelah pembuatan stack selesai, lanjutkan dengan mengupload container image ke Container service **hello-api**.
+Once stack creation completed, continue to upload container image to **hello-api** container service.
 
 ```sh
 aws lightsail push-container-image \
@@ -61,9 +61,11 @@ Image "indonesia-belajar:2.0" registered.
 Refer to this image as ":hello-api.indonesia-belajar.14" in deployments.
 ```
 
-Image berhasil diupload. Referensi untuk container image yang baru saja diupload adalah `:hello-api.indonesia-belajar.14`. Nomor `14` bisa saja berbeda ditempat anda. Hal ini karena saya sudah beberapa kali melakukan upload.
+Image successfully uploaded, the reference for uploaded image is `:hello-api.idn-belajar-node.14`. Number `14` could be different on your side.
 
-Langkah berikutnya adalah melakukan deployment container image pada container service **hello-api**. Kita akan melakukan update CloudFormation stack dengan memberikan parameter `deployment` untuk menginstruksikan pembuatan deployment.
+Next is to create a deployment on container service **hello-api** using image that we just uploaded. 
+
+Run an update to the CloudFormation stack by giving parameter value `deployment`.
 
 ```sh
 aws cloudformation update-stack \
@@ -79,17 +81,17 @@ ParameterKey=ImageNameParam,ParameterValue=:hello-api.indonesia-belajar.14
 }
 ```
 
-Jika semua berjalan sukses maka pada halaman Amazon Lightsail Containers terdapat container service baru **hello-api**. Anda dapat mengakses API dari public domain yang berfungsi sebagai endpoint.
+You can check the progress on CloudFormation console. Once completed you can access API from the public endpoint provided in the Lightsail container service console.
 
 [![Lightsail Deploy from CloudFormation](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-cloudformation-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-cloudformation-deployment.png)
 
-## Menghapus Deployment dan Container Service
+## Remove Deployment and Container Service
 
-Karena kita menggunakan CloudFormation dalam membuat Amazon Lightsail Container dan deploymentnya, maka untuk menghapus keseluruhan cukup mudah.
+Since we uses CloudFormation to create container service and the deployment, removing the all resources is pretty easy.
 
 ```sh
 aws cloudformation delete-stack \
 --stack-name "lab-lightsail-python-app"
 ```
 
-Hanya dengan perintah diatas maka seluruh _resources_ yang dibuat saat deployment akan dihapus.
+Running command above all resources created during deployment will be deleted.
