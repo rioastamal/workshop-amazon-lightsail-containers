@@ -85,7 +85,7 @@ You can check the progress on CloudFormation console. Once completed you can acc
 
 [![Lightsail Deploy from CloudFormation](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-cloudformation-deployment.png)](https://raw.githubusercontent.com/rioastamal-examples/assets/main/workshop-amazon-lightsail-containers/lab-deploy-nodejs-app/images/lightsail-hello-api-cloudformation-deployment.png)
 
-## Menghapus Deployment dan Container Service
+## Remove Deployment and Container Service
 
 Karena kita menggunakan CloudFormation dalam membuat Amazon Lightsail Container dan deploymentnya, maka untuk menghapus keseluruhan cukup mudah.
 
