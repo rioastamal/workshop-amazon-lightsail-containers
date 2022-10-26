@@ -87,8 +87,6 @@ You can check the progress on CloudFormation console. Once completed you can acc
 
 ## Remove Deployment and Container Service
 
-Karena kita menggunakan CloudFormation dalam membuat Amazon Lightsail Container dan deploymentnya, maka untuk menghapus keseluruhan cukup mudah.
-
 Since we uses CloudFormation to create container service and the deployment, removing the all resources is pretty easy.
 
 ```sh
@@ -96,4 +94,4 @@ $ aws cloudformation delete-stack \
 --stack-name "lab-lightsail-nodejs-app"
 ```
 
-With command above all resources created during deployment will be deleted.
+By running command above all resources created during deployment will be deleted.
